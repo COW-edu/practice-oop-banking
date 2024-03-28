@@ -29,7 +29,6 @@ public class BasicAccount implements Account {
 	private boolean isActivated;
 
 	public String getAccountInfo() {
-		sou
 		stringBuilder.append("[계좌 정보]").append("\n");
 		stringBuilder.append("계좌종류: ").append(accountType.getAccountName()).append("\n");
 		stringBuilder.append("계좌번호: ").append(getAccountNumber()).append("\n");
