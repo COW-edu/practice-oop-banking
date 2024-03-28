@@ -1,16 +1,13 @@
 package banking.account.domain;
 
-import static banking.account.domain.AccountType.*;
-
 import java.math.BigDecimal;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
-@Getter @Setter
+@Getter
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class BasicAccount implements Account {
