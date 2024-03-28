@@ -35,7 +35,7 @@ public class Main
         System.out.print("예산를 입력해주세요 : ");
         amount = s.next();
         if(type.equals("S")) {goalAmount = s.next(); return new SavingAccount(type, aNum, name, new BigDecimal(amount), new BigDecimal(goalAmount));}
-        else {goalAmount = null; return new Account(type, aNum, name, new BigDecimal(amount));}
+        else {return new Account(type, aNum, name, new BigDecimal(amount));}
     }
 
     public String getAccountNum(Scanner s)
