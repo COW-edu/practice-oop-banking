@@ -1,22 +1,15 @@
 package account;
 
-public abstract class Account {
-    enum EAccount{
-        N("예금계좌"),
-        S("적금계좌");
+import java.math.BigDecimal;
 
-        private final String information;
+public class Account {
 
-        EAccount(String information) {
-            this.information = information;
-        }
-    }
 
-    private EAccount eAccount;
-    private String accountNum;
-    private String accountHolder;
-    private float balance;
-    private boolean isActivate;
+    protected EAccount eAccount;
+    protected String accountNum;
+    protected String accountHolder;
+    protected BigDecimal balance;
+    protected boolean isActivate;
 
 
     public EAccount getEAccount() {
@@ -43,11 +36,11 @@ public abstract class Account {
         this.accountHolder = accountHolder;
     }
 
-    public float getBalance() {
+    public BigDecimal getBalance() {
         return balance;
     }
 
-    public void setBalance(float balance) {
+    public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
 
@@ -59,37 +52,43 @@ public abstract class Account {
         isActivate = activate;
     }
 
-    public String getAccountInfo(){
-        return "Account{" +
-                "계좌종류 : " + eAccount.information +
-                ", 계좌번호 : " + accountNum +
-                ", 예금주 : " + accountHolder + '\'' +
-                ", 잔액 : " + balance +
-                ", 활성화 여부 : " + isActivate +
-                '}';
+
+    public Account(){
+        this.eAccount = EAccount.N;
+        this.balance = new BigDecimal(0);
+        this.isActivate = true;
+    }
+    public Account(String accountHolder, String accountNum){
+        this();
+        this.accountHolder = accountHolder;
+        this.accountNum = accountNum;
     }
 
 
-    public boolean deposit(int amount){
+
+    public String getAccountInfo(){
+        return "계좌종류 : " + eAccount.information + "\n" +
+                "계좌번호 : " + accountNum + "\n" +
+                "예금주 : " + accountHolder + "\n" +
+                "잔액 : " + balance + "\n" +
+                "계좌상태 : " + (isActivate ? "활성화" : "비활성화");
+    }
+
+
+    public boolean deposit(BigDecimal amount){
         try {
-            balance += amount;
+            balance.add(amount);
             return true;
         }catch (Exception e){
-            System.out.println("오류가 발생했습니다");
             return false;
         }
     }
 
-    public boolean withdraw(int amount){
+    public boolean withdraw(BigDecimal amount){
         try {
-            if(amount > balance)
-                throw new Exception();
-            else {
-                balance -= amount;
-                return true;
-            }
+            balance.add(amount);
+            return true;
         }catch (Exception e){
-            e.printStackTrace();
             return false;
         }
     }
