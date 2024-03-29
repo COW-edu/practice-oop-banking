@@ -46,8 +46,9 @@ public class CentralBank
         Account account = findAccountByNum(accountNum);
         if (account != null) {
             account.deposit(amount);
-        } else {
-            System.out.println("Account.Account not found!");
+        } else
+        {
+            throw new NullPointerException();
         }
     }
 
@@ -85,7 +86,7 @@ public class CentralBank
             {
                 InterestCalculator calculator = Calcualateinterest.get(account.getAccountType());
                 BigDecimal interest = ((InterestCalculator) calculator).getInterest(account.getAmount());
-                System.out.println("Account.Account Owner : " + account.getOwner() + ", Account.Account Number: " + account.getAccountNum() + ", Interest : " + interest);
+                System.out.println("Account Owner : " + account.getOwner() + ", Account Number: " + account.getAccountNum() + ", Interest : " + interest);
             }
         }
     }

@@ -30,11 +30,12 @@ public class Account
     public String getAccountInfo()
     {
         // 계좌 정보를 문자열로 표현하여 반환
-        return "Owner: " + owner + "\n" +
-                "Account.Account Type: " + accountType + "\n" +
-                "Account.Account Number: " + accountNum + "\n" +
-                "Asset: " + amount + "\n" +
-                "Activated: " + (activated ? "Yes" : "No");
+        return "*************************\n" +
+                "Owner : " + owner + "\n" +
+                "Account Type : " + accountType + "\n" +
+                "Account Number : " + accountNum + "\n" +
+                "Asset : ₩" + amount + "\n" +
+                "Activated : " + (activated ? "Yes" : "No");
     }
     //출금
     public void withDraw(BigDecimal amount)
@@ -42,7 +43,7 @@ public class Account
         if(getAmount().compareTo(amount) >= 0)
         {
             setAmount(getAmount().subtract(amount));
-            System.out.println("WithDraw Finish! your Amount : " + getAmount());
+            System.out.println("WithDraw Finish! your Amount : ₩" + getAmount());
         }
         else
         {
@@ -53,16 +54,17 @@ public class Account
     public void deposit(BigDecimal amount)
     {
         setAmount(getAmount().add(amount));
-        System.out.println("Deposite Finish! Your Amount :" + getAmount());
+        System.out.println("Deposite Finish! Your Amount : ₩" + getAmount());
     }
     //송금
     public void transfer(Account receiver, BigDecimal amount)
     {
         if(getAmount().compareTo(amount) >= 0)
         {
-            withDraw(amount);
-            receiver.deposit(amount);
-            System.out.println("Transfer Finish! Send " + amount + " To " + receiver.getOwner());
+            setAmount(getAmount().subtract(amount));
+            receiver.setAmount(getAmount().add(amount));
+            System.out.println("Sender : " + getOwner() + ", Receiver : " + receiver.getOwner());
+            System.out.println("Transfer Finish! Send ₩" + amount + " To " + receiver.getOwner());
         }
         else
         {

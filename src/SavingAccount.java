@@ -16,7 +16,7 @@ public class SavingAccount extends Account
     public String getAccountInfo()
     {
         return super.getAccountInfo() + "\n" +
-                "Goal Asset: " + goalAmount;
+                "Goal Asset : ₩" + goalAmount;
     }
 
 
