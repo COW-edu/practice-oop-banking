@@ -1,6 +1,8 @@
-package member;
+package util;
 
-public class MemberAppconfig {
+import member.*;
+
+public class Appconfig {
     public DepositMemberService depositMemberService(){
         return new DepositServiceImpl(depositMemberRepository());
     }

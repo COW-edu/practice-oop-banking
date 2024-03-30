@@ -1,5 +1,7 @@
 package member;
 
+import util.Appconfig;
+
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -10,8 +12,8 @@ public class MemberAccountMake {
     private static BigDecimal amount;
     private static BigDecimal goalAmount;
     private static Boolean activation;
-    MemberAppconfig memberAppConfig = new MemberAppconfig();
-    DepositMemberService depositMemberService = memberAppConfig.depositMemberService();
+    Appconfig appConfig = new Appconfig();
+    DepositMemberService depositMemberService = appConfig.depositMemberService();
 
     public void makeAccount(List<String> account){
         if(account.size()==4){

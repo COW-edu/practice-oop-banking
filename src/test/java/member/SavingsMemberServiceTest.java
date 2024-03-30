@@ -2,6 +2,7 @@ package member;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import util.Appconfig;
 
 import java.math.BigDecimal;
 
@@ -11,8 +12,8 @@ class SavingsMemberServiceTest {
     SavingsMemberService savingsMemberService;
     @BeforeEach()
     public void beforeEach(){
-        MemberAppconfig memberAppconfig = new MemberAppconfig();
-        savingsMemberService = memberAppconfig.savingsMemberService();
+        Appconfig appconfig = new Appconfig();
+        savingsMemberService = appconfig.savingsMemberService();
     }
     @Test
     //적금계좌 생성확인
