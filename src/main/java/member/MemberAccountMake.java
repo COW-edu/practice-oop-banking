@@ -21,16 +21,15 @@ public class MemberAccountMake {
         String name= account.get(1);
         String bankAccountNumber = account.get(2);
         BigDecimal amount = new BigDecimal(account.get(3));
-        BigDecimal goalAmount = new BigDecimal(account.get(4));
         Boolean activation = true;
+
         if(account.size()==4){
-            //makeGeneralAccount(account);
             GeneralMember generalMember = new GeneralMember(accountType,name,bankAccountNumber,amount,activation);
             memberService.join(generalMember);
-
             return;
         }
         if(account.size()==5){
+            BigDecimal goalAmount = new BigDecimal(account.get(4));
 //            makeSavingsAccount(account);
             SavingsMember savingsMember = new SavingsMember(accountType,name,bankAccountNumber,amount,activation,goalAmount);
             memberService.join(savingsMember);
