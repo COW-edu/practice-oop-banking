@@ -8,4 +8,11 @@ public class MemberAppconfig {
         return new DepositMemoryRepository();
 
     }
+    public SavingsMemberService savingsMemberService(){
+        return new SavingsServiceImpl(savingsMemberRepository());
+    }
+    public static SavingsMemberRepository savingsMemberRepository(){
+        return new SavingsMemoryRepository();
+
+    }
 }

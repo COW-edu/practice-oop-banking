@@ -4,6 +4,12 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public class MemberAccountMake {
+    private static String accountType;
+    private static String name;
+    private static String bankAccountNumber;
+    private static BigDecimal amount;
+    private static BigDecimal goalAmount;
+    private static Boolean activation;
     MemberAppconfig memberAppConfig = new MemberAppconfig();
     DepositMemberService depositMemberService = memberAppConfig.depositMemberService();
 
@@ -12,11 +18,25 @@ public class MemberAccountMake {
             makeDepositAccount(account);
             return;
         }
+        if(account.size()==5){
+            makeSavingsAccount(account);
+            return;
+        }
+        return;
+    }
+
+    private void makeSavingsAccount(List<String> account) {
+        String accountType = "적금계좌";
+        String name= account.get(1);
+        String bankAccountNumber = account.get(2);
+        BigDecimal amount = new BigDecimal(account.get(3));
+        BigDecimal goalAmount = new BigDecimal(account.get(4));
+        Boolean activation = true;
     }
 
 
     private void makeDepositAccount(List<String> account){
-        String accountType = account.get(0);
+        String accountType = "예금계좌";
         String name= account.get(1);
         String bankAccountNumber = account.get(2);
         BigDecimal amount = new BigDecimal(account.get(3));
