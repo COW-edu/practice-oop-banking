@@ -77,4 +77,8 @@ public class InputView {
 
     public static void exitProgram() {
     }
+
+    public String getAccountInfo() {
+        return "12345";
+    }
 }

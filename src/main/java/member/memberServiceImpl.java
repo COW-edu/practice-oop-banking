@@ -1,9 +1,9 @@
 package member;
 
-public class ServiceImpl implements MemberService {
+public class memberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
 
-    public ServiceImpl(MemberRepository memberRepository) {
+    public memberServiceImpl(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
 
