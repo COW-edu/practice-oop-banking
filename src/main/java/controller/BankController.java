@@ -30,6 +30,9 @@ public class BankController {
     public void run()  {
         menuOptionChoice(InputView.askCategory());
 
+    }  private void createAccount() {
+
+        System.out.println( InputView.createAccount());
     }
     private void exitProgram() {
     }
@@ -46,9 +49,7 @@ public class BankController {
     private void withdraw() {
     }
 
-    private void createAccount() {
 
-    }
 
 
     private void menuOptionChoice(int input) {
