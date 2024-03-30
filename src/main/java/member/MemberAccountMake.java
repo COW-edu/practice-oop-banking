@@ -13,43 +13,32 @@ public class MemberAccountMake {
     private static BigDecimal goalAmount;
     private static Boolean activation;
     Appconfig appConfig = new Appconfig();
-    MemberService memberService = appConfig.generalMemberService();
-//    SavingsMemberService savingsMemberService = appConfig.savingsMemberService();
+    MemberService memberService = appConfig.memberService();
+
 
     public void makeAccount(List<String> account){
-        if(account.size()==4){
-            makeGeneralAccount(account);
-            return;
-        }
-        if(account.size()==5){
-            makeSavingsAccount(account);
-            return;
-        }
-        return;
-    }
-
-    private void makeSavingsAccount(List<String> account) {
-        String accountType = "적금계좌";
+        String accountType = account.get(0);
         String name= account.get(1);
         String bankAccountNumber = account.get(2);
         BigDecimal amount = new BigDecimal(account.get(3));
         BigDecimal goalAmount = new BigDecimal(account.get(4));
         Boolean activation = true;
-        SavingsMember savingsMember = new SavingsMember(accountType,name,bankAccountNumber,amount,activation,goalAmount);
-        memberService.join(savingsMember);
+        if(account.size()==4){
+            //makeGeneralAccount(account);
+            GeneralMember generalMember = new GeneralMember(accountType,name,bankAccountNumber,amount,activation);
+            memberService.join(generalMember);
+
+            return;
+        }
+        if(account.size()==5){
+//            makeSavingsAccount(account);
+            SavingsMember savingsMember = new SavingsMember(accountType,name,bankAccountNumber,amount,activation,goalAmount);
+            memberService.join(savingsMember);
+            return;
+        }
+        return;
     }
 
 
-    private void makeGeneralAccount(List<String> account){
-        String accountType = "예금계좌";
-        String name= account.get(1);
-        String bankAccountNumber = account.get(2);
-        BigDecimal amount = new BigDecimal(account.get(3));
-        Boolean activation = true;
-
-
-        GeneralMember generalMember = new GeneralMember(accountType,name,bankAccountNumber,amount,activation);
-        memberService.join(generalMember);
-    }
 
 }

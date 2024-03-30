@@ -13,7 +13,7 @@ class SavingsMemberServiceTest {
     @BeforeEach()
     public void beforeEach(){
         Appconfig appconfig = new Appconfig();
-        memberService = appconfig.generalMemberService();
+        memberService = appconfig.memberService();
     }
     @Test
     //적금계좌 생성확인
