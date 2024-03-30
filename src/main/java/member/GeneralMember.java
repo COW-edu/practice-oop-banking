@@ -2,14 +2,14 @@ package member;
 
 import java.math.BigDecimal;
 
-public class DepositMember {
+public class GeneralMember {
     private String accountType;
     private String name;
     private String bankAccountNumber;
     private BigDecimal amount;
     private boolean activation;
 
-    public DepositMember(String accountType, String name, String bankAccountNumber, BigDecimal amount, boolean activation) {
+    public GeneralMember(String accountType, String name, String bankAccountNumber, BigDecimal amount, boolean activation) {
         this.accountType = accountType;
         this.name = name;
         this.bankAccountNumber = bankAccountNumber;

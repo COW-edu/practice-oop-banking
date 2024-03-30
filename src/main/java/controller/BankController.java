@@ -31,8 +31,7 @@ public class BankController {
         menuOptions.put(0,this::exitProgram);
     }
 
-    private void getAccountInfo() {
-    }
+
 
     public void run()  {
         menuOptionChoice(InputView.askCategory());
@@ -40,6 +39,9 @@ public class BankController {
     }  private void createAccount() {
         memberAccountMake.makeAccount(InputView.createAccount());
         run();
+    }
+    private void getAccountInfo() {
+
     }
     private void exitProgram() {
     }

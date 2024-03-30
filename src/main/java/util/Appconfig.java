@@ -3,11 +3,11 @@ package util;
 import member.*;
 
 public class Appconfig {
-    public DepositMemberService depositMemberService(){
-        return new DepositServiceImpl(depositMemberRepository());
+    public GeneralMemberService generalMemberService(){
+        return new GeneralServiceImpl(generalMemberRepository());
     }
-    public static DepositMemberRepository depositMemberRepository(){
-        return new DepositMemoryRepository();
+    public static GeneralMemberRepository generalMemberRepository(){
+        return new GeneralMemoryRepository();
 
     }
     public SavingsMemberService savingsMemberService(){

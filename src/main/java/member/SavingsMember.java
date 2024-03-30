@@ -2,7 +2,7 @@ package member;
 
 import java.math.BigDecimal;
 
-public class SavingsMember extends DepositMember {
+public class SavingsMember extends GeneralMember {
     private BigDecimal goalAmount;
 
 

@@ -8,23 +8,23 @@ import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DepositMemberServiceTest {
-    DepositMemberService depositMemberService;
+class GeneralMemberServiceTest {
+    GeneralMemberService generalMemberService;
     @BeforeEach()
     public void beforeEach(){
         Appconfig appconfig = new Appconfig();
-        depositMemberService = appconfig.depositMemberService();
+        generalMemberService = appconfig.generalMemberService();
     }
     @Test
     //계좌생성확인
     void join() {
         BigDecimal amount = new BigDecimal("10000");
         //given
-        DepositMember depositMember = new DepositMember("N","NAME","12345",amount,true);
+        GeneralMember generalMember = new GeneralMember("N","NAME","12345",amount,true);
         //when
-        depositMemberService.join(depositMember);
-        DepositMember getAccountInfo = depositMemberService.getAccountInfo("12345");
+        generalMemberService.join(generalMember);
+        GeneralMember getAccountInfo = generalMemberService.getAccountInfo("12345");
         //then
-        assertEquals(depositMember,getAccountInfo);
+        assertEquals(generalMember,getAccountInfo);
     }
 }
