@@ -11,4 +11,10 @@ public class DepositServiceImpl implements DepositMemberService{
     public void join(DepositMember depositMember) {
         depositMemberRepository.save(depositMember);
     }
+
+    @Override
+    public DepositMember getAccountInfo(String accountNumber) {
+        return depositMemberRepository.findByAccountNumber(accountNumber);
+
+    }
 }

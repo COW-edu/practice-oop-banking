@@ -9,4 +9,9 @@ public class MemoryDepsitRepository implements DepositMemberRepository {
     public void save(DepositMember depositMember) {
         store.put(depositMember.getBankAccountNumber(), depositMember);
     }
+
+    @Override
+    public DepositMember findByAccountNumber(String accountNumber) {
+        return store.get(accountNumber);
+    }
 }
