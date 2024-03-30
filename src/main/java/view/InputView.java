@@ -9,24 +9,15 @@ import java.util.stream.Collectors;
 
 public class InputView {
     private static final String ASK_CATEGORY = "원하는 메뉴를 선택하세요%n";
-    private static final String CATEGORY_CHOICE = "계좌생성:1, 출금:2, 입금:3, 송금:4, 계좌해지:5, 프로그램종료:0%n";
+    private static final String CATEGORY_CHOICE = "계좌생성(1), 계좌정보확인(2), 입금(3), 출금(4), 송금(5), 계좌해지(6), 프로그램종료(0)%n";
     private static final String ASK_ACCOUNT_INFORMATION = "계좌를 생성하기 위한 정보를 입력해주세요%n";
     private static final String ACCOUNT_INFORMATION_CATEGORY = "계좌종류(예금:N,적금S),이름,계좌번호(5자리),첫 입금액)%n";
     private static final String ACCOUNT_INFORMATION_EXAMPLE = "예시)N,박진현,12345,5000%n";
     private static final String ASK_TARGET_AMOUNT= "목표금액을 입력해주세요";
-    private static final String NUMBER_REGEX = "^[0-5]{1}+$";
+    private static final String NUMBER_REGEX = "^[0-6]{1}+$";
     private static final String DELIMITER = ",";
     private static final String EXIT_PROGRAM = "프로그램을 종료합니다.";
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-//    private static final Map<Integer, Runnable> menuOptions = new HashMap<>();
-//    static {
-//        menuOptions.put(1, InputView::createAccount);
-//        menuOptions.put(2, InputView::withdraw);
-//        menuOptions.put(3, InputView::deposit);
-//        menuOptions.put(4, InputView::transfer);
-//        menuOptions.put(5, InputView::terminateAccount);
-//        menuOptions.put(0, () -> System.out.println(EXIT_PROGRAM));
-//    }
 
     public static void terminateAccount() {
 

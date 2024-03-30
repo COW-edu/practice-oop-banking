@@ -23,17 +23,23 @@ public class BankController {
     private static final Map<Integer, Runnable> menuOptions = new HashMap<>();
     {
         menuOptions.put(1, this::createAccount);
-        menuOptions.put(2, this::withdraw);
+        menuOptions.put(2, this::getAccountInfo);
         menuOptions.put(3, this::deposit);
-        menuOptions.put(4, this::transfer);
-        menuOptions.put(5, this::terminateAccount);
+        menuOptions.put(4, this::withdraw);
+        menuOptions.put(5, this::transfer);
+        menuOptions.put(6, this::terminateAccount);
         menuOptions.put(0,this::exitProgram);
     }
+
+    private void getAccountInfo() {
+    }
+
     public void run()  {
         menuOptionChoice(InputView.askCategory());
 
     }  private void createAccount() {
         memberAccountMake.makeAccount(InputView.createAccount());
+        run();
     }
     private void exitProgram() {
     }
