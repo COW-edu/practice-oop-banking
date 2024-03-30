@@ -5,7 +5,7 @@ public class MemberAppconfig {
         return new DepositServiceImpl(depositMemberRepository());
     }
     public static DepositMemberRepository depositMemberRepository(){
-        return new MemoryDepositRepository();
+        return new DepositMemoryRepository();
 
     }
 }
