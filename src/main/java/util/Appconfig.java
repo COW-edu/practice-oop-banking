@@ -3,18 +3,11 @@ package util;
 import member.*;
 
 public class Appconfig {
-    public GeneralMemberService generalMemberService(){
+    public MemberService generalMemberService(){
         return new GeneralServiceImpl(generalMemberRepository());
     }
-    public static GeneralMemberRepository generalMemberRepository(){
-        return new GeneralMemoryRepository();
-
-    }
-    public SavingsMemberService savingsMemberService(){
-        return new SavingsServiceImpl(savingsMemberRepository());
-    }
-    public static SavingsMemberRepository savingsMemberRepository(){
-        return new SavingsMemoryRepository();
+    public static MemberRepository generalMemberRepository(){
+        return new MemoryRepository();
 
     }
 }

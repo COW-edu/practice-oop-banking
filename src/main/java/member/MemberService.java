@@ -1,6 +1,6 @@
 package member;
 
-public interface GeneralMemberService {
+public interface MemberService {
     void join(GeneralMember generalMember);
     GeneralMember getAccountInfo(String accountNumber);
 

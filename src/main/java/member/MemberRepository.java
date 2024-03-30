@@ -1,6 +1,6 @@
 package member;
 
-public interface GeneralMemberRepository {
+public interface MemberRepository {
     void save(GeneralMember generalMember);
 
     GeneralMember findByAccountNumber(String accountNumber);

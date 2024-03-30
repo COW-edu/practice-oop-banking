@@ -1,20 +1,20 @@
 package member;
 
-public class GeneralServiceImpl implements GeneralMemberService {
-    private final GeneralMemberRepository generalMemberRepository;
+public class GeneralServiceImpl implements MemberService {
+    private final MemberRepository memberRepository;
 
-    public GeneralServiceImpl(GeneralMemberRepository generalMemberRepository) {
-        this.generalMemberRepository = generalMemberRepository;
+    public GeneralServiceImpl(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
     }
 
     @Override
     public void join(GeneralMember generalMember) {
-        generalMemberRepository.save(generalMember);
+        memberRepository.save(generalMember);
     }
 
     @Override
     public GeneralMember getAccountInfo(String accountNumber) {
-        return generalMemberRepository.findByAccountNumber(accountNumber);
+        return memberRepository.findByAccountNumber(accountNumber);
 
     }
 }

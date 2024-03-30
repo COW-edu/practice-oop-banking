@@ -9,11 +9,11 @@ import java.math.BigDecimal;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SavingsMemberServiceTest {
-    SavingsMemberService savingsMemberService;
+    MemberService memberService;
     @BeforeEach()
     public void beforeEach(){
         Appconfig appconfig = new Appconfig();
-        savingsMemberService = appconfig.savingsMemberService();
+        memberService = appconfig.generalMemberService();
     }
     @Test
     //적금계좌 생성확인
@@ -23,8 +23,8 @@ class SavingsMemberServiceTest {
         //given
         SavingsMember savingsMember = new SavingsMember("N","NAME","12345",amount,true, goalamount);
         //when
-        savingsMemberService.join(savingsMember);
-        SavingsMember getAccountInfo = savingsMemberService.getAccountInfo("12345");
+        memberService.join(savingsMember);
+        SavingsMember getAccountInfo = (SavingsMember) memberService.getAccountInfo("12345");
         //then
         assertEquals(savingsMember,getAccountInfo);
     }

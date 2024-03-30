@@ -1,19 +1,20 @@
 package member;
 
-public class SavingsServiceImpl implements SavingsMemberService {
-    private final SavingsMemberRepository savingsMemberRepository;
+public class SavingsServiceImpl implements MemberService {
+    private final MemberRepository memberRepository;
 
-    public SavingsServiceImpl(SavingsMemberRepository savingsMemoryRepository) {
-        this.savingsMemberRepository = savingsMemoryRepository;
+    public SavingsServiceImpl(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
     }
 
     @Override
-    public void join(SavingsMember savingsMember) {
-        savingsMemberRepository.save(savingsMember);
+    public void join(GeneralMember generallMember) {
+        SavingsMember savingsMember = (SavingsMember) generallMember;
+        memberRepository.save(savingsMember);
     }
 
     @Override
     public SavingsMember getAccountInfo(String accountNumber) {
-        return savingsMemberRepository.findByAccountNumber(accountNumber);
+        return (SavingsMember) memberRepository.findByAccountNumber(accountNumber);
     }
 }

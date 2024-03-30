@@ -13,8 +13,8 @@ public class MemberAccountMake {
     private static BigDecimal goalAmount;
     private static Boolean activation;
     Appconfig appConfig = new Appconfig();
-    GeneralMemberService generalMemberService = appConfig.generalMemberService();
-    SavingsMemberService savingsMemberService = appConfig.savingsMemberService();
+    MemberService memberService = appConfig.generalMemberService();
+//    SavingsMemberService savingsMemberService = appConfig.savingsMemberService();
 
     public void makeAccount(List<String> account){
         if(account.size()==4){
@@ -36,7 +36,7 @@ public class MemberAccountMake {
         BigDecimal goalAmount = new BigDecimal(account.get(4));
         Boolean activation = true;
         SavingsMember savingsMember = new SavingsMember(accountType,name,bankAccountNumber,amount,activation,goalAmount);
-        savingsMemberService.join(savingsMember);
+        memberService.join(savingsMember);
     }
 
 
@@ -49,7 +49,7 @@ public class MemberAccountMake {
 
 
         GeneralMember generalMember = new GeneralMember(accountType,name,bankAccountNumber,amount,activation);
-        generalMemberService.join(generalMember);
+        memberService.join(generalMember);
     }
 
 }
