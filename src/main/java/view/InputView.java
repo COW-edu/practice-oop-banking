@@ -17,6 +17,7 @@ public class InputView {
     private static final String NUMBER_REGEX = "^[0-5]{1}+$";
     private static final String DELIMITER = ",";
     private static final String EXIT_PROGRAM = "프로그램을 종료합니다.";
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 //    private static final Map<Integer, Runnable> menuOptions = new HashMap<>();
 //    static {
 //        menuOptions.put(1, InputView::createAccount);
@@ -60,11 +61,6 @@ public class InputView {
         }
         return updatedAccountDetails;
     }
-
-
-
-    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
 
     public static int askCategory() {
         String choiceCategory;

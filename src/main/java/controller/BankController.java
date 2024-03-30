@@ -1,9 +1,9 @@
 package controller;
 
+import member.MemberAccountMake;
 import view.InputView;
 import view.OutputView;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,10 +13,12 @@ public class BankController {
 
     private final InputView inputView;
     private final OutputView outputView;
+    private final MemberAccountMake memberAccountMake;
 
-    public BankController(InputView inputView, OutputView outputView) {
+    public BankController(InputView inputView, OutputView outputView, MemberAccountMake memberAccountMake) {
         this.inputView = inputView;
         this.outputView = outputView;
+        this.memberAccountMake = memberAccountMake;
     }
     private static final Map<Integer, Runnable> menuOptions = new HashMap<>();
     {
@@ -31,8 +33,7 @@ public class BankController {
         menuOptionChoice(InputView.askCategory());
 
     }  private void createAccount() {
-
-        System.out.println( InputView.createAccount());
+        memberAccountMake.makeAccount(InputView.createAccount());
     }
     private void exitProgram() {
     }

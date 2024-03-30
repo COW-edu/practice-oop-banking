@@ -3,34 +3,26 @@ package member;
 import java.math.BigDecimal;
 
 public class DepositMember {
-    private int accountType;
-    private int bankAccountNumber;
+    private String accountType;
     private String name;
-    private BigDecimal ammount;
+    private String bankAccountNumber;
+    private BigDecimal amount;
     private boolean activation;
 
-    public DepositMember(int accountType, int bankAccountNumber, String name, BigDecimal ammount, boolean activation) {
+    public DepositMember(String accountType, String name, String bankAccountNumber, BigDecimal amount, boolean activation) {
         this.accountType = accountType;
-        this.bankAccountNumber = bankAccountNumber;
         this.name = name;
-        this.ammount = ammount;
+        this.bankAccountNumber = bankAccountNumber;
+        this.amount = amount;
         this.activation = activation;
     }
 
-    public int getAccountType() {
+    public String getAccountType() {
         return accountType;
     }
 
-    public void setAccountType(int accountType) {
+    public void setAccountType(String accountType) {
         this.accountType = accountType;
-    }
-
-    public int getBankAccountNumber() {
-        return bankAccountNumber;
-    }
-
-    public void setBankAccountNumber(int bankAccountNumber) {
-        this.bankAccountNumber = bankAccountNumber;
     }
 
     public String getName() {
@@ -41,12 +33,20 @@ public class DepositMember {
         this.name = name;
     }
 
-    public BigDecimal getAmmount() {
-        return ammount;
+    public String getBankAccountNumber() {
+        return bankAccountNumber;
     }
 
-    public void setAmmount(BigDecimal ammount) {
-        this.ammount = ammount;
+    public void setBankAccountNumber(String bankAccountNumber) {
+        this.bankAccountNumber = bankAccountNumber;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
     }
 
     public boolean isActivation() {
