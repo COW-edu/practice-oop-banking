@@ -1,16 +1,14 @@
 package bank;
 
 import account.Account;
-import account.AccountType;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class BankSystem {
 
-    BankStorage bankStorage;
+    private final BankStorage bankStorage;
 
     public BankSystem(BankStorage bankStorage){
         this.bankStorage = bankStorage;
@@ -21,21 +19,34 @@ public class BankSystem {
         return bankStorage.save(account);
 
     }
-    public String deposit(String accountNum, BigDecimal balance) {
 
+    public String deposit(String accountNum, BigDecimal balance) {
+        System.out.println(bankStorage);
         Map<String, Account> allList = getAllList();
         Account account = allList.get(accountNum);
         return account.deposit(balance);
     }
 
-    public void withdraw() {
-
+    public String withdraw(String accountNum, BigDecimal balance) {
+        System.out.println(bankStorage);
+        Map<String, Account> allList = getAllList();
+        Account account = allList.get(accountNum);
+        return account.withdraw(balance);
     }
+    public String remittance(String fromAccountNum, String toAccountNum, BigDecimal balance) {
+        Map<String, Account> allList = getAllList();
+        Account toAccount = allList.get(fromAccountNum);
+        Account fromAccount = allList.get(toAccountNum);
 
-    public void remittance(String fromAccountNum, String toAccountNum, BigDecimal balance) {
-
+        String message = toAccount.withdrawForTransfer(balance);
+        fromAccount.depositForTransfer(balance);
+        return message;
     }
-
+    public String changeStatus(String accountNum) {
+        Map<String, Account> allList = getAllList();
+        Account account = allList.get(accountNum);
+        return account.changeStatus();
+    }
     private String createAccountNum(){
         return Long.toString(ThreadLocalRandom.current().nextLong(1000000000L, 10000000000L));
     }
@@ -43,4 +54,7 @@ public class BankSystem {
        return bankStorage.getAllAccount();
     }
 
+    private boolean validateStatus(){
+
+    }
 }

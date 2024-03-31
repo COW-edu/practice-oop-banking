@@ -1,48 +1,32 @@
 package bank;
 
-import bank.clerk.*;
-import person.PersonalInfo;
-
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
-import java.util.function.Consumer;
 
-public class BankKiosk implements IBankService {
+public class BankKiosk {
 
-    private final Clerk clerk;
-    private Map<Integer, Consumer<PersonalInfo>> actions;
-
-    public BankKiosk(Clerk clerk) {
-        this.clerk = clerk;
-        initActions();
+    private final BankServiceMediator clerkFacade;
+    private final Scanner scanner = new Scanner(System.in);
+    public BankKiosk(BankServiceMediator clerkFacade) {
+        this.clerkFacade = clerkFacade;
     }
 
-    private void initActions() {
-        clerks = new HashMap<>();
-        clerks.put(1, new CreateAccountClerk());
-        clerks.put(2, new DepositClerk());
-        clerks.put(3, new WithdrawClerk());
-        clerks.put(4, new RemittanceClerk());
-    }
-
-    public void bankServiceMenu(PersonalInfo personalInfo) {
-
-        try {menuList();
+    public void bankServiceMenu() {
+        try {
             int choice = promptMenuSelection();
-            Consumer<PersonalInfo> action = actions.get(choice);
-
-            if (action != null) {
-                action.accept(personalInfo);
-            } else throw new InvalidInputException("잘못된 입력입니다.");
+            clerkFacade.executeAction(choice);
         } catch (InvalidInputException e) {
-            System.out.println(e.getMessage());}}
-
-
+            System.out.println(e.getMessage());
+        }
+    }
     private int promptMenuSelection() {
-        Scanner scanner = new Scanner(System.in);
         menuList();
-        int choice = scanner.nextInt(); scanner.nextLine();
+        while (!scanner.hasNextInt()) {
+            System.out.println("유효한 번호를 입력해주세요.");
+            scanner.next();
+            menuList();
+        }
+        int choice = scanner.nextInt();
+        scanner.nextLine();
         return choice;
     }
 
@@ -52,6 +36,7 @@ public class BankKiosk implements IBankService {
                 2. 입금
                 3. 출금
                 4. 송금
+                5. 계좌상태 변경
                 """);
     }
     private static class InvalidInputException extends RuntimeException {

@@ -10,13 +10,10 @@ public class SavingInterest implements InterestCalculator{
         BigDecimal interestRate;
 
         if (balance.compareTo(new BigDecimal("10000000")) >= 0) {
-            interestRate = new BigDecimal("0.50");  // 50%
+            interestRate = new BigDecimal("0.50");
             return balance.multiply(interestRate);
         }
-        if (balance.compareTo(new BigDecimal("5000000")) >= 0) {
-            interestRate = new BigDecimal("0.01");  // 1%
+            interestRate = new BigDecimal("0.01");
             return balance.multiply(interestRate);
-        }
-        return null;
     }
 }

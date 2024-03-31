@@ -1,31 +1,37 @@
-import Interest.DepositInterest;
-import Interest.SavingInterest;
-import account.DepositAccount;
-import account.SavingAccount;
-import bank.BankKiosk;
-import bank.BankStorage;
-import bank.BankSystem;
+import bank.*;
+import bank.clerk.*;
 import person.Person;
 
 public class AppConfig {
+
+    private final CentralBank centralBank = new CentralBank();
+    private final BankStorage bankStorage = new BankStorage(centralBank);
+    private final BankSystem bankSystem = new BankSystem(bankStorage);
 
     public Person person(){
          return new Person(bankKiosk());
     }
     public BankKiosk bankKiosk(){
-        return new BankKiosk(bankClerk());
+        return new BankKiosk(bankClerkFacade());
     }
-    public BankClerk bankClerk() {
-        return new BankClerk(bankSystem());
+    public BankServiceMediator bankClerkFacade(){
+        return new BankServiceMediator(bankClerk(), depositClerk(), withdrawClerk(), remittanceClerk(), changeStatusClerk());
     }
-    public BankSystem bankSystem() {
-        return new BankSystem(bankStorage());
+    public CreateAccountClerk bankClerk() {
+        return new CreateAccountClerk(bankSystem);
     }
-    public BankStorage bankStorage() {
-        return new BankStorage();
+    public DepositClerk depositClerk() {
+        return new DepositClerk(bankSystem);
     }
-    public void accountConfig(){
-        new SavingAccount(new SavingInterest());
-        new DepositAccount(new DepositInterest());
+    public WithdrawClerk withdrawClerk() {
+        return new WithdrawClerk(bankSystem);
     }
+    public RemittanceClerk remittanceClerk() {
+        return new RemittanceClerk(bankSystem);
+    }
+
+    public ChangeStatusClerk changeStatusClerk() {
+        return new ChangeStatusClerk(bankSystem);
+    }
+
 }
