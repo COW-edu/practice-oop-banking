@@ -43,15 +43,6 @@ public class Main
 
     }
 
-    public boolean compareCAGA(BigDecimal current, BigDecimal goal)
-    {
-        if(current.compareTo(goal) > 0)
-        {
-            return true;
-        }
-        return false;
-    }
-
     public String getAccountType(Scanner s)
     {
         System.out.println("예금계좌 : N, 적금게좌 : S");

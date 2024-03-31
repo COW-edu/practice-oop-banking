@@ -19,15 +19,8 @@ public class SavingAccount extends Account
                 "Goal Asset : ₩" + goalAmount;
     }
 
-
-    public void withDraw(BigDecimal amount)
+    public boolean compareCAGA(Account account)
     {
-        if (getAmount().compareTo(amount) >= 0)
-        {
-            super.withDraw(amount);
-        } else {
-            System.out.println("Insufficient funds!");
-        }
+        return account.getAmount().compareTo(this.getGoalAsset()) > 0;
     }
-
 }

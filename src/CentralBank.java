@@ -33,12 +33,17 @@ public class CentralBank
         Account account = findAccountByNum(accountNum);
         if (account != null)
         {
-            account.withDraw(amount);
+            if(account instanceof SavingAccount)
+            {
+                if(((SavingAccount) account).compareCAGA(account))
+                {
+                    account.withDraw(amount);
+                }
+                else { System.out.println("계좌 금액이 목표 금액보다 낮습니다. 인출이 거부됩니다."); }
+            }
+            else {account.withDraw(amount);}
         }
-        else
-        {
-            System.out.println("Account.Account not found!");
-        }
+        else {System.out.println("Account not found!");}
     }
     // 입금
     public void deposit(String accountNum, BigDecimal amount)
@@ -60,7 +65,7 @@ public class CentralBank
         if (sender != null && receiver != null) {
             sender.transfer(receiver, amount);
         } else {
-            System.out.println("Sender or receiver account not found!");
+            System.out.println("Sender or Receiver account not found!");
         }
     }
 
@@ -77,7 +82,7 @@ public class CentralBank
         return null;
     }
 
-    // 이자를 계산하고 출력하는 메서드
+    // 이자를 계산하고 출력
     public void printAccountInfoNInterestRate(String accountNum)
     {
         for (Account account : accounts)
@@ -85,7 +90,7 @@ public class CentralBank
             if(account.getAccountNum().equals(accountNum))
             {
                 InterestCalculator calculator = Calcualateinterest.get(account.getAccountType());
-                BigDecimal interest = ((InterestCalculator) calculator).getInterest(account.getAmount());
+                BigDecimal interest = calculator.getInterest(account.getAmount());
                 System.out.println("Account Owner : " + account.getOwner() + ", Account Number: " + account.getAccountNum() + ", Interest : " + interest);
             }
         }
