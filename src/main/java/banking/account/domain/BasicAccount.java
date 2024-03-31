@@ -2,44 +2,27 @@ package banking.account.domain;
 
 import java.math.BigDecimal;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
+import banking.account.constant.AccountName;
+import lombok.*;
 
 @Getter
-@Builder
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class BasicAccount implements Account {
+@Setter
+@AllArgsConstructor
+public class BasicAccount {
 
-	private final StringBuilder stringBuilder;
-
-	private AccountType accountType;
-
+	private AccountName accountType;
 	private String accountNumber;
-
 	private String owner;
-
-	// https://jsonobject.tistory.com/466
 	private BigDecimal balance;
-
 	private boolean isActivated;
 
 	public String getAccountInfo() {
-		stringBuilder.append("[계좌 정보]").append("\n");
-		stringBuilder.append("계좌종류: ").append(accountType.getAccountName()).append("\n");
-		stringBuilder.append("계좌번호: ").append(getAccountNumber()).append("\n");
-		stringBuilder.append("소유자: ").append(getOwner()).append("\n");
-		stringBuilder.append("잔액: ").append(getBalance()).append("\n");
-		stringBuilder.append("활성여부: ").append(isActivated());
-		return stringBuilder.toString();
-	}
-
-	public void withdraw(BigDecimal value) {
-		this.balance.subtract(value);
-	}
-
-	public void deposit(BigDecimal value) {
-		this.balance.add(value);
+		return "계좌정보 = [" +
+				" 계좌타입=" + accountType +
+				", 계좌번호='" + accountNumber + '\'' +
+				", 소유주='" + owner + '\'' +
+				", 잔액=" + balance +
+				", 활성화 여부=" + isActivated +
+				']' + " \n" ;
 	}
 }
