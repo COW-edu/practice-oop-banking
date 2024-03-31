@@ -12,6 +12,7 @@ public class Main {
 
         CentralBank centralBank = new CentralBank();
         Bank bank = new Bank();
+        bank.associate(centralBank);
         bank.run();
     }
 

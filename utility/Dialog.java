@@ -19,7 +19,7 @@ public class Dialog {
         while (result == null) {
             try {
                 userInputMark();
-                String input = scanner.next();
+                String input = scanner.nextLine();
                 result = new BigDecimal(input);
             } catch (NumberFormatException e) {
                 systemMsg("잘못된 입력입니다. 다시 입력해주세요.");
@@ -40,19 +40,21 @@ public class Dialog {
     }
 
     public static int selectMenu(String[] menus){
-        systemMsg("원하시는 업무를 선택해주세요.");
+        systemMsg("원하시는 항목을 선택해주세요.");
         int select = -999;
-        while (0 < select && select < menus.length+1){
-            for (int i = 0; i < menus.length; i++){
-                System.out.println("    " + (i+1) + ". " + menus[i]);
-            }
-            try {
-                select = scanner.nextInt();
-            }catch (Exception e){
-                systemMsg("숫자만 입력가능합니다.");
-            }
-            systemMsg("1  ~ "+menus.length+"사이의 숫자를 선택하세요");
-        }
+        showMenus(menus);
+        select = selectInRange(menus.length);
+//        while (0 < select && select < menus.length+1){
+//            for (int i = 0; i < menus.length; i++){
+//                System.out.println("    " + (i+1) + ". " + menus[i]);
+//            }
+//            try {
+//                select = scanner.nextInt();
+//            }catch (Exception e){
+//                systemMsg("숫자만 입력가능합니다.");
+//            }
+//            systemMsg("1  ~ "+menus.length+"사이의 숫자를 선택하세요");
+//        }
         return select;
     }
 
@@ -62,17 +64,44 @@ public class Dialog {
         return scanner.nextLine();
     }
     public static String inputAsAccountNum(String msg){
+        /** 계좌번호는 정수로 이루어진 11자 문자열이고, 첫자리의 0도 생략하면 안되므로
+         *  형식에 맞는 String으로 입력받기위한 메소드
+         */
         boolean validInput = false;
         String str = "";
         while (!validInput){
             systemMsg(msg);
             userInputMark();
             str = scanner.nextLine();
-
-
-
+            validInput = str.matches("\\d+") && str.length() == 11;
         }
         return str;
+    }
+
+    public static void showMenus(String[] menus){
+        for (int i = 0; i < menus.length; i++){
+            System.out.println("    " + i + ". " + menus[i]);
+        }
+    }
+
+
+    /** 0 부터 range개의 정수를 입력 받아 리턴
+     * 범위 밖의 값이 입력되거나 정수가 아닌값이 입력되면
+     * 다시 입력받음.
+     */
+    public static int selectInRange(int range){
+        int select = -1;
+        while (select < 0 || select >= range) {
+            try {
+                select = Integer.parseInt(scanner.nextLine());
+                if (select < 0 || select >= range) {
+                    systemMsg("0 ~ " + (range - 1) + " 사이의 숫자를 선택하세요.");
+                }
+            } catch (NumberFormatException e) {
+                systemMsg("숫자만 입력 가능합니다.");
+            }
+        }
+        return select;
     }
 
 }

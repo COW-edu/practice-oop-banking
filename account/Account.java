@@ -58,6 +58,7 @@ public class Account {
         this.balance = new BigDecimal(0);
         this.isActivate = true;
     }
+
     public Account(String accountHolder, String accountNum){
         this();
         this.accountHolder = accountHolder;
@@ -91,6 +92,10 @@ public class Account {
         }catch (Exception e){
             return false;
         }
+    }
+
+    public Account newAccount(){
+        return new Account();
     }
 
 
