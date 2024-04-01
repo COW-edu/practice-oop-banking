@@ -1,21 +1,21 @@
 package util;
 
-import Bank.BankService;
-import Bank.BankServiceImpl;
-import interest.InterestPolicy;
-import interest.RateInterestPolicy;
-import member.*;
+import interest.InterestServiceImpl;
+import interest.InterestService;
+import interestPolicy.InterestPolicy;
+import interestPolicy.RateInterestPolicy;
+import bank.*;
 
 public class Appconfig {
-    public MemberService memberService(){
-        return new memberServiceImpl(memberRepository());
+    public BankService memberService(){
+        return new bankServiceImpl(memberRepository());
     }
-    public static MemberRepository memberRepository(){
-        return new MemoryRepository();
+    public static BankRepository memberRepository(){
+        return new BankMemoryRepository();
 
     }
-    public BankService bankService(){
-        return new BankServiceImpl(memberRepository(), interestPolicy());
+    public InterestService bankService(){
+        return new InterestServiceImpl(memberRepository(), interestPolicy());
 
     }
     public static InterestPolicy interestPolicy() {

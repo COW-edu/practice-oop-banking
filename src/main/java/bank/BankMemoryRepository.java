@@ -1,10 +1,10 @@
-package member;
+package bank;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MemoryRepository implements MemberRepository {
+public class BankMemoryRepository implements BankRepository {
     private static Map<String, GeneralMember> store = new HashMap<>();
     @Override
     public void save(GeneralMember generalMember) {

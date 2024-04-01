@@ -1,10 +1,10 @@
-package interest;
+package interestPolicy;
 
-import member.GeneralMember;
+import bank.GeneralMember;
 
 import java.math.BigDecimal;
 
-import static interest.InterestList.*;
+import static interestPolicy.InterestList.*;
 
 
 

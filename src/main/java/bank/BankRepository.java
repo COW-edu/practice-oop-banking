@@ -1,8 +1,8 @@
-package member;
+package bank;
 
 import java.math.BigDecimal;
 
-public interface MemberRepository {
+public interface BankRepository {
     void save(GeneralMember generalMember);
     void addAmount(String accountNumber, BigDecimal depositAmount);
     void subtractAmount(String accountNumber, BigDecimal withdrawAmount);

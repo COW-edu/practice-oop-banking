@@ -1,4 +1,4 @@
-package member;
+package bank;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,12 +8,12 @@ import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class SavingsMemberServiceTest {
-    MemberService memberService;
+class SavingsInterestServiceTest {
+    BankService bankService;
     @BeforeEach()
     public void beforeEach(){
         Appconfig appconfig = new Appconfig();
-        memberService = appconfig.memberService();
+        bankService = appconfig.memberService();
     }
     @Test
     //적금계좌 생성확인
@@ -23,8 +23,8 @@ class SavingsMemberServiceTest {
         //given
         SavingsMember savingsMember = new SavingsMember("N","NAME","12345",amount,true, goalamount);
         //when
-        memberService.join(savingsMember);
-        SavingsMember getAccountInfo = (SavingsMember) memberService.getAccountInfo("12345");
+        bankService.join(savingsMember);
+        SavingsMember getAccountInfo = (SavingsMember) bankService.getAccountInfo("12345");
         //then
         assertEquals(savingsMember,getAccountInfo);
     }

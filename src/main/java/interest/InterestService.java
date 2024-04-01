@@ -1,5 +1,5 @@
-package Bank;
+package interest;
 
-public interface BankService {
+public interface InterestService {
     Bank getInterestEstimated(String accountNumber);
 }

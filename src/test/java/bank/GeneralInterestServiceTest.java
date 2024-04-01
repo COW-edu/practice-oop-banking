@@ -1,4 +1,4 @@
-package member;
+package bank;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,12 +8,12 @@ import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class GeneralMemberServiceTest {
-    MemberService memberService;
+class GeneralInterestServiceTest {
+    BankService bankService;
     @BeforeEach()
     public void beforeEach(){
         Appconfig appconfig = new Appconfig();
-        memberService = appconfig.memberService();
+        bankService = appconfig.memberService();
     }
     @Test
     //계좌생성확인
@@ -22,8 +22,8 @@ class GeneralMemberServiceTest {
         BigDecimal amount = new BigDecimal("10000");
         GeneralMember generalMember = new GeneralMember("N","NAME","12345",amount,true);
         //when
-        memberService.join(generalMember);
-        GeneralMember getAccountInfo = memberService.getAccountInfo("12345");
+        bankService.join(generalMember);
+        GeneralMember getAccountInfo = bankService.getAccountInfo("12345");
         //then
         assertEquals(generalMember,getAccountInfo);
     }
@@ -35,9 +35,9 @@ class GeneralMemberServiceTest {
         BigDecimal depositAmount = new BigDecimal("10000");
         GeneralMember generalMember = new GeneralMember("N","NAME","12345",amount,true);
         //when
-        memberService.join(generalMember);
-        memberService.deposit("12345",depositAmount);
-        GeneralMember getAccountInfo = memberService.getAccountInfo("12345");
+        bankService.join(generalMember);
+        bankService.deposit("12345",depositAmount);
+        GeneralMember getAccountInfo = bankService.getAccountInfo("12345");
         //then
         BigDecimal answerValue = new BigDecimal("20000");
         assertEquals(answerValue,getAccountInfo.getAmount());

@@ -1,4 +1,4 @@
-package interest;
+package interestPolicy;
 
 import java.math.BigDecimal;
 
