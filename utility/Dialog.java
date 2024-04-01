@@ -1,6 +1,7 @@
 package utility;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Dialog {
@@ -39,22 +40,11 @@ public class Dialog {
         System.out.print(" >> ");
     }
 
-    public static int selectMenu(String[] menus){
+    public static int selectMenu(Object[] menus){
         systemMsg("원하시는 항목을 선택해주세요.");
         int select = -999;
         showMenus(menus);
         select = selectInRange(menus.length);
-//        while (0 < select && select < menus.length+1){
-//            for (int i = 0; i < menus.length; i++){
-//                System.out.println("    " + (i+1) + ". " + menus[i]);
-//            }
-//            try {
-//                select = scanner.nextInt();
-//            }catch (Exception e){
-//                systemMsg("숫자만 입력가능합니다.");
-//            }
-//            systemMsg("1  ~ "+menus.length+"사이의 숫자를 선택하세요");
-//        }
         return select;
     }
 
@@ -78,7 +68,7 @@ public class Dialog {
         return str;
     }
 
-    public static void showMenus(String[] menus){
+    public static void showMenus(Object[] menus){
         for (int i = 0; i < menus.length; i++){
             System.out.println("    " + i + ". " + menus[i]);
         }

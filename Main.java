@@ -14,6 +14,8 @@ public class Main {
         Bank bank = new Bank();
         bank.associate(centralBank);
         bank.run();
+        bank.payInterest();
+        bank.run();
     }
 
 

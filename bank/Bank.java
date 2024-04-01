@@ -6,6 +6,8 @@ import account.SaveAccount;
 import utility.Dialog;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.ArrayList;
 
 public class Bank {
     private CentralBank centralBank;
@@ -18,8 +20,38 @@ public class Bank {
         CONNECTED,
         DISCONNECTED
     }
-    private String[] menuTable = { "이전으로", "계좌생성", "출금", "입금", "송금", "계좌정보 확인"};
-    private String[] accountType = {"예금계좌", "적금계좌"};
+
+    enum EMenuTable{
+        RETURN_PREV("이전으로"),
+        CREATE_ACCOUNT("계좌생성"),
+        WITHDRAW("출금"),
+        DEPOSIT("입금"),
+        REMIT("송금"),
+        GET_ACCOUNT_INFO("계좌정보 확인");
+
+        public String getMenuName() {
+            return menuName;
+        }
+
+        private final String menuName;
+
+
+
+        EMenuTable(String menuName) {
+            this.menuName = menuName;
+        }
+
+        public static String[] nameValues(){
+            int nOfValues = values().length;
+            String[] returnValue = new String[nOfValues];
+            for(int i = 0; i < nOfValues; i++){
+                returnValue[i] = values()[i].getMenuName();
+            }
+            return returnValue;
+        }
+    }
+
+//    private String[] menuTable = { "이전으로", "계좌생성", "출금", "입금", "송금", "계좌정보 확인" };
     private static int nOfBanks = 0;
 
     private int bankNum;
@@ -36,12 +68,19 @@ public class Bank {
         nOfAccounts = 0;
         bankNum = nOfBanks++;
         eState = EState.CONNECTED;
+        System.out.println(bankNum);
     }
 
     public void createAccount(){
+
+        //계좌종류 선택
         Dialog.systemMsg("계좌 종류를 선택하세요");
-        Dialog.showMenus(accountType);
-        EAccount eAccount = EAccount.values()[Dialog.selectInRange(accountType.length)];
+//        Dialog.showMenus(EAccount.values());
+//        EAccount eAccount = EAccount.values()[Dialog.selectInRange(EAccount.values().length)];
+        EAccount eAccount = EAccount.values()[Dialog.selectMenu(EAccount.nameValues())];
+
+
+
         Account newAccount = eAccount.getAccount().newAccount();
         String name = Dialog.inputAsString("예금주를 입력하세요");
         newAccount.setAccountHolder(name);
@@ -49,29 +88,30 @@ public class Bank {
 
         if (eAccount == EAccount.S){
             //이 부분을 좀더 개선할수 있을듯? 상위클래스에서 additionalSettings() 하고 msg셋과 리턴밸류 타입을 저장해두면 일반화가능할듯
+            //additionalSettings(String[] args, EType[] argTypes)로 주면 될듯
             BigDecimal targetAmount = Dialog.inputAsBigDecimal("목표금액을 설정해주세요");
             ((SaveAccount) newAccount).setTargetAmount(targetAmount);
         }
 
         String accountNum = createAccountNum(eAccount);
         newAccount.setAccountNum(accountNum);
-        centralBank.registerAccount(newAccount); // boolean 으로 등록완료 판별과정+@ 구현필요
+        //TODO: 2024-03-30   boolean 으로 등록완료 판별과정+@ 구현필요
+        centralBank.registerAccount(newAccount);
         Dialog.systemMsg("계좌생성이 완료되었습니다. ");
         System.out.println(newAccount.getAccountInfo());
-
-
 
     }
 
 
     public void selectMenu(){
-        switch (Dialog.selectMenu(this.menuTable)){
-            case 0 -> returnPrev();
-            case 1 -> createAccount();
-            case 2 -> withdraw();
-            case 3 -> deposit();
-            case 4 -> remit();
-            case 5 -> getAccountInfo();
+        EMenuTable selectedMenu = EMenuTable.values()[Dialog.selectMenu(EMenuTable.nameValues())];
+        switch (selectedMenu){
+            case RETURN_PREV -> returnPrev();
+            case CREATE_ACCOUNT -> createAccount();
+            case WITHDRAW -> withdraw();
+            case DEPOSIT -> deposit();
+            case REMIT -> remit();
+            case GET_ACCOUNT_INFO -> getAccountInfo();
         }
     }
 
@@ -87,7 +127,7 @@ public class Bank {
     private Account getAccount(String msg) {
         Account account = centralBank.getAccount(Dialog.inputAsAccountNum(msg + "계좌번호를 입력하세요"));
         if (account == null){
-            Dialog.systemMsg("존재하지 않는 계좌입니다. 다시 입력하세요");
+            Dialog.systemMsg("유요하지 않은 계좌입니다. 다시 입력하세요");
             account = centralBank.getAccount(Dialog.inputAsAccountNum(msg + "계좌번호를 입력하세요"));
         }
         return account;
@@ -107,6 +147,8 @@ public class Bank {
                 Dialog.systemMsg("현재 잔액: " + sendAccount.getBalance());
             }else {
                 Dialog.systemMsg("송금 실패");
+                // 보내는사람계좌에서는 출금된 상태에서 송금실패시 다시 입금해야함.
+                sendAccount.deposit(amount);
             }
         }else {
             Dialog.systemMsg("송금 실패");
@@ -173,8 +215,22 @@ public class Bank {
 
         return String.valueOf(verifyNum);
     }
+    public void payInterest(){
+        ArrayList<Account> accountList = centralBank.getAllAccounts(bankNum);
+        InterestCalculator interestCalculator;
+        BigDecimal sum = new BigDecimal(0);
+        for(Account account : accountList){
+            interestCalculator = centralBank.interestCalculatorTable.get(account.getEAccount());
+            BigDecimal interest = interestCalculator.getInterest(account.getBalance()).setScale(0, RoundingMode.UP); //소수점은 올림
+            sum = sum.add(interest);
+            account.setBalance(account.getBalance().add(interest));
+        }
+        Dialog.systemMsg(accountList.size() + "개의 계좌에 이자 지급을 완료했습니다.");
+        Dialog.systemMsg("총 " + sum + "원을 지급했습니다.");
+    }
 
     public void run() {
+        eState = EState.CONNECTED;
         while (eState == EState.CONNECTED){
             selectMenu();
         }

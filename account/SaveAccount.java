@@ -1,5 +1,7 @@
 package account;
 
+import utility.Dialog;
+
 import java.math.BigDecimal;
 
 public class SaveAccount extends Account{
@@ -22,6 +24,15 @@ public class SaveAccount extends Account{
         this.accountHolder = accountHolder;
         this.accountNum = accountNum;
         this.targetAmount = targetAmount;
+    }
+
+    @Override
+    public boolean withdraw(BigDecimal amount) {
+        if(balance.compareTo(targetAmount)<0) {
+            Dialog.systemMsg("잔액이 목표금액보다 적을 경우 출금할 수 없습니다.");
+            return false;
+        }
+        return super.withdraw(amount);
     }
 
     @Override

@@ -1,5 +1,7 @@
 package account;
 
+import utility.Dialog;
+
 import java.math.BigDecimal;
 
 public class Account {
@@ -68,7 +70,7 @@ public class Account {
 
 
     public String getAccountInfo(){
-        return "계좌종류 : " + eAccount.information + "\n" +
+        return "계좌종류 : " + eAccount.menuName + "\n" +
                 "계좌번호 : " + accountNum + "\n" +
                 "예금주 : " + accountHolder + "\n" +
                 "잔액 : " + balance + "\n" +
@@ -77,12 +79,11 @@ public class Account {
 
 
     public boolean deposit(BigDecimal amount){
-        try {
+        if(balance.compareTo(amount)<0){
             this.balance = balance.add(amount);
             return true;
-        }catch (Exception e){
-            return false;
         }
+        return false;
     }
 
     public boolean withdraw(BigDecimal amount){
@@ -90,6 +91,7 @@ public class Account {
             this.balance = balance.subtract(amount);
             return true;
         }catch (Exception e){
+            Dialog.systemMsg("오류가 발생했습니다. 다시 시도해주세요.");
             return false;
         }
     }
