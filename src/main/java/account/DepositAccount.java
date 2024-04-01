@@ -14,7 +14,7 @@ public class DepositAccount implements Account{
 
     private static final String DEPOSIT_COMPLETE = "입금완료! [잔고] = %s";
     private static final String WITHDRAW_COMPLETE = "출금완료! [잔고] = %s";
-    private static final String INSUFFICIENT_BALANCE = "잔액부족! [잔고] = %s";
+    private static final String INSUFFICIENT_BALANCE = "잔액부족! [잔고] = %s 처음부터 다시 입력해주세요";
     private static final String REMITTANCE_COMPLETE = "송금완료! [잔고] = %s";
     private static final String ACCOUNT_INACTIVE = "[계좌상태] = 비활성화";
     private static final String ACCOUNT_ACTIVE = "[계좌상태] = 활성화";

@@ -23,17 +23,19 @@ public class RemittanceClerk implements Clerk{
 
     public void remittance() {
 
-        try{
-            String fromAccountNum = getUserInput(); ValidationUtils.isValidAccountNumber(fromAccountNum);
-            String toAccountNum = getUserInput(); ValidationUtils.isValidAccountNumber(fromAccountNum);
-            BigDecimal balance = ValidationUtils.createBalance(getUserInput());
+        while (true){
+            try{
+                String fromAccountNum = getUserInput(); ValidationUtils.isValidAccountNumber(fromAccountNum);
+                String toAccountNum = getUserInput(); ValidationUtils.isValidAccountNumber(fromAccountNum);
+                BigDecimal balance = ValidationUtils.createBalance(getUserInput());
 
-            String balanceResult = bankSystem.remittance(fromAccountNum, toAccountNum,  balance);
-            resultMessage(balanceResult);
-        }catch (NotFoundAccountException | InputAccountNumberException | NumberFormatException e){
-            System.out.println(e.getMessage()); remittance();
-        }catch (BelowTargetException | InsufficienBalancetException | AccountStatusException e){
-            System.out.println(e.getMessage());
+                String balanceResult = bankSystem.remittance(fromAccountNum, toAccountNum,  balance);
+                resultMessage(balanceResult);
+                break;
+            }catch (NotFoundAccountException | InputAccountNumberException | NumberFormatException |
+                    BelowTargetException | InsufficienBalancetException | AccountStatusException e){
+                System.out.println(e.getMessage());
+            }
         }
     }
 }

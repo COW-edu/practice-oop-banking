@@ -22,17 +22,17 @@ public class DepositClerk implements Clerk{
     }
 
     public void deposit() {
-        try {
-            String accountNum = getUserInput(); ValidationUtils.isValidAccountNumber(accountNum);
-            BigDecimal balance = ValidationUtils.createBalance(getUserInput());
-            String balanceResult = bankSystem.deposit(accountNum, balance);
-            resultMessage(balanceResult);
-
-        }catch (NotFoundAccountException | InputAccountNumberException | NumberFormatException e) {
-            System.out.println(e.getMessage());
-            deposit();
-        }catch (AccountStatusException e){
-            System.out.println(e.getMessage());
+        while (true){
+            try {
+                String accountNum = getUserInput(); ValidationUtils.isValidAccountNumber(accountNum);
+                BigDecimal balance = ValidationUtils.createBalance(getUserInput());
+                String balanceResult = bankSystem.deposit(accountNum, balance);
+                resultMessage(balanceResult);
+                break;
+            }catch (NotFoundAccountException | InputAccountNumberException | NumberFormatException |
+                    AccountStatusException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 }

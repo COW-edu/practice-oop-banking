@@ -20,24 +20,20 @@ public class BankKiosk {
     }
     private int promptMenuSelection() {
         int choice;
-        menuList();
         while (true) {
-            if (!scanner.hasNextInt()) {
+            menuList();
+            while (!scanner.hasNextInt()) {
                 System.out.println(ERROR_MESSAGE);
                 scanner.next();
-                menuList();
-                continue;
             }
             choice = scanner.nextInt();
             scanner.nextLine();
             if (choice >= 1 && choice <= 6) {
-                break;
-            } else {
-                System.out.println(ERROR_MESSAGE);
-                menuList();}}
-        return choice;}
-
-
+                return choice;
+            }
+            System.out.println(ERROR_MESSAGE);
+        }
+    }
     private void menuList() {
         System.out.println(MENU_LIST);
     }

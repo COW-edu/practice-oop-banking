@@ -27,9 +27,7 @@ public class BankSystem {
 
     public String deposit(String accountNum, BigDecimal balance) throws AccountStatusException, NotFoundAccountException {
         Account account = ValidationUtils.getAccount(getAllList(), accountNum);
-        if (ValidationUtils.validateStatus(account)) {
-
-            return account.deposit(balance);}
+        if (ValidationUtils.validateStatus(account)) return account.deposit(balance);
         throw new AccountStatusException(ACCOUNT_INACTIVE_ERROR);
     }
 
@@ -37,8 +35,7 @@ public class BankSystem {
             throws AccountStatusException, NotFoundAccountException, InsufficienBalancetException, BelowTargetException {
 
         Account account = ValidationUtils.getAccount(getAllList(), accountNum);
-        if (ValidationUtils.validateStatus(account)) {
-            return account.withdraw(balance);}
+        if (ValidationUtils.validateStatus(account)) return account.withdraw(balance);
         throw new AccountStatusException(ACCOUNT_INACTIVE_ERROR);
     }
 

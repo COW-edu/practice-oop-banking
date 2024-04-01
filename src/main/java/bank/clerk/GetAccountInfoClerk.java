@@ -20,14 +20,16 @@ public class GetAccountInfoClerk implements Clerk {
     }
 
     public void getAccountInfo() {
-        try{
-            String accountNum = getUserInput();
-            ValidationUtils.isValidAccountNumber(accountNum);
-            String statusResult = bankSystem.getAccountInfo(accountNum);
-            resultMessage(statusResult);
-        }catch (InputAccountNumberException | NotFoundAccountException e){
-            System.out.println(e.getMessage());
-            getAccountInfo();
+        while(true){
+            try{
+                String accountNum = getUserInput();
+                ValidationUtils.isValidAccountNumber(accountNum);
+                String statusResult = bankSystem.getAccountInfo(accountNum);
+                resultMessage(statusResult);
+                break;
+            }catch (InputAccountNumberException | NotFoundAccountException e){
+                System.out.println(e.getMessage());
+            }
         }
     }
 }

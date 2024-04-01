@@ -20,14 +20,16 @@ public class ChangeStatusClerk implements Clerk{
     }
 
     public void suspension() {
-        try{
-            String accountNum = getUserInput();
-            ValidationUtils.isValidAccountNumber(accountNum);
-            String statusResult = bankSystem.changeStatus(accountNum);
-            resultMessage(statusResult);
-        }catch (InputAccountNumberException | NotFoundAccountException e){
-            System.out.println(e.getMessage());
-            suspension();
+        while (true){
+            try{
+                String accountNum = getUserInput();
+                ValidationUtils.isValidAccountNumber(accountNum);
+                String statusResult = bankSystem.changeStatus(accountNum);
+                resultMessage(statusResult);
+                break;
+            }catch (InputAccountNumberException | NotFoundAccountException e){
+                System.out.println(e.getMessage());
+            }
         }
     }
 }

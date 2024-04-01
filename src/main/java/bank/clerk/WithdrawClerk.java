@@ -22,19 +22,15 @@ public class WithdrawClerk implements Clerk{
         withdraw();}
 
     public void withdraw() {
-
-        try {
-            String accountNum = getUserInput();
-            ValidationUtils.isValidAccountNumber(accountNum);
-            BigDecimal balance = ValidationUtils.createBalance(getUserInput());
-            String balanceResult = bankSystem.withdraw(accountNum, balance);
-            resultMessage(balanceResult);
-
-        }catch (NotFoundAccountException | InputAccountNumberException e) {
+        while (true){
+            try {
+                String accountNum = getUserInput();
+                ValidationUtils.isValidAccountNumber(accountNum);
+                BigDecimal balance = ValidationUtils.createBalance(getUserInput());
+                String balanceResult = bankSystem.withdraw(accountNum, balance);
+                resultMessage(balanceResult);
+                break;
+            }catch (NotFoundAccountException | InputAccountNumberException | BelowTargetException |
+                    InsufficienBalancetException | AccountStatusException e) {
                 System.out.println(e.getMessage());
-                withdraw();
-        }catch (BelowTargetException | InsufficienBalancetException | AccountStatusException e){
-            System.out.println(e.getMessage());
-        }
-    }
-}
+            }}}}

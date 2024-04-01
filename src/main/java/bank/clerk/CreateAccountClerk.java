@@ -7,6 +7,7 @@ import account.SavingAccount;
 import bank.BankSystem;
 import exception.clerk.InputAccountTypeException;
 import lombok.RequiredArgsConstructor;
+import validate.ValidationUtils;
 
 import java.math.BigDecimal;
 
@@ -29,37 +30,37 @@ public class CreateAccountClerk implements Clerk{
     }
 
     private void validateAccountType() {
+        while(true){
+            try{
+                String input = getUserInput();
+                AccountType accountType = AccountType.fromDescription(input);
+                switch (accountType){
+                    case DEPOSIT -> createAccount(AccountType.DEPOSIT, null);
+                    case SAVING -> {BigDecimal target = promptForTargetAmount(); createAccount(AccountType.SAVING, target);}
+                }
+                break;
+            }catch (InputAccountTypeException | NumberFormatException e){
+                System.out.println(e.getMessage());}}}
 
-        try{
-            String input = getUserInput();
-            AccountType accountType = AccountType.fromDescription(input);
-            switch (accountType) {
-                case DEPOSIT: createDepositAccount(); break;
-                case SAVING: BigDecimal target = promptForTargetAmount(); createSavingAccount(target); break;}
-        }catch (InputAccountTypeException e){
-            System.out.println(e.getMessage());
-            validateAccountType();
+    private void createAccount(AccountType type, BigDecimal targetAmount) {
+        String name = getName();
+        Account account;
+        if (type == AccountType.SAVING) {
+            account = new SavingAccount(SAVING_ACCOUNT_TYPE, TEMP_VALUE, name, BigDecimal.ZERO, targetAmount, true);
+        } else {
+            account = new DepositAccount(DEPOSIT_ACCOUNT_TYPE, TEMP_VALUE, name, BigDecimal.ZERO, true);
         }
-    }
-
-    private void createDepositAccount() {
-        System.out.println(REQUEST_NAME);
-        String name = getUserInput();
-        Account account = new DepositAccount(DEPOSIT_ACCOUNT_TYPE, TEMP_VALUE, name, BigDecimal.ZERO, true);
         String accountNumber = bankSystem.createAccount(account);
-        System.out.printf(DEPOSIT_ACCOUNT_CREATED, accountNumber);
+        System.out.printf(type == AccountType.SAVING ? SAVING_ACCOUNT_CREATED : DEPOSIT_ACCOUNT_CREATED, accountNumber);
     }
 
-    private void createSavingAccount(BigDecimal target) {
-        System.out.println(REQUEST_NAME);
-        String name = getUserInput();
-        Account account = new SavingAccount(SAVING_ACCOUNT_TYPE, TEMP_VALUE, name, BigDecimal.ZERO, target, true);
-        String accountNumber = bankSystem.createAccount(account);
-        System.out.printf(SAVING_ACCOUNT_CREATED, accountNumber);
-    }
 
-    private BigDecimal promptForTargetAmount() {
+    private BigDecimal promptForTargetAmount() throws NumberFormatException{
         System.out.println(PROMPT_TARGET_AMOUNT);
-        return new BigDecimal(getUserInput());
+        return new BigDecimal(String.valueOf(ValidationUtils.createBalance(getUserInput())));
+    }
+    private String getName(){
+        System.out.println(REQUEST_NAME);
+        return getUserInput();
     }
 }
