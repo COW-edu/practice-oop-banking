@@ -78,7 +78,7 @@ public class Account {
 
     public boolean deposit(BigDecimal amount){
         try {
-            balance.add(amount);
+            this.balance = balance.add(amount);
             return true;
         }catch (Exception e){
             return false;
@@ -87,7 +87,7 @@ public class Account {
 
     public boolean withdraw(BigDecimal amount){
         try {
-            balance.add(amount);
+            this.balance = balance.subtract(amount);
             return true;
         }catch (Exception e){
             return false;

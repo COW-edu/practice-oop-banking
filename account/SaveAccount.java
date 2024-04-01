@@ -26,7 +26,7 @@ public class SaveAccount extends Account{
 
     @Override
     public String getAccountInfo() {
-        return super.getAccountInfo()+"\n 목표금액 : " + targetAmount;
+        return super.getAccountInfo()+"\n목표금액 : " + targetAmount;
     }
 
     @Override

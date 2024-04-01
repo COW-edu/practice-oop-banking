@@ -90,7 +90,6 @@ public class Bank {
             Dialog.systemMsg("존재하지 않는 계좌입니다. 다시 입력하세요");
             account = centralBank.getAccount(Dialog.inputAsAccountNum(msg + "계좌번호를 입력하세요"));
         }
-
         return account;
     }
     private Account getAccount(){

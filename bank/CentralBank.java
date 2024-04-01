@@ -39,7 +39,6 @@ public class CentralBank {
     public Account getAccount(String accountNum){
         for(Account account : accountList){
             if(account.getAccountNum().equals(accountNum)) {
-                Dialog.systemMsg("등록실패!! 중복된 계좌번호입니다.");
                 return account;
             }
         }
