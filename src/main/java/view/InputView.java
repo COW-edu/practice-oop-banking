@@ -15,6 +15,7 @@ public class InputView {
     private static final String ASK_TARGET_AMOUNT= "목표금액을 입력해주세요";
     private static final String ASK_ACCOUNT_NUMBER = "계좌번호를 입력해주세요";
     private static final String NUMBER_REGEX = "^[0-6]{1}+$";
+    private static final String ASK_NUMBER_AND_AMOUNT = "계좌번호와 금액을 입력하세요";
     private static final String DELIMITER = ",";
     private static final String EXIT_PROGRAM = "프로그램을 종료합니다.";
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -27,11 +28,14 @@ public class InputView {
     }
 
     public static List<String> deposit() {
-        System.out.println("계좌번호와 입금금액을 입력하세요");
+        System.out.println(ASK_NUMBER_AND_AMOUNT);
         return  makeList(input());
     }
 
-
+    public static List<String> withdraw() {
+        System.out.println(ASK_NUMBER_AND_AMOUNT);
+        return makeList(input());
+    }
 
     public static List<String> createAccount() {
         System.out.printf(ASK_ACCOUNT_INFORMATION+ACCOUNT_INFORMATION_CATEGORY+ACCOUNT_INFORMATION_EXAMPLE);//추후에 입력값 예외처리 필요

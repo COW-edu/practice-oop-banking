@@ -10,7 +10,6 @@ import view.InputView;
 import view.OutputView;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -95,13 +94,18 @@ public class BankController {
     }
 
     private void deposit() {
-        List<String> depositformation = InputView.deposit();
-        memberService.deposit(depositformation.get(0),new BigDecimal(depositformation.get(1)));
+        List<String> depositInformation = InputView.deposit();
+        memberService.deposit(depositInformation.get(0),new BigDecimal(depositInformation.get(1)));
+        OutputView.depositMessage(depositInformation.get(0), depositInformation.get(1));
         run();
 
     }
 
     private void withdraw() {
+        List<String> withdrawInformation = InputView.withdraw();
+        memberService.withdraw(withdrawInformation.get(0),new BigDecimal(withdrawInformation.get(1)));
+        OutputView.withdrawEndMessage(withdrawInformation.get(0),withdrawInformation.get(1));
+        run();
     }
 
 

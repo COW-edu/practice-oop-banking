@@ -21,6 +21,11 @@ public class memberServiceImpl implements MemberService {
     }
 
     @Override
+    public void withdraw(String accountNumber, BigDecimal withdrawAmount) {
+        memberRepository.subtractAmount(accountNumber,withdrawAmount);
+    }
+
+    @Override
     public GeneralMember getAccountInfo(String accountNumber) {
         return memberRepository.findByAccountNumber(accountNumber);
 

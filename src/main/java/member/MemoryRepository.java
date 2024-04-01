@@ -18,6 +18,12 @@ public class MemoryRepository implements MemberRepository {
     }
 
     @Override
+    public void subtractAmount(String accountNumber, BigDecimal withdrawAmount) {
+        GeneralMember member = store.get(accountNumber);
+        member.setAmount(member.getAmount().subtract(withdrawAmount));
+    }
+
+    @Override
     public GeneralMember findByAccountNumber(String accountNumber) {
         return store.get(accountNumber);
     }

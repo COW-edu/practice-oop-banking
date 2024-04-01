@@ -4,6 +4,16 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public class OutputView {
+    private static final String WITHDRAW_MESSAGE = "%s 계좌에서 %s원 출금이 완료되었습니다.%n";
+    private static final String DEPOSIT_MESSAGE = "%s 계좌에 %s원 입금이 완료되었습니다.%n";
+    public static void withdrawEndMessage(String accountNumber, String amount) {
+        System.out.printf(WITHDRAW_MESSAGE, accountNumber, amount);
+    }
+
+    public static void depositMessage(String accountNumber, String amount) {
+        System.out.printf(DEPOSIT_MESSAGE, accountNumber, amount);
+    }
+
     public void printAccountInfo(List<String> combinedInfo) {
         combinedInfo.forEach(System.out::println);
     }
