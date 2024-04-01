@@ -1,6 +1,5 @@
 package controller;
 
-import interest.Bank;
 import bank.GeneralMember;
 import bank.BankService;
 import bank.SavingsMember;
@@ -24,8 +23,8 @@ public class BankController {
 
 
     Appconfig appConfig = new Appconfig();
-    BankService bankService = appConfig.memberService();
-    InterestService interestService = appConfig.bankService();
+    BankService bankService = appConfig.bankService();
+    InterestService interestService = appConfig.interBankService();
 
 
     public BankController(InputView inputView, OutputView outputView) {
@@ -65,7 +64,6 @@ public class BankController {
         }
         if(account.size()==5){
             BigDecimal goalAmount = new BigDecimal(account.get(4));
-//            makeSavingsAccount(account);
             SavingsMember savingsMember = new SavingsMember(accountType,name,bankAccountNumber,amount,activation,goalAmount);
             bankService.join(savingsMember);
 
@@ -74,9 +72,9 @@ public class BankController {
     }
     private void getAccountInfo() {
         String accountNumber= inputView.getAccountInfo();
-        Bank interestEstimated = interestService.getInterestEstimated(accountNumber);
+        BigDecimal interestEstimated = interestService.getInterestEstimated(accountNumber);
         GeneralMember generalMember = bankService.getAccountInfo(accountNumber);
-        outputView.setAccountInfo(generalMember.getAccountType(),generalMember.getBankAccountNumber(),generalMember.getName(),generalMember.getAmount(),interestEstimated.getInterestAmount());
+        outputView.setAccountInfo(generalMember.getAccountType(),generalMember.getBankAccountNumber(),generalMember.getName(),generalMember.getAmount(),interestEstimated);
         if(generalMember.getAccountType().equals("S")){
             SavingsMember savingsMember = (SavingsMember) bankService.getAccountInfo(accountNumber);
             outputView.setAccountInfo(savingsMember.getGoalAmount());

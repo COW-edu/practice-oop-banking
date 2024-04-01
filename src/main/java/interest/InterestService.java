@@ -1,5 +1,7 @@
 package interest;
 
+import java.math.BigDecimal;
+
 public interface InterestService {
-    Bank getInterestEstimated(String accountNumber);
+    BigDecimal getInterestEstimated(String accountNumber);
 }

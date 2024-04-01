@@ -2,20 +2,20 @@ package util;
 
 import interest.InterestServiceImpl;
 import interest.InterestService;
-import interestPolicy.InterestPolicy;
-import interestPolicy.RateInterestPolicy;
+import interest.InterestPolicy;
+import interest.RateInterestPolicy;
 import bank.*;
 
 public class Appconfig {
-    public BankService memberService(){
-        return new bankServiceImpl(memberRepository());
+    public BankService bankService(){
+        return new bankServiceImpl(bankRepository());
     }
-    public static BankRepository memberRepository(){
+    public static BankRepository bankRepository(){
         return new BankMemoryRepository();
 
     }
-    public InterestService bankService(){
-        return new InterestServiceImpl(memberRepository(), interestPolicy());
+    public InterestService interBankService(){
+        return new InterestServiceImpl(bankRepository(), interestPolicy());
 
     }
     public static InterestPolicy interestPolicy() {

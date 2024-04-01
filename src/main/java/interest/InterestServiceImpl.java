@@ -1,6 +1,5 @@
 package interest;
 
-import interestPolicy.InterestPolicy;
 import bank.BankRepository;
 
 import java.math.BigDecimal;
@@ -16,8 +15,7 @@ public class InterestServiceImpl implements InterestService {
     }
 
     @Override
-    public Bank getInterestEstimated(String accountNumber) {
-        BigDecimal InterestAmount = interestPolicy.interest(bankRepository.findByAccountNumber(accountNumber));
-        return new Bank(InterestAmount);
+    public BigDecimal getInterestEstimated(String accountNumber) {
+        return interestPolicy.interest(bankRepository.findByAccountNumber(accountNumber));
     }
 }
