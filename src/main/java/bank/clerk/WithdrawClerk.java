@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import validate.ValidationUtils;
 
 import java.math.BigDecimal;
-import java.util.Scanner;
 
 @RequiredArgsConstructor
 public class WithdrawClerk implements Clerk{

@@ -9,7 +9,6 @@ import exception.clerk.InputAccountTypeException;
 import lombok.RequiredArgsConstructor;
 
 import java.math.BigDecimal;
-import java.util.Scanner;
 
 @RequiredArgsConstructor
 public class CreateAccountClerk implements Clerk{

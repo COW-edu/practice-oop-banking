@@ -6,7 +6,6 @@ import exception.system.NotFoundAccountException;
 import lombok.RequiredArgsConstructor;
 import validate.ValidationUtils;
 
-import java.util.Scanner;
 
 @RequiredArgsConstructor
 public class GetAccountInfoClerk implements Clerk {
