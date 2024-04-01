@@ -1,7 +1,6 @@
 import bank.*;
 import bank.clerk.*;
 import person.Person;
-import validate.ValidationUtils;
 
 public class AppConfig {
 

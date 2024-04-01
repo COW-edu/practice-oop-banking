@@ -1,9 +1,7 @@
-import account.Account;
 import account.DepositAccount;
 import bank.BankServiceMediator;
 import bank.BankStorage;
 import bank.CentralBank;
-import person.Person;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

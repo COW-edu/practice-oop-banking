@@ -1,4 +1,3 @@
-import bank.CentralBank;
 import person.Person;
 
 public class RunBanking {

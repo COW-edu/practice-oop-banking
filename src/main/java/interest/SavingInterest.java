@@ -6,7 +6,7 @@ public class SavingInterest implements InterestCalculator{
 
     @Override
     public BigDecimal getInterest(BigDecimal balance) {
-        BigDecimal interestRate = SavingInterestRateTier.findInterestRateForBalance(balance);;
+        BigDecimal interestRate = SavingInterestRateTier.findInterestRateForBalance(balance);
         return balance.multiply(interestRate);
     }
 }

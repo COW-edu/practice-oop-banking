@@ -28,7 +28,7 @@ public class RemittanceClerk implements Clerk{
         try{
             String fromAccountNum = getUserInput(); ValidationUtils.isValidAccountNumber(fromAccountNum);
             String toAccountNum = getUserInput(); ValidationUtils.isValidAccountNumber(fromAccountNum);
-            BigDecimal balance = ValidationUtils.createBalance(getUserInput());;
+            BigDecimal balance = ValidationUtils.createBalance(getUserInput());
 
             String balanceResult = bankSystem.remittance(fromAccountNum, toAccountNum,  balance);
             resultMessage(balanceResult);
