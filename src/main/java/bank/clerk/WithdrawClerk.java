@@ -39,10 +39,4 @@ public class WithdrawClerk implements Clerk{
             System.out.println(e.getMessage());
         }
     }
-    private void resultMessage(String balanceResult){
-        System.out.println(balanceResult);
-    }
-    public String getUserInput() {
-        return scanner.nextLine().trim();
-    }
 }

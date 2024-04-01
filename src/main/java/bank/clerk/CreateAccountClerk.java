@@ -64,8 +64,4 @@ public class CreateAccountClerk implements Clerk{
         System.out.println(PROMPT_TARGET_AMOUNT);
         return new BigDecimal(getUserInput());
     }
-
-    public String getUserInput() {
-        return scanner.nextLine().trim();
-    }
 }

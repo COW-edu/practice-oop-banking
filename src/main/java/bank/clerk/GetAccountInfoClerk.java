@@ -32,12 +32,5 @@ public class GetAccountInfoClerk implements Clerk {
             getAccountInfo();
         }
     }
-
-    public String getUserInput() {
-        return scanner.nextLine().trim();
-    }
-    private void resultMessage(String balanceResult){
-        System.out.println(balanceResult);
-    }
 }
 
