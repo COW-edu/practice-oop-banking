@@ -2,6 +2,8 @@ package member;
 
 import java.math.BigDecimal;
 
+import static interest.InterestList.OVERONE;
+
 public class memberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
 
@@ -22,6 +24,10 @@ public class memberServiceImpl implements MemberService {
 
     @Override
     public void withdraw(String accountNumber, BigDecimal withdrawAmount) {
+        GeneralMember generalMember=  memberRepository.findByAccountNumber(accountNumber);
+        if (generalMember instanceof SavingsMember && ((SavingsMember) generalMember).getGoalAmount().compareTo(((SavingsMember) generalMember).getAmount()) > -1) {
+            return;
+        }
         memberRepository.subtractAmount(accountNumber,withdrawAmount);
     }
 
