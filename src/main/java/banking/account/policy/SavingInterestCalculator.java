@@ -3,7 +3,7 @@ package banking.account.policy;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class SavingInterestCalculator implements InterestCalculator {
+public class    SavingInterestCalculator implements InterestCalculator {
 
     @Override
     public BigDecimal getInterest(BigDecimal balance) {

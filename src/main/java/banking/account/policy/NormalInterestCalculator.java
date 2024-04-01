@@ -12,7 +12,7 @@ public class NormalInterestCalculator implements  InterestCalculator{
     @Override
     public BigDecimal getInterest(BigDecimal balance) {
         calculator();
-        BigDecimal rate = (interestRates != null) ? interestRates.firstEntry().getValue(): BigDecimal.ZERO;
+        BigDecimal rate = (interestRates != null) ? interestRates.floorEntry(balance).getValue(): BigDecimal.ZERO;
         return balance.multiply(rate).setScale(0, RoundingMode.DOWN);
     }
 
