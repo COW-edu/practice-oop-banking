@@ -1,5 +1,6 @@
 package member;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,6 +9,12 @@ public class MemoryRepository implements MemberRepository {
     @Override
     public void save(GeneralMember generalMember) {
         store.put(generalMember.getBankAccountNumber(), generalMember);
+    }
+
+    @Override
+    public void addAmount(String accountNumber, BigDecimal depositAmount) {
+        GeneralMember member = store.get(accountNumber);
+        member.setAmount(member.getAmount().add(depositAmount));
     }
 
     @Override

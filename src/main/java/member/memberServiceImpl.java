@@ -1,5 +1,7 @@
 package member;
 
+import java.math.BigDecimal;
+
 public class memberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
 
@@ -10,6 +12,12 @@ public class memberServiceImpl implements MemberService {
     @Override
     public void join(GeneralMember generalMember) {
         memberRepository.save(generalMember);
+    }
+
+    @Override
+    public void deposit(String accountNumber, BigDecimal depositAmount) {
+        memberRepository.addAmount(accountNumber,depositAmount);
+
     }
 
     @Override

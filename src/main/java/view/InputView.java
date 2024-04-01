@@ -5,7 +5,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class InputView {
     private static final String ASK_CATEGORY = "원하는 메뉴를 선택하세요%n";
@@ -14,6 +13,7 @@ public class InputView {
     private static final String ACCOUNT_INFORMATION_CATEGORY = "계좌종류(예금:N,적금S),이름,계좌번호(5자리),첫 입금액)%n";
     private static final String ACCOUNT_INFORMATION_EXAMPLE = "예시)N,박진현,12345,5000%n";
     private static final String ASK_TARGET_AMOUNT= "목표금액을 입력해주세요";
+    private static final String ASK_ACCOUNT_NUMBER = "계좌번호를 입력해주세요";
     private static final String NUMBER_REGEX = "^[0-6]{1}+$";
     private static final String DELIMITER = ",";
     private static final String EXIT_PROGRAM = "프로그램을 종료합니다.";
@@ -26,7 +26,13 @@ public class InputView {
     public static void transfer() {
     }
 
-    public static void deposit() {
+    public static List<String> deposit() {
+        System.out.println("계좌번호와 입금금앱을 입력하세요");
+        String depositformation = input();
+        return  Arrays.stream(depositformation.split(","))
+                .map(String::trim) // 앞뒤 공백 제거
+                .map(s -> s.replaceAll(" ", ""))// 모든공백제거
+                .toList(); // 결과를 수집
     }
 
     public static void withdraw() {
@@ -79,6 +85,7 @@ public class InputView {
     }
 
     public String getAccountInfo() {
-        return "12345";
+        System.out.println(ASK_ACCOUNT_NUMBER);
+        return input();
     }
 }
