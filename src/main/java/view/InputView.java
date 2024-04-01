@@ -27,25 +27,15 @@ public class InputView {
     }
 
     public static List<String> deposit() {
-        System.out.println("계좌번호와 입금금앱을 입력하세요");
-        String depositformation = input();
-        return  Arrays.stream(depositformation.split(","))
-                .map(String::trim) // 앞뒤 공백 제거
-                .map(s -> s.replaceAll(" ", ""))// 모든공백제거
-                .toList(); // 결과를 수집
+        System.out.println("계좌번호와 입금금액을 입력하세요");
+        return  makeList(input());
     }
 
-    public static void withdraw() {
-    }
+
 
     public static List<String> createAccount() {
         System.out.printf(ASK_ACCOUNT_INFORMATION+ACCOUNT_INFORMATION_CATEGORY+ACCOUNT_INFORMATION_EXAMPLE);//추후에 입력값 예외처리 필요
-        String accountInformation = input();
-        List<String> accountDetails = Arrays.stream(accountInformation.split(","))
-                .map(String::trim) // 앞뒤 공백 제거
-                .map(s -> s.replaceAll(" ", ""))// 모든공백제거
-                .toList(); // 결과를 수집
-
+        List<String> accountDetails = makeList(input());
         return checkAccountType(accountDetails);
     }
 
@@ -81,6 +71,12 @@ public class InputView {
         }
     }
 
+    private static List<String> makeList(String input) {
+        return Arrays.stream(input.split(","))
+                .map(String::trim) // 앞뒤 공백 제거
+                .map(s -> s.replaceAll(" ", ""))// 모든공백제거
+                .toList(); // 결과를 수집
+    }
     public static void exitProgram() {
     }
 
