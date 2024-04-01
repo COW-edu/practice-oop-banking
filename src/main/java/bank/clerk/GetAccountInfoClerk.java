@@ -9,27 +9,27 @@ import validate.ValidationUtils;
 import java.util.Scanner;
 
 @RequiredArgsConstructor
-public class ChangeStatusClerk implements Clerk{
+public class GetAccountInfoClerk implements Clerk {
 
-    private static final String CLERK_REQUEST = "계좌상태를 변경하려면 계좌번호를 입력해주세요";
+    private static final String CLERK_REQUEST = "조회할 계좌번호를 입력해주세요.";
 
     private final BankSystem bankSystem;
     private final Scanner scanner = new Scanner(System.in);
 
     public void action() {
         System.out.println(CLERK_REQUEST);
-        suspension();
+        getAccountInfo();
     }
 
-    public void suspension() {
+    public void getAccountInfo() {
         try{
             String accountNum = getUserInput();
             ValidationUtils.isValidAccountNumber(accountNum);
-            String statusResult = bankSystem.changeStatus(accountNum);
+            String statusResult = bankSystem.getAccountInfo(accountNum);
             resultMessage(statusResult);
         }catch (InputAccountNumberException | NotFoundAccountException e){
             System.out.println(e.getMessage());
-            suspension();
+            getAccountInfo();
         }
     }
 
@@ -40,3 +40,4 @@ public class ChangeStatusClerk implements Clerk{
         System.out.println(balanceResult);
     }
 }
+

@@ -1,39 +1,52 @@
 package bank.clerk;
 
 import bank.BankSystem;
+import exception.account.BelowTargetException;
+import exception.account.InsufficienBalancetException;
+import exception.clerk.InputAccountNumberException;
+import exception.system.AccountStatusException;
+import exception.system.NotFoundAccountException;
+import lombok.RequiredArgsConstructor;
+import validate.ValidationUtils;
 
 import java.math.BigDecimal;
 import java.util.Scanner;
 
+@RequiredArgsConstructor
 public class RemittanceClerk implements Clerk{
 
-    BankSystem bankSystem;
-    Scanner sc = new Scanner(System.in);
+    private static final String CLERK_REQUEST = "출금계좌, 입금계좌, 금액을 차례로 작성해주세요";
+    private final BankSystem bankSystem;
+    Scanner scanner = new Scanner(System.in);
 
     public void action() {
+        System.out.println(CLERK_REQUEST);
         remittance();}
 
-    public RemittanceClerk(BankSystem bankSystem){
-        this.bankSystem = bankSystem;
-    }
-
     public void remittance() {
-        System.out.println("출금계좌, 입금계좌, 금액을 차례로 작성해주세요");
-        String fromAccountNum = getUserInput();
-        String toAccountNum = getUserInput();
-        BigDecimal balance = new BigDecimal(getUserInput());
 
-        String balanceResult = bankSystem.remittance(fromAccountNum, toAccountNum,  balance);
+        try{
+            String fromAccountNum = getUserInput(); ValidationUtils.isValidAccountNumber(fromAccountNum);
+            String toAccountNum = getUserInput(); ValidationUtils.isValidAccountNumber(fromAccountNum);
+            BigDecimal balance = ValidationUtils.createBalance(getUserInput());;
 
-        resultMessage(balanceResult);
+            String balanceResult = bankSystem.remittance(fromAccountNum, toAccountNum,  balance);
+            resultMessage(balanceResult);
+        }catch (NotFoundAccountException | InputAccountNumberException | NumberFormatException e){
+            System.out.println(e.getMessage()); remittance();
+        }catch (BelowTargetException | InsufficienBalancetException | AccountStatusException e){
+            System.out.println(e.getMessage());
+        }
     }
 
     public String getUserInput() {
-        return sc.nextLine().trim();
+        return scanner.nextLine().trim();
     }
 
     private void resultMessage(String balanceResult){
-        System.out.println("송금완료! [잔고] = " + balanceResult);
+        System.out.println(balanceResult);
     }
+
+
 
 }

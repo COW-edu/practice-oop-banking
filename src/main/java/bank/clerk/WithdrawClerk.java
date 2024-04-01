@@ -1,39 +1,48 @@
 package bank.clerk;
 
 import bank.BankSystem;
+import exception.account.BelowTargetException;
+import exception.account.InsufficienBalancetException;
+import exception.clerk.InputAccountNumberException;
+import exception.system.AccountStatusException;
+import exception.system.NotFoundAccountException;
+import lombok.RequiredArgsConstructor;
+import validate.ValidationUtils;
 
 import java.math.BigDecimal;
 import java.util.Scanner;
 
+@RequiredArgsConstructor
 public class WithdrawClerk implements Clerk{
+    private static final String CLERK_REQUEST = "[출금] 계좌, 금액을 작성해주세요";
 
-    BankSystem bankSystem;
-    Scanner sc = new Scanner(System.in);
+    private final BankSystem bankSystem;
+    Scanner scanner = new Scanner(System.in);
 
     public void action() {
+        System.out.println(CLERK_REQUEST);
         withdraw();}
 
-    public WithdrawClerk(BankSystem bankSystem){
-        this.bankSystem = bankSystem;
-    }
-
-
     public void withdraw() {
-        System.out.println("[출금] 계좌, 금액을 작성해주세요");
 
-        String accountNum = getUserInput();
-        BigDecimal balance = new BigDecimal(getUserInput());
+        try {
+            String accountNum = getUserInput();
+            ValidationUtils.isValidAccountNumber(accountNum);
+            BigDecimal balance = ValidationUtils.createBalance(getUserInput());
+            String balanceResult = bankSystem.withdraw(accountNum, balance);
+            resultMessage(balanceResult);
 
-        String balanceResult = bankSystem.withdraw(accountNum, balance);
-
-        resultMessage(balanceResult);
+        }catch (NotFoundAccountException | InputAccountNumberException e) {
+                System.out.println(e.getMessage());
+                withdraw();
+        }catch (BelowTargetException | InsufficienBalancetException | AccountStatusException e){
+            System.out.println(e.getMessage());
+        }
     }
-
-    public String getUserInput() {
-        return sc.nextLine().trim();
-    }
-
     private void resultMessage(String balanceResult){
-        System.out.println("출금완료! [잔고] = " + balanceResult);
+        System.out.println(balanceResult);
+    }
+    public String getUserInput() {
+        return scanner.nextLine().trim();
     }
 }

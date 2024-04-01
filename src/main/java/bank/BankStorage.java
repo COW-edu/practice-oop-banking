@@ -1,17 +1,15 @@
 package bank;
 
 import account.Account;
+import lombok.RequiredArgsConstructor;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@RequiredArgsConstructor
 public class BankStorage {
-    CentralBank centralBank;
+    private final CentralBank centralBank;
     Map<String, Account> accountList= new HashMap<>();
-
-    public BankStorage(CentralBank centralBank) {
-        this.centralBank = centralBank;
-    }
 
     public String save(Account account){
         accountList.put(account.getAccountNum(), account);
