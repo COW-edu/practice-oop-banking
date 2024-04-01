@@ -1,10 +1,8 @@
 package controller;
 
 import Bank.Bank;
-import Bank.BankApp;
 import Bank.BankService;
 import member.GeneralMember;
-import member.MemberAccountMake;
 import member.MemberService;
 import member.SavingsMember;
 import util.Appconfig;
@@ -12,6 +10,7 @@ import view.InputView;
 import view.OutputView;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,20 +62,27 @@ public class BankController {
         if(account.size()==4){
             GeneralMember generalMember = new GeneralMember(accountType,name,bankAccountNumber,amount,activation);
             memberService.join(generalMember);
-            return;
+
         }
         if(account.size()==5){
             BigDecimal goalAmount = new BigDecimal(account.get(4));
 //            makeSavingsAccount(account);
             SavingsMember savingsMember = new SavingsMember(accountType,name,bankAccountNumber,amount,activation,goalAmount);
             memberService.join(savingsMember);
-            return;
+
         }
         run();
     }
     private void getAccountInfo() {
-        Bank bank = bankService.getAccountInfo( inputView.getAccountInfo());
-
+        String accountNumber= inputView.getAccountInfo();
+        Bank interestEstimated = bankService.getInterestEstimated(accountNumber);
+        GeneralMember generalMember = memberService.getAccountInfo(accountNumber);
+        outputView.setAccountInfo(generalMember.getAccountType(),generalMember.getBankAccountNumber(),generalMember.getName(),generalMember.getAmount(),interestEstimated.getInterestAmount());
+        if(generalMember.getAccountType().equals("S")){
+            SavingsMember savingsMember = (SavingsMember) memberService.getAccountInfo(accountNumber);
+            outputView.setAccountInfo(savingsMember.getGoalAmount());
+        }
+       run();
 
     }
     private void exitProgram() {
@@ -89,6 +95,10 @@ public class BankController {
     }
 
     private void deposit() {
+        List<String> depositformation = InputView.deposit();
+        memberService.deposit(depositformation.get(0),new BigDecimal(depositformation.get(1)));
+        run();
+
     }
 
     private void withdraw() {
