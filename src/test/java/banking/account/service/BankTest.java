@@ -23,6 +23,10 @@ class BankTest {
         bank = (BankService) BankService.getInstance();
         centralBank = (CentralBank) CentralBank.getInstance();
 
+        init();
+    }
+
+    private void init() {
         money = new BigDecimal("10000000");
         account = new BasicAccount(BASIC, "1234-1234", "백재혁", money, true);
         centralBank.createAccount(account);
