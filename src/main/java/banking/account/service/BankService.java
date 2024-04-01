@@ -58,6 +58,11 @@ public class BankService implements Service {
         centralBankRepo.createAccount(savingAccount);
     }
 
+    @Override
+    public BasicAccount findAccount(String accountNumber) {
+        return centralBankRepo.findAccount(accountNumber);
+    }
+
     private BasicAccount makeDomain(AccountDTO accountDTO) {
         AccountName accountType = getAccountType(accountDTO.getTypeNum());
         String accountNumber = accountDTO.getAccountNumber();
@@ -65,12 +70,6 @@ public class BankService implements Service {
         BigDecimal balance = new BigDecimal(accountDTO.getMoney());
 
         return new BasicAccount(accountType, accountNumber, owner, balance, true);
-    }
-
-
-    @Override
-    public BasicAccount findAccount(String accountNumber) {
-        return centralBankRepo.findAccount(accountNumber);
     }
 
     @Override

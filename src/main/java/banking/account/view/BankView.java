@@ -4,7 +4,9 @@ package banking.account.view;
 import banking.account.controller.BankController;
 import banking.account.domain.BasicAccount;
 import banking.account.dto.AccountDTO;
+import banking.account.exception.FormatException;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.Scanner;
@@ -41,6 +43,9 @@ public class BankView {
                 case "5":
                     // 계좌 조회
                     findAccount();
+                    break;
+                case "6" :
+                    System.exit(0);
                     break;
                 default:
                     break;
@@ -92,20 +97,19 @@ public class BankView {
     private String getFormat() {
         DecimalFormat df = new DecimalFormat("00000000");
 
-        // input()으로부터 입력받은 문자열 (계좌 번호 등)
         String inputStr = input();
 
+        if (inputStr.length() != 8) {
+            throw new FormatException("8자리로 입력해주세요,");
+        }
+
         try {
-            // 문자열을 long 타입으로 변환
             long number = Long.parseLong(inputStr);
 
-            // 숫자를 형식화된 문자열로 변환
             String formatNumber = df.format(number);
             return formatNumber;
         } catch (NumberFormatException e) {
-            // 입력값이 숫자로 변환될 수 없는 경우
-            System.out.println(ERROR_INPUT_TYPE);
-            return null; // 또는 적절한 기본값 또는 오류 처리
+            throw new FormatException("다시 시도해주세요.");// 입력값이 숫자로 변환될 수 없는 경우
         }
     }
 
@@ -136,6 +140,7 @@ public class BankView {
     }
 
     private static String input() {
-        return sc.nextLine();
+            return sc.nextLine();
+
     }
 }
