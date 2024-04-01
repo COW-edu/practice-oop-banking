@@ -23,4 +23,24 @@ public class SavingAccount extends Account
     {
         return account.getAmount().compareTo(this.getGoalAsset()) > 0;
     }
+
+    public void withdrawal(BigDecimal amount)
+    {
+        if(getAmount().compareTo(amount) >= 0)
+        {
+            if(getAmount().compareTo(getGoalAsset()) >= 0)
+            {
+                setAmount(getAmount().subtract(amount));
+                System.out.println("WithDraw Finish! your Amount : ₩" + getAmount());
+            }
+            else
+            {
+                System.out.println("The GoalAmount was not met. The withdraw will be cancelled.");
+            }
+        }
+        else
+        {
+            System.out.println("Failed WithDraw!");
+        }
+    }
 }

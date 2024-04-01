@@ -15,7 +15,8 @@ public class Main
         System.out.println("4. 송금");
         System.out.println("5. 이자보기");
         System.out.println("6. 전체 계좌 보기");
-        System.out.println("7. 나가기");
+        System.out.println("7. 각 계좌에 이자 더하기");
+        System.out.println("8. 나가기");
         System.out.print("원하시는 작업을 선택해주세요 : ");
         return s.nextInt();
     }
@@ -97,7 +98,7 @@ public class Main
     {
         System.out.println("적금 목표 금액을 입력하세요");
         String gm =  s.next();
-        while(!isNumber(gm) || current.compareTo(new BigDecimal(gm)) > 0)
+        while(!isNumber(gm))
         {
             System.out.println("잘못된 입력값입니다.");
             System.out.print("목표 금액을 다시 입력해주세요 : ");
@@ -135,7 +136,7 @@ public class Main
                     c.createAccount(m.getAccount(s));
                     break;
                 case 2:
-                    c.withdraw(m.getAccountNum(s), m.getAmount(s));
+                    c.withdrawal(m.getAccountNum(s), m.getAmount(s));
                     break;
                 case 3:
                     c.deposit(m.getAccountNum(s), m.getAmount(s));
@@ -150,6 +151,9 @@ public class Main
                     c.printAllAccountsInfo();
                     break;
                 case 7:
+                    c.addInterest();
+                    break;
+                case 8:
                     return;
             }
         }

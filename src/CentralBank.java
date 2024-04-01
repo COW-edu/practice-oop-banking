@@ -4,9 +4,7 @@ import java.util.*;
 public class CentralBank
 {
     private List<Account> accounts;
-
     private Map<String, InterestCalculator> Calcualateinterest;
-
     public CentralBank()
     {
         accounts = new ArrayList<>();
@@ -17,7 +15,21 @@ public class CentralBank
     // 게좌 만들기
     public void createAccount(Account a)
     {
-        accounts.add(a);
+        if(a instanceof SavingAccount)
+        {
+            if(!((SavingAccount) a).compareCAGA(a))
+            {
+                accounts.add(a);
+            }
+            else
+            {
+                System.out.println("Your Gaol Amount is smaller than your Amount");
+            }
+        }
+        else
+        {
+            accounts.add(a);
+        }
     }
     // 전체 게좌 정보 출력
     public void printAllAccountsInfo()
@@ -28,20 +40,12 @@ public class CentralBank
         }
     }
     // 출금
-    public void withdraw(String accountNum, BigDecimal amount)
+    public void withdrawal(String accountNum, BigDecimal amount)
     {
         Account account = findAccountByNum(accountNum);
         if (account != null)
         {
-            if(account instanceof SavingAccount)
-            {
-                if(((SavingAccount) account).compareCAGA(account))
-                {
-                    account.withDraw(amount);
-                }
-                else { System.out.println("계좌 금액이 목표 금액보다 낮습니다. 인출이 거부됩니다."); }
-            }
-            else {account.withDraw(amount);}
+            account.withdrawal(amount);
         }
         else {System.out.println("Account not found!");}
     }
@@ -49,11 +53,13 @@ public class CentralBank
     public void deposit(String accountNum, BigDecimal amount)
     {
         Account account = findAccountByNum(accountNum);
-        if (account != null) {
-            account.deposit(amount);
-        } else
+        if (account != null)
         {
-            throw new NullPointerException();
+            account.deposit(amount);
+        }
+        else
+        {
+            System.out.println("Unavailable Account");
         }
     }
 
@@ -62,9 +68,11 @@ public class CentralBank
 
         Account sender = findAccountByNum(senderAccountNum);
         Account receiver = findAccountByNum(receiverAccountNum);
-        if (sender != null && receiver != null) {
+        if (sender != null && receiver != null)
+        {
             sender.transfer(receiver, amount);
-        } else {
+        } else
+        {
             System.out.println("Sender or Receiver account not found!");
         }
     }
@@ -96,5 +104,25 @@ public class CentralBank
         }
     }
 
+    public void addInterest()
+    {
+        if(accounts != null)
+        {
+            for (Account account : accounts)
+            {
+                InterestCalculator calculator = Calcualateinterest.get(account.getAccountType());
+                BigDecimal interestRate = calculator.getInterest(account.getAmount());
+                BigDecimal interestAmount = account.getAmount().multiply(interestRate);
+
+                account.setAmount(account.getAmount().add(interestAmount));
+                System.out.println("Finished adding Interest " + interestAmount + " to " + account.getOwner());
+            }
+            System.out.println("Finished adding Interest!");
+        }
+        else
+        {
+            System.out.println("Accounts are not exist!");
+        }
+    }
 
 }

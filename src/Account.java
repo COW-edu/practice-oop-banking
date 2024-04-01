@@ -38,7 +38,7 @@ public class Account
                 "Activated : " + (activated ? "Yes" : "No");
     }
     //출금
-    public void withDraw(BigDecimal amount)
+    public void withdrawal(BigDecimal amount)
     {
         if(getAmount().compareTo(amount) >= 0)
         {
@@ -68,7 +68,7 @@ public class Account
         }
         else
         {
-            System.out.println("Failed Transfer From" + this.getOwner() + " To " + receiver.getOwner() + " amount " + amount );
+            System.out.println("Failed Transfer From" + this.getOwner() + " To " + receiver.getOwner() + " amount " + amount);
         }
     }
 }
