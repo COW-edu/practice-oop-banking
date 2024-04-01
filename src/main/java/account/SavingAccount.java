@@ -1,6 +1,7 @@
-package Account;
+package account;
 import java.math.BigDecimal;
 
+import global.AccountType;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -50,5 +51,17 @@ public class SavingAccount implements Account{
 	@Override
 	public AccountType getAccountType() {
 		return this.accountType;
+	}
+	@Override
+	public synchronized void deactive() {
+		this.isActivated = false;
+	}
+	@Override
+	public synchronized void active() {
+		this.isActivated = true;
+	}
+	@Override
+	public boolean isActive() {
+		return this.isActivated;
 	}
 }

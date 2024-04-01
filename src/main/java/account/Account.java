@@ -1,6 +1,8 @@
-package Account;
+package account;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+
+import global.AccountType;
 
 public interface Account {
 	final StringBuilder stringBuilder = new StringBuilder();
@@ -24,4 +26,7 @@ public interface Account {
 	 */
 	AccountType getAccountType();
 	BigDecimal getBalance();
+	boolean isActive();
+	void deactive();
+	void active();
 }

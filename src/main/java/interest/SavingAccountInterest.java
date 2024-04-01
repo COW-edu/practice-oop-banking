@@ -1,4 +1,4 @@
-package Interest;
+package interest;
 import java.math.BigDecimal;
 
 public class SavingAccountInterest implements InterestCalculator{

@@ -1,14 +1,15 @@
-package Banking;
+package banking;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
 
-import Account.Account;
-import Account.AccountType;
-import Account.BasicAccount;
-import Account.SavingAccount;
-import Interest.InterestCalculator;
+import account.Account;
+import account.BasicAccount;
+import account.SavingAccount;
+import exception.DeactivatedAccountException;
+import global.AccountType;
+import interest.InterestCalculator;
 
 public class CentralBank {
 	private static CentralBank centralBank;
@@ -65,16 +66,23 @@ public class CentralBank {
 			return null;
 	}
 	public boolean checkAccountNumber(String accountNumber) {
-		for(Account account : accountList)
+		for(Account account : accountList) {
 			if(account.checkNumber(accountNumber))
 				return true;
+		}
 		return false;
 	}
-	private Account getAccount(String accountNumber) {
-		for(Account account : accountList)
-			if(account.checkNumber(accountNumber))
-				return account;
-		return null;
+	private Account getAccount(String accountNumber) throws DeactivatedAccountException {
+		Account account = null;
+		for(Account ac : accountList) {
+			if(ac.checkNumber(accountNumber)) {
+				account = ac;
+				break;
+			}
+		}
+		if(account == null) return null;
+		if(!account.isActive()) throw new DeactivatedAccountException(account);
+		return account;
 	}
 	public boolean withdrawal(String accountNumber, BigDecimal withdrawalAmount) {
 		for(Account account : accountList) {
@@ -89,15 +97,20 @@ public class CentralBank {
 			.forEach((account) -> account.deposit(depositAmount));
 	}
 	
-	public String getAccountInfo(String accountNumber) {
+	public String getAccountInfo(String accountNumber) throws DeactivatedAccountException {
 		Account account = this.getAccount(accountNumber);
 		return account != null ? account.getAccountInfo() : "";
 	}
 	public boolean deleteAccount(String accountNumber) {
-		Account account = this.getAccount(accountNumber);
+		Account account = null;
+		try {
+			account = this.getAccount(accountNumber);
+		} catch (DeactivatedAccountException e) {
+			return accountList.remove(e.getAccount());
+		}
 		return account != null ? accountList.remove(account) : false;
 	}
-	public String getInterest(String accountNumber) {
+	public String getInterest(String accountNumber) throws DeactivatedAccountException {
 		Account account = this.getAccount(accountNumber);
 		String result = "";
 		if(account != null) {
@@ -106,5 +119,19 @@ public class CentralBank {
 				.toString();
 		}
 		return result;
+	}
+	public void deactive(String accountNumber) throws DeactivatedAccountException {
+		Account account = this.getAccount(accountNumber);
+		account.deactive();
+	}
+	public void active(String accountNumber) {
+		Account account = null;
+		try {
+			account = this.getAccount(accountNumber);
+		} catch (DeactivatedAccountException e) {
+			e.getAccount().active();
+			return;
+		}
+		account.active();
 	}
 }

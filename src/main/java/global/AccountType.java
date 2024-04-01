@@ -1,7 +1,7 @@
-package Account;
-import Interest.BasicAccountInterest;
-import Interest.InterestCalculator;
-import Interest.SavingAccountInterest;
+package global;
+import interest.BasicAccountInterest;
+import interest.InterestCalculator;
+import interest.SavingAccountInterest;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
