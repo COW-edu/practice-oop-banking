@@ -23,7 +23,6 @@ public class CreateAccountClerk implements Clerk{
     private static final String TEMP_VALUE = "";
 
     private final BankSystem bankSystem;
-    private final Scanner scanner = new Scanner(System.in);
 
     public void action() {
         System.out.println(CLERK_REQUEST);

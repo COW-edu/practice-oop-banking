@@ -14,7 +14,6 @@ public class ChangeStatusClerk implements Clerk{
     private static final String CLERK_REQUEST = "계좌상태를 변경하려면 계좌번호를 입력해주세요";
 
     private final BankSystem bankSystem;
-    private final Scanner scanner = new Scanner(System.in);
 
     public void action() {
         System.out.println(CLERK_REQUEST);

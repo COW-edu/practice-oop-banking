@@ -17,7 +17,6 @@ public class WithdrawClerk implements Clerk{
     private static final String CLERK_REQUEST = "[출금] 계좌, 금액을 작성해주세요";
 
     private final BankSystem bankSystem;
-    Scanner scanner = new Scanner(System.in);
 
     public void action() {
         System.out.println(CLERK_REQUEST);
