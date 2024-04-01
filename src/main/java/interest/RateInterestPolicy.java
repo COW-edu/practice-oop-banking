@@ -21,23 +21,23 @@ public class RateInterestPolicy implements InterestPolicy {
     }
 
     private BigDecimal savingsInterest(BigDecimal amount) {
-        if (amount.compareTo(OVERHUNDRED.getAccountAmount()) != -1){
+        if (amount.compareTo(OVERHUNDRED.getAccountAmount()) > -1){
             return amount.add(amount.multiply(OVERHUNDRED.getSavingsAccountInterest()));
         }
             return amount.add(amount.multiply(REMAIN.getSavingsAccountInterest()));
     }
 
     private BigDecimal generalInterest(BigDecimal amount) {
-        if (amount.compareTo(OVERTHOUSAND.getAccountAmount()) != -1) { //왼쪽값이 우측값이상일경우
+        if (amount.compareTo(OVERTHOUSAND.getAccountAmount()) > -1) { //왼쪽값이 우측값이상일경우
             return amount.add(amount.multiply(OVERTHOUSAND.getGeneralAccountInterest()));
         }
-        if (amount.compareTo(OVERFIVEHUNDRED.getAccountAmount()) != -1){
+        if (amount.compareTo(OVERFIVEHUNDRED.getAccountAmount()) > -1){
             return amount.add(amount.multiply(OVERFIVEHUNDRED.getGeneralAccountInterest()));
         }
-        if (amount.compareTo(OVERHUNDRED.getAccountAmount()) != -1){
+        if (amount.compareTo(OVERHUNDRED.getAccountAmount()) > -1){
             return amount.add(amount.multiply(OVERHUNDRED.getGeneralAccountInterest()));
         }
-        if (amount.compareTo(OVERONE.getAccountAmount()) != -1){
+        if (amount.compareTo(OVERONE.getAccountAmount()) > -1){
             return amount.add(amount.multiply(OVERONE.getGeneralAccountInterest()));
         }
         return amount.add(amount.multiply(REMAIN.getGeneralAccountInterest()));
