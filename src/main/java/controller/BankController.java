@@ -91,6 +91,10 @@ public class BankController {
     }
 
     private void transfer() {
+        List<String> transferInformation = InputView.transfer();
+        memberService.withdraw(transferInformation.get(0),new BigDecimal(transferInformation.get(2)));
+        memberService.deposit(transferInformation.get(1),new BigDecimal(transferInformation.get(2)));
+        run();
     }
 
     private void deposit() {

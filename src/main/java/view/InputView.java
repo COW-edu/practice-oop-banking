@@ -14,9 +14,10 @@ public class InputView {
     private static final String ACCOUNT_INFORMATION_EXAMPLE = "예시)N,박진현,12345,5000%n";
     private static final String ASK_TARGET_AMOUNT= "목표금액을 입력해주세요";
     private static final String ASK_ACCOUNT_NUMBER = "계좌번호를 입력해주세요";
+    private static final String ASK_TRANSFER_INFORMATION ="입금자의 계좌번호, 상대방 계좌번호, 입금금액을 순서대로 입력해주세요";
+
     private static final String NUMBER_REGEX = "^[0-6]{1}+$";
     private static final String ASK_NUMBER_AND_AMOUNT = "계좌번호와 금액을 입력하세요";
-    private static final String DELIMITER = ",";
     private static final String EXIT_PROGRAM = "프로그램을 종료합니다.";
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -24,7 +25,10 @@ public class InputView {
 
     }
 
-    public static void transfer() {
+    public static List<String> transfer() {
+        System.out.println(ASK_TRANSFER_INFORMATION);
+        return  makeList(input());
+
     }
 
     public static List<String> deposit() {
