@@ -38,7 +38,7 @@
 **계좌 관리를 위한 컬렉션 프레임 워크 사용하기**
 
 1. 모든 계좌를 관리하기 위한 중앙은행 클래스를 만듭니다. 계좌를 배열에 관리하기 위해 ArrayList를 활용합니다.
-2. 계좌별 이자 정책을 관리하기 위해 HashMap을 활용하고, Key에 category, Value에 각 category의 InterestCalculator 인스턴스 를 담습니다.
+2. 계좌별 이자 정책을 관리하기 위해 HashMap을 활용하고, Key에 Category, Value에 각 Category의 InterestCalculator 인스턴스 를 담습니다.
 
 **예외 처리**
 
