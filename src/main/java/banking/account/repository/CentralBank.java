@@ -11,6 +11,7 @@ import banking.account.policy.SavingInterestCalculator;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import static banking.account.constant.AccountName.BASIC;
@@ -18,15 +19,12 @@ import static banking.account.constant.AccountName.SAVING;
 
 public class CentralBank implements Repository {
     // 싱글톤 패턴
-    private static final Repository centralBankRepo = new CentralBank();
+    private final HashMap<String, BasicAccount> accountMap = new HashMap<>();
+    private final Map<AccountName, InterestCalculator> policy = new HashMap<>();
 
-    private static final HashMap<String, BasicAccount> accountMap = new HashMap<>();
-    private static final HashMap<AccountName, InterestCalculator> policy = new HashMap<>();
-
-    public static Repository getInstance() {
+    public CentralBank() {
         policy.put(BASIC, new NormalInterestCalculator());
         policy.put(SAVING, new SavingInterestCalculator());
-        return centralBankRepo;
     }
 
     @Override

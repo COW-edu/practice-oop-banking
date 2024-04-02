@@ -15,7 +15,11 @@ import static banking.account.constant.ConstantMessage.*;
 
 public class BankView {
     private static final Scanner sc = new Scanner(System.in);
-    private BankController bankController = BankController.getInstance();
+    private final BankController bankController;
+
+    public BankView(BankController bankController) {
+        this.bankController = bankController;
+    }
 
 
     public void startMenu () {

@@ -10,30 +10,31 @@ import java.math.BigDecimal;
 
 public class BankController {
     // 싱글톤 패턴
-    public static final BankController bankController = new BankController();
-    private Service bankservice = BankService.getInstance();
+    public  final Service service;
 
-    public static BankController getInstance() { return bankController; }
+    public BankController(Service service) {
+        this.service = service;
+    }
 
     public BasicAccount findAccount(String accountNumber) {
-        return bankservice.findAccount(accountNumber);
+        return service.findAccount(accountNumber);
     }
 
     public void createAccount(AccountDTO accountDTO) {
-        bankservice.createAccount(accountDTO);
+        service.createAccount(accountDTO);
     }
 
 
     public void deposit(String accountNum, BigDecimal depositAmount) {
-        bankservice.deposit(accountNum, depositAmount);
+        service.deposit(accountNum, depositAmount);
     }
 
     public void withdraw(String accountNum, BigDecimal depositAmount) {
-        bankservice.withdraw(accountNum, depositAmount);
+        service.withdraw(accountNum, depositAmount);
 
     }
 
     public void transfer(String depositAccountNum, String withdrawAccountNum, BigDecimal transferAmount) {
-        bankservice.transfer(depositAccountNum,withdrawAccountNum,transferAmount);
+        service.transfer(depositAccountNum,withdrawAccountNum,transferAmount);
     }
 }

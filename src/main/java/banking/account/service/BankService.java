@@ -14,25 +14,24 @@ import static banking.account.constant.AccountName.SAVING;
 
 public class BankService implements Service {
     // 싱글톤 패턴
-    private static final Service bankservice = new BankService();
-    private Repository centralBankRepo = CentralBank.getInstance();
+    private final Repository repository;
     private BasicAccount account;
 
-    public static Service getInstance() {
-        return bankservice;
+    public BankService(Repository repository) {
+        this.repository = repository;
     }
 
     public void deposit(String accountNum, BigDecimal depositAmount) {
-        centralBankRepo.deposit(accountNum, depositAmount);
+        repository.deposit(accountNum, depositAmount);
     }
 
     public void withdraw(String accountNum, BigDecimal depositAmount) {
-        centralBankRepo.withdraw(accountNum, depositAmount);
+        repository.withdraw(accountNum, depositAmount);
 
     }
 
     public void transfer(String depositAccountNum, String withdrawAccountNum, BigDecimal transferAmount) {
-        centralBankRepo.transfer(depositAccountNum,withdrawAccountNum,transferAmount);
+        repository.transfer(depositAccountNum,withdrawAccountNum,transferAmount);
     }
 
     @Override
@@ -48,19 +47,19 @@ public class BankService implements Service {
     private void createBasic(AccountDTO accountDTO) {
         BasicAccount account = makeDomain(accountDTO);
         BasicAccount basicAccount = new BasicAccount(account.getAccountType(), account.getAccountNumber(), account.getOwner(), account.getBalance(), true);
-        centralBankRepo.createAccount(basicAccount);
+        repository.createAccount(basicAccount);
     }
 
     private void createSaving(AccountDTO accountDTO) {
         BasicAccount account = makeDomain(accountDTO);
         BigDecimal targetAmount = new BigDecimal(accountDTO.getTargetAmount());
         SavingAccount savingAccount = new SavingAccount(account.getAccountType(), account.getAccountNumber(), account.getOwner(), account.getBalance(), true, targetAmount);
-        centralBankRepo.createAccount(savingAccount);
+        repository.createAccount(savingAccount);
     }
 
     @Override
     public BasicAccount findAccount(String accountNumber) {
-        return centralBankRepo.findAccount(accountNumber);
+        return repository.findAccount(accountNumber);
     }
 
     private BasicAccount makeDomain(AccountDTO accountDTO) {

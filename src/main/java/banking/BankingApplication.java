@@ -7,7 +7,9 @@ import javax.swing.text.View;
 public class BankingApplication {
 
 	public static void main(String[] args) {
-		BankView bankView = new BankView();
+
+		AppConfig appConfig = new AppConfig();
+		BankView bankView = appConfig.bankView();
 		bankView.startMenu();
 	}
 }
