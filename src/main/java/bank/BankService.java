@@ -7,7 +7,4 @@ public interface BankService {
     void deposit(String accountNumber, BigDecimal depositAmount);
     void withdraw(String accountNumber, BigDecimal withdrawAmount);
     GeneralMember getAccountInfo(String accountNumber);
-
-
-
 }

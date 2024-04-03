@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BankMemoryRepository implements BankRepository {
-    private static Map<String, GeneralMember> store = new HashMap<>();
+    private static final Map<String, GeneralMember> store = new HashMap<>();
     @Override
     public void save(GeneralMember generalMember) {
         store.put(generalMember.getBankAccountNumber(), generalMember);

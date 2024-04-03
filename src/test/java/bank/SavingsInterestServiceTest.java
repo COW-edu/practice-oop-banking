@@ -28,5 +28,4 @@ class SavingsInterestServiceTest {
         //then
         assertEquals(savingsMember,getAccountInfo);
     }
-
 }

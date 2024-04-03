@@ -30,7 +30,6 @@ public class BankController {
     public BankController(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
-
     }
 
     private static final Map<Integer, Runnable> menuOptions = new HashMap<>();

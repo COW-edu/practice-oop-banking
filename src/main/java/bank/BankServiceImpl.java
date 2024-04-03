@@ -2,10 +2,10 @@ package bank;
 
 import java.math.BigDecimal;
 
-public class bankServiceImpl implements BankService {
+public class BankServiceImpl implements BankService {
     private final BankRepository bankRepository;
 
-    public bankServiceImpl(BankRepository bankRepository) {
+    public BankServiceImpl(BankRepository bankRepository) {
         this.bankRepository = bankRepository;
     }
 
@@ -17,7 +17,6 @@ public class bankServiceImpl implements BankService {
     @Override
     public void deposit(String accountNumber, BigDecimal depositAmount) {
         bankRepository.addAmount(accountNumber,depositAmount);
-
     }
 
     @Override
@@ -32,6 +31,5 @@ public class bankServiceImpl implements BankService {
     @Override
     public GeneralMember getAccountInfo(String accountNumber) {
         return bankRepository.findByAccountNumber(accountNumber);
-
     }
 }

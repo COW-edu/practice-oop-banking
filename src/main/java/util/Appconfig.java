@@ -8,15 +8,13 @@ import bank.*;
 
 public class Appconfig {
     public BankService bankService(){
-        return new bankServiceImpl(bankRepository());
+        return new BankServiceImpl(bankRepository());
     }
     public static BankRepository bankRepository(){
         return new BankMemoryRepository();
-
     }
     public InterestService interBankService(){
         return new InterestServiceImpl(bankRepository(), interestPolicy());
-
     }
     public static InterestPolicy interestPolicy() {
         return new RateInterestPolicy();
