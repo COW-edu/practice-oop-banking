@@ -1,10 +1,12 @@
-package bank;
+package BankRepository;
+
+import bankSevice.GeneralAccount;
 
 import java.math.BigDecimal;
 
 public interface BankRepository {
-    void save(GeneralMember generalMember);
+    void save(GeneralAccount generalAccount);
     void addAmount(String accountNumber, BigDecimal depositAmount);
     void subtractAmount(String accountNumber, BigDecimal withdrawAmount);
-    GeneralMember findByAccountNumber(String accountNumber);
+    GeneralAccount findByAccountNumber(String accountNumber);
 }

@@ -1,9 +1,9 @@
 package interest;
 
-import bank.GeneralMember;
+import bankSevice.GeneralAccount;
 
 import java.math.BigDecimal;
 
 public interface InterestPolicy {
-    BigDecimal interest(GeneralMember member);
+    BigDecimal interest(GeneralAccount member);
 }

@@ -1,8 +1,8 @@
 package controller;
 
-import bank.GeneralMember;
-import bank.BankService;
-import bank.SavingsMember;
+import bankSevice.GeneralAccount;
+import bankSevice.BankService;
+import bankSevice.SavingsAccount;
 import interest.InterestService;
 import util.Appconfig;
 import view.InputView;
@@ -53,22 +53,12 @@ public class BankController {
         while (true) {
             try {
                 List<String> account = InputView.createAccount();
-                String accountType = account.get(0);
+//                String accountType = account.get(0);
                 String name = account.get(1);
-                String bankAccountNumber = account.get(2);
-                BigDecimal amount = new BigDecimal(account.get(3));
-                Boolean activation = true;
-
-                if (account.size() == 4) {
-                    GeneralMember generalMember = new GeneralMember(accountType, name, bankAccountNumber, amount, activation);
-                    bankService.join(generalMember);
-
-                }
-                if (account.size() == 5) {
-                    BigDecimal goalAmount = new BigDecimal(account.get(4));
-                    SavingsMember savingsMember = new SavingsMember(accountType, name, bankAccountNumber, amount, activation, goalAmount);
-                    bankService.join(savingsMember);
-                }
+//                String bankAccountNumber = account.get(2);
+//                BigDecimal amount = new BigDecimal(account.get(3));
+//                Boolean activation = true;
+                    bankService.join(account);
                 run();
                 OutputView.createAccountEnd(name);
                 break;
@@ -81,11 +71,11 @@ public class BankController {
     private void getAccountInfo() {
         String accountNumber = inputView.getAccountInfo();
         BigDecimal interestEstimated = interestService.getInterestEstimated(accountNumber);
-        GeneralMember generalMember = bankService.getAccountInfo(accountNumber);
-        outputView.setAccountInfo(generalMember.getAccountType(), generalMember.getBankAccountNumber(), generalMember.getName(), generalMember.getAmount(), interestEstimated);
-        if (generalMember.getAccountType().equals("S")) {
-            SavingsMember savingsMember = (SavingsMember) bankService.getAccountInfo(accountNumber);
-            outputView.setAccountInfo(savingsMember.getGoalAmount());
+        GeneralAccount generalAccount = bankService.getAccountInfo(accountNumber);
+        outputView.setAccountInfo(generalAccount.getAccountType(), generalAccount.getBankAccountNumber(), generalAccount.getName(), generalAccount.getAmount(), interestEstimated);
+        if (generalAccount.getAccountType().equals("S")) {
+            SavingsAccount savingsAccount = (SavingsAccount) bankService.getAccountInfo(accountNumber);
+            outputView.setAccountInfo(savingsAccount.getGoalAmount());
         }
         run();
 

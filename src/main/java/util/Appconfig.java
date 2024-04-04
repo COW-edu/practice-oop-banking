@@ -1,10 +1,12 @@
 package util;
 
+import BankRepository.BankRepository;
 import interest.InterestServiceImpl;
 import interest.InterestService;
 import interest.InterestPolicy;
 import interest.RateInterestPolicy;
-import bank.*;
+import bankSevice.*;
+import BankRepository.BankMemoryRepository;
 
 public class Appconfig {
     public BankService bankService(){

@@ -1,6 +1,6 @@
 package interest;
 
-import bank.GeneralMember;
+import bankSevice.GeneralAccount;
 
 import java.math.BigDecimal;
 
@@ -9,7 +9,7 @@ import static interest.InterestList.*;
 
 public class RateInterestPolicy implements InterestPolicy {
     @Override
-    public BigDecimal interest(GeneralMember member) {
+    public BigDecimal interest(GeneralAccount member) {
         if (member.getAccountType().equals("N")) {
             return generalInterest(member.getAmount());
         }

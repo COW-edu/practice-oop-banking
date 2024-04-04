@@ -1,6 +1,6 @@
 package interest;
 
-import bank.BankRepository;
+import BankRepository.BankRepository;
 
 import java.math.BigDecimal;
 
