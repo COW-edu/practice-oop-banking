@@ -1,5 +1,6 @@
 package controller;
 
+import bankSevice.Account;
 import bankSevice.GeneralAccount;
 import bankSevice.BankService;
 import bankSevice.SavingsAccount;
@@ -71,7 +72,7 @@ public class BankController {
     private void getAccountInfo() {
         String accountNumber = inputView.getAccountInfo();
         BigDecimal interestEstimated = interestService.getInterestEstimated(accountNumber);
-        GeneralAccount generalAccount = bankService.getAccountInfo(accountNumber);
+        Account generalAccount = bankService.getAccountInfo(accountNumber);
         outputView.setAccountInfo(generalAccount.getAccountType(), generalAccount.getBankAccountNumber(), generalAccount.getName(), generalAccount.getAmount(), interestEstimated);
         if (generalAccount.getAccountType().equals("S")) {
             SavingsAccount savingsAccount = (SavingsAccount) bankService.getAccountInfo(accountNumber);

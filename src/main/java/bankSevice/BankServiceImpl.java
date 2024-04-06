@@ -57,7 +57,7 @@ public class BankServiceImpl implements BankService {
     }
 
     @Override
-    public GeneralAccount getAccountInfo(String accountNumber) {
+    public Account getAccountInfo(String accountNumber) {
         return bankRepository.findByAccountNumber(accountNumber);
 
     }

@@ -1,6 +1,9 @@
 package bankSevice;
 
+import lombok.Getter;
+
 import java.math.BigDecimal;
+
 
 public class AccountBuilder {
     private String accountType;
@@ -48,6 +51,6 @@ public class AccountBuilder {
         if (goalAmount == null) {
             throw new IllegalStateException("Goal amount is required for SavingsAccount");
         }
-        return new SavingsAccount(accountType, bankAccountNumber, name, amount, activation, goalAmount);
+        return new SavingsAccount(accountType, name, bankAccountNumber, amount, activation, goalAmount);
     }
 }

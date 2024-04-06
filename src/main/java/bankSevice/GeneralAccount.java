@@ -6,10 +6,10 @@ import java.math.BigDecimal;
 
 
 @Getter
-public class GeneralAccount {
-    private String accountType;
-    private String name;
-    private String bankAccountNumber;
+public class GeneralAccount implements Account {
+    private final String accountType;
+    private final String name;
+    private final String bankAccountNumber;
     private BigDecimal amount;
     private boolean activation;
 

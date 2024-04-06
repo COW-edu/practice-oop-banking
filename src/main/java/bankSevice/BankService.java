@@ -12,5 +12,5 @@ public interface BankService {
 
     void deposit(String accountNumber, BigDecimal depositAmount);
     void withdraw(String accountNumber, BigDecimal withdrawAmount);
-    GeneralAccount getAccountInfo(String accountNumber);
+    Account getAccountInfo(String accountNumber);
 }
