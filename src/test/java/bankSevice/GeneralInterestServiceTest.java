@@ -42,45 +42,51 @@ class GeneralInterestServiceTest {
         //입금확인
     void deposit() {
         //given
-//        BigDecimal amount = new BigDecimal("10000");
-//        BigDecimal depositAmount = new BigDecimal("10000");
-//        GeneralAccount generalAccount = new GeneralAccount("N", "NAME", "12345", amount, true);
-//        //when
-//        bankService.join(generalAccount);
-//        bankService.deposit("12345", depositAmount);
-//        GeneralAccount getAccountInfo = bankService.getAccountInfo("12345");
-//        //then
-//        BigDecimal answerValue = new BigDecimal("20000");
-//        assertEquals(answerValue, getAccountInfo.getAmount());
+        List<String> generalAccount = new ArrayList<>();
+        generalAccount.add("N");
+        generalAccount.add("NAME");
+        generalAccount.add("12345");
+        generalAccount.add("10000");
+
+        //when
+        bankService.join(generalAccount);
+        bankService.deposit("12345", new BigDecimal("10000"));
+        Account getAccountInfo = bankService.getAccountInfo("12345");
+        //then
+        assertEquals(new BigDecimal("20000"), getAccountInfo.getAmount());
     }
 
     @Test
         //출금확인
     void withdraw() {
         //given
-//        BigDecimal amount = new BigDecimal("10000");
-//        BigDecimal witdrawAmount = new BigDecimal("5000");
-//        GeneralAccount generalAccount = new GeneralAccount("N", "NAME", "12345", amount, true);
-//        //when
-//        bankService.join(generalAccount);
-//        bankService.withdraw("12345", witdrawAmount);
-//        GeneralAccount getAccountInfo = bankService.getAccountInfo("12345");
-//        //then
-//        BigDecimal answerValue = new BigDecimal("5000");
-//        assertEquals(answerValue, getAccountInfo.getAmount());
+        List<String> generalAccount = new ArrayList<>();
+        generalAccount.add("N");
+        generalAccount.add("NAME");
+        generalAccount.add("12345");
+        generalAccount.add("10000");
+
+        //when
+        bankService.join(generalAccount);
+        bankService.withdraw("12345", new BigDecimal("5000"));
+        Account getAccountInfo = bankService.getAccountInfo("12345");
+        //then
+        assertEquals(new BigDecimal("5000"), getAccountInfo.getAmount());
     }
 
     @Test
         //이자률 확인
     void interest() {
-//        BigDecimal amount = new BigDecimal("10000");
-//        BigDecimal depositAmount = new BigDecimal("10000");
-//        GeneralAccount generalAccount = new GeneralAccount("N", "NAME", "12345", amount, true);
-//        //when
-//        bankService.join(generalAccount);
-//
-//        //then
-//        BigDecimal answerValue = new BigDecimal("10200.00");
-//        assertEquals(answerValue, interestService.getInterestEstimated("12345"));
+        List<String> generalAccount = new ArrayList<>();
+        generalAccount.add("N");
+        generalAccount.add("NAME");
+        generalAccount.add("12345");
+        generalAccount.add("10000");
+        //when
+        bankService.join(generalAccount);
+
+        //then
+        BigDecimal answerValue = new BigDecimal("10200.00");
+        assertEquals(answerValue, interestService.getInterestEstimated("12345"));
     }
 }
