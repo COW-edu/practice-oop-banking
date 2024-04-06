@@ -1,6 +1,7 @@
 package person;
 
 import bank.BankKiosk;
+import global.GlobalScanner;
 import lombok.RequiredArgsConstructor;
 
 import java.util.HashMap;
@@ -10,44 +11,10 @@ import java.util.Scanner;
 @RequiredArgsConstructor
 public class Person {
 
-    private static final int BANK_SERVICE = 1;
-    private static final int END_BANK_SERVICE = 2;
-    private static final String BANK_SERVICE_END_MESSAGE = "은행 업무 종료";
-    private static final String INVALID_SELECTION_MESSAGE = "다시 선택해주세요.";
-    private static final String MENU_OPTIONS = """
-                        1. 은행 업무를 본다
-                        2. 은행 업무를 보지 않는다.
-                        """;
-
-    private final Scanner scanner = new Scanner(System.in);
     private final BankKiosk service;
-    private final Map<Integer, Runnable> menu = new HashMap<>();
-
-
-    private void initialize() {
-        menu.put(BANK_SERVICE, service::bankServiceMenu);
-        menu.put(END_BANK_SERVICE, () -> System.out.println(BANK_SERVICE_END_MESSAGE));
-    }
 
     public void doBanking() {
-        initialize();
-        int choice;
-        do {
-            menuList();
-            choice = getUserChoice();
-            Runnable action = menu.getOrDefault(choice, () -> System.out.println(INVALID_SELECTION_MESSAGE));
-            action.run();
-        } while (choice != 2);
+        service.bankServiceMenu();
     }
-
-    private int getUserChoice() {
-        String input = scanner.nextLine().trim();
-        try {
-            return Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            return -1;
-        }
-    }
-        private void menuList () {
-            System.out.println(MENU_OPTIONS);}}
+}
 

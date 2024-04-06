@@ -1,6 +1,6 @@
 package account;
 
-import exception.clerk.InputAccountTypeException;
+import message.ErrorMessage;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -10,16 +10,15 @@ import java.util.Arrays;
 @RequiredArgsConstructor
 public enum AccountType {
 
-	DEPOSIT("예금 계좌"),
-	SAVING("적금 계좌");
+    DEPOSIT("예금 계좌"),
+    SAVING("적금 계좌");
 
-	private static final String ERROR_MESSAGE = "계좌유형을 다시 입력해주세요. ex) 예금 계좌, 적금 계좌";
-	private final String type;
+    private final String type;
 
-	public static AccountType fromDescription(String input) throws InputAccountTypeException{
-		return Arrays.stream(AccountType.values())
-				.filter(type -> type.getType().equals(input))
-				.findFirst()
-				.orElseThrow(() -> new InputAccountTypeException(ERROR_MESSAGE));
-	}
+    public static AccountType fromDescription(String input) throws IllegalStateException {
+        return Arrays.stream(AccountType.values())
+                .filter(type -> type.getType().equals(input))
+                .findFirst()
+                .orElseThrow(() -> new IllegalStateException(ErrorMessage.INVALID_ACCOUNT_TYPE.getErrorMessage()));
+    }
 }

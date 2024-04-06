@@ -1,8 +1,6 @@
 package bank.clerk;
 
 import bank.BankSystem;
-import exception.clerk.InputAccountNumberException;
-import exception.system.NotFoundAccountException;
 import lombok.RequiredArgsConstructor;
 import validate.ValidationUtils;
 
@@ -19,15 +17,15 @@ public class GetAccountInfoClerk implements Clerk {
         getAccountInfo();
     }
 
-    public void getAccountInfo() {
-        while(true){
-            try{
+    private void getAccountInfo() {
+        while (true) {
+            try {
                 String accountNum = getUserInput();
                 ValidationUtils.isValidAccountNumber(accountNum);
                 String statusResult = bankSystem.getAccountInfo(accountNum);
                 resultMessage(statusResult);
                 break;
-            }catch (InputAccountNumberException | NotFoundAccountException e){
+            } catch (IllegalStateException e) {
                 System.out.println(e.getMessage());
             }
         }

@@ -1,14 +1,12 @@
 package bank.clerk;
 
 import bank.BankSystem;
-import exception.clerk.InputAccountNumberException;
-import exception.system.NotFoundAccountException;
 import lombok.RequiredArgsConstructor;
 import validate.ValidationUtils;
 
 
 @RequiredArgsConstructor
-public class ChangeStatusClerk implements Clerk{
+public class ChangeStatusClerk implements Clerk {
 
     private static final String CLERK_REQUEST = "계좌상태를 변경하려면 계좌번호를 입력해주세요";
 
@@ -19,15 +17,15 @@ public class ChangeStatusClerk implements Clerk{
         suspension();
     }
 
-    public void suspension() {
-        while (true){
-            try{
+    private void suspension() {
+        while (true) {
+            try {
                 String accountNum = getUserInput();
                 ValidationUtils.isValidAccountNumber(accountNum);
                 String statusResult = bankSystem.changeStatus(accountNum);
                 resultMessage(statusResult);
                 break;
-            }catch (InputAccountNumberException | NotFoundAccountException e){
+            } catch (IllegalStateException e) {
                 System.out.println(e.getMessage());
             }
         }

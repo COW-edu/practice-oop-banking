@@ -4,43 +4,43 @@ import person.Person;
 
 public class AppConfig {
 
-    private final CentralBank centralBank = new CentralBank();
-    private final BankStorage bankStorage = new BankStorage(centralBank);
-    private final BankSystem bankSystem = new BankSystem(bankStorage);
-
-    public Person person(){
-         return new Person(bankKiosk());
+    public Person person() {
+        return new Person(bankKiosk());
     }
-    public BankKiosk bankKiosk(){
+
+    private BankKiosk bankKiosk() {
         return new BankKiosk(bankClerkFacade());
     }
-    public BankServiceMediator bankClerkFacade(){
+
+    private BankServiceMediator bankClerkFacade() {
         return new BankServiceMediator(bankClerk(), depositClerk(), withdrawClerk(), remittanceClerk(), changeStatusClerk(), getAccountInfoClerk());
     }
 
-    public CreateAccountClerk bankClerk() {
-        return new CreateAccountClerk(bankSystem);
-    }
-    public DepositClerk depositClerk() {
-        return new DepositClerk(bankSystem);
-    }
-    public WithdrawClerk withdrawClerk() {
-        return new WithdrawClerk(bankSystem);
-    }
-    public RemittanceClerk remittanceClerk() { return new RemittanceClerk(bankSystem);}
-    public ChangeStatusClerk changeStatusClerk() {
-        return new ChangeStatusClerk(bankSystem);
-    }
-    public GetAccountInfoClerk getAccountInfoClerk() {return new GetAccountInfoClerk(bankSystem);
+    private CreateAccountClerk bankClerk() {
+        return new CreateAccountClerk(bankSystem());
     }
 
-
-
-    BankStorage getBankStorage(){
-        return this.bankStorage;
+    private DepositClerk depositClerk() {
+        return new DepositClerk(bankSystem());
     }
 
-    CentralBank getCentralBank(){
-        return this.centralBank;
+    private WithdrawClerk withdrawClerk() {
+        return new WithdrawClerk(bankSystem());
+    }
+
+    private RemittanceClerk remittanceClerk() {
+        return new RemittanceClerk(bankSystem());
+    }
+
+    private ChangeStatusClerk changeStatusClerk() {
+        return new ChangeStatusClerk(bankSystem());
+    }
+
+    private GetAccountInfoClerk getAccountInfoClerk() {
+        return new GetAccountInfoClerk(bankSystem());
+    }
+
+    private BankSystem bankSystem() {
+        return new BankSystem(BankStorage.getInstance());
     }
 }

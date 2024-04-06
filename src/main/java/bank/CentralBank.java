@@ -7,14 +7,17 @@ import java.util.Map;
 
 public class CentralBank {
 
+    private final BankStorage bankStorage = BankStorage.getInstance();
 
-    private Map<String, Account> accountList= new HashMap<>();
-    public void getAccountList(String accountNum, Account account) {
-        accountList.put(accountNum, account);
+    public void showAccountList() {
+        Map<String, Account> accounts = getAccountList();
+        StringBuilder stringBuilder = new StringBuilder();
+        accounts.forEach((accountNum, account) ->
+                stringBuilder.append(account.getAccountInfo()).append("\n"));
+        System.out.println(stringBuilder.toString());
     }
-    public void showAccountList(){
-        accountList.forEach((accountNum, account) ->
-                System.out.println(account.getAccountInfo())
-        );
+
+    private Map<String, Account> getAccountList() {
+        return bankStorage.getAllAccount();
     }
 }
