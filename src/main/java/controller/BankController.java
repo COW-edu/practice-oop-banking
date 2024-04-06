@@ -54,11 +54,7 @@ public class BankController {
         while (true) {
             try {
                 List<String> account = InputView.createAccount();
-//                String accountType = account.get(0);
                 String name = account.get(1);
-//                String bankAccountNumber = account.get(2);
-//                BigDecimal amount = new BigDecimal(account.get(3));
-//                Boolean activation = true;
                     bankService.join(account);
                 run();
                 OutputView.createAccountEnd(name);
@@ -72,11 +68,10 @@ public class BankController {
     private void getAccountInfo() {
         String accountNumber = inputView.getAccountInfo();
         BigDecimal interestEstimated = interestService.getInterestEstimated(accountNumber);
-        Account generalAccount = bankService.getAccountInfo(accountNumber);
-        outputView.setAccountInfo(generalAccount.getAccountType(), generalAccount.getBankAccountNumber(), generalAccount.getName(), generalAccount.getAmount(), interestEstimated);
-        if (generalAccount.getAccountType().equals("S")) {
-            SavingsAccount savingsAccount = (SavingsAccount) bankService.getAccountInfo(accountNumber);
-            outputView.setAccountInfo(savingsAccount.getGoalAmount());
+        Account account = bankService.getAccountInfo(accountNumber);
+        outputView.setAccountInfo(account.getAccountType(), account.getBankAccountNumber(), account.getName(), account.getAmount(), interestEstimated);
+        if (account instanceof  SavingsAccount) {
+            outputView.setAccountInfo(((SavingsAccount) bankService.getAccountInfo(accountNumber)).getGoalAmount());
         }
         run();
 

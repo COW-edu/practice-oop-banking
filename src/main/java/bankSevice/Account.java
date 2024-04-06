@@ -10,4 +10,6 @@ public interface Account {
     BigDecimal getAmount();
 
     String getName();
+
+    void setAmount(BigDecimal add);
 }

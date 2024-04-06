@@ -16,14 +16,14 @@ public class BankMemoryRepository implements BankRepository {
 
     @Override
     public void addAmount(String accountNumber, BigDecimal depositAmount) {
-        Account member = store.get(accountNumber);
-       // member.setAmount(member.getAmount().add(depositAmount));
+        Account account = store.get(accountNumber);
+        account.setAmount(account.getAmount().add(depositAmount));
     }
 
     @Override
     public void subtractAmount(String accountNumber, BigDecimal withdrawAmount) {
         Account member = store.get(accountNumber);
-       // member.setAmount(member.getAmount().subtract(withdrawAmount));
+        member.setAmount(member.getAmount().subtract(withdrawAmount));
     }
 
     @Override

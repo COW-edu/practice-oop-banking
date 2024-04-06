@@ -93,7 +93,7 @@ public class InputView {
                 .toList(); // 결과를 수집
     }
     public static void exitProgram() {
-        System.exit(0);
+        //System.exit(0);
     }
 
     public String getAccountInfo() {

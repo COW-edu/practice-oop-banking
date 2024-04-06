@@ -1,6 +1,7 @@
 package bankSevice;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 
@@ -10,6 +11,7 @@ public class GeneralAccount implements Account {
     private final String accountType;
     private final String name;
     private final String bankAccountNumber;
+    @Setter
     private BigDecimal amount;
     private boolean activation;
 
