@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * @author kmjkh
- *
- */
-module Bank {
-}
