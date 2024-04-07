@@ -1,4 +1,4 @@
-package banking.account.exception;
+package banking.exception;
 
 public class InsufficientAmount extends RuntimeException{
     public InsufficientAmount(String message) {
