@@ -1,29 +1,56 @@
 package banking;
 
-import banking.account.controller.BankController;
-import banking.account.repository.CentralBank;
-import banking.account.repository.Repository;
-import banking.account.service.BankService;
-import banking.account.service.Service;
-import banking.account.view.BankView;
+
+import static banking.constant.AccountType.BASIC;
+import static banking.constant.AccountType.SAVING;
+
+import banking.app.BankApp;
+import banking.constant.AccountType;
+import banking.controller.BankController;
+import banking.handler.MenuActionHandler;
+import banking.interestpolicy.InterestCalculator;
+import banking.interestpolicy.NormalInterestCalculator;
+import banking.interestpolicy.SavingInterestCalculator;
+import banking.repository.BankRepository;
+import banking.repository.MemoryBankRepository;
+import banking.service.BankService;
+import banking.service.BankServiceImpl;
+import banking.service.validation.AccountValidationService;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AppConfig {
 
-    public BankView bankView() {
-        return new BankView(bankController());
-    }
+  public BankApp bankApp() {
+    return new BankApp();
+  }
 
-    public BankController bankController(){
-        return new BankController(service());
-    }
+  public Map<AccountType, InterestCalculator> interestCalculator() {
+    Map<AccountType, InterestCalculator> interestPolicy = new HashMap<>();
+    interestPolicy.put(BASIC, new NormalInterestCalculator());
+    interestPolicy.put(SAVING, new SavingInterestCalculator());
+    return interestPolicy;
+  }
 
-    public Service service() {
-        return new BankService(repository());
-    }
+  public BankController bankController() {
+    return new BankController(bankService(), bankApp(), menuActionHandler());
+  }
 
-    public Repository repository() {
-        return new CentralBank();
-    }
+  public BankRepository bankRepository() {
+    return new MemoryBankRepository();
+  }
+
+  public MenuActionHandler menuActionHandler() {
+    return new MenuActionHandler();
+  }
+
+  public BankService bankService() {
+    return new BankServiceImpl(bankRepository(), interestCalculator(), accountValidationService());
+  }
+
+  public AccountValidationService accountValidationService() {
+    return new AccountValidationService();
+  }
 
 
 }
