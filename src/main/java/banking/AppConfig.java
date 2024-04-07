@@ -21,9 +21,11 @@ import java.util.Map;
 
 public class AppConfig {
 
+  
   public BankApp bankApp() {
     return new BankApp();
   }
+
 
   public Map<AccountType, InterestCalculator> interestCalculator() {
     Map<AccountType, InterestCalculator> interestPolicy = new HashMap<>();
@@ -32,21 +34,26 @@ public class AppConfig {
     return interestPolicy;
   }
 
+
   public BankController bankController() {
     return new BankController(bankService(), bankApp(), menuActionHandler());
   }
+
 
   public BankRepository bankRepository() {
     return new MemoryBankRepository();
   }
 
+
   public MenuActionHandler menuActionHandler() {
     return new MenuActionHandler();
   }
 
+
   public BankService bankService() {
     return new BankServiceImpl(bankRepository(), interestCalculator(), accountValidationService());
   }
+
 
   public AccountValidationService accountValidationService() {
     return new AccountValidationService();
