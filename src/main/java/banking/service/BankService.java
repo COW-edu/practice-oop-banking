@@ -10,15 +10,13 @@ public interface BankService {
 
   void createAccount(AccountDTO accountDTO);
 
-  void deposit(DepositDTO depositDTO);
+  void depositAmountToAccount(DepositDTO depositDTO);
 
-  void withdraw(WithdrawDTO withdrawDTO);
+  void withdrawAmountToAccount(WithdrawDTO withdrawDTO);
 
-  void transfer(TransferDTO transferDTO);
+  void transferAmountToAccount(TransferDTO transferDTO);
 
   BasicAccount retrieveAndComputeInterest(String accountInput);
-
-  //BasicAccount findAccount(String accountNumber);
 
 
 }

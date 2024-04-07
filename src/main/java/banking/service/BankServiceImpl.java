@@ -31,39 +31,38 @@ public class BankServiceImpl implements BankService {
 
   @Override
   public void createAccount(AccountDTO accountDTO) {
-    if (validationService.isTargetAmountNull(accountDTO.getTargetAmount())) {
+    if (validationService.isTargetAmountNull(accountDTO)) {
       bankRepository.createAccount(accountDTO.createBasicAccount());
       return;
     }
     bankRepository.createAccount(accountDTO.createSavingAccount());
   }
 
-
   @Override
-  public void deposit(DepositDTO depositDTO) {
+  public void depositAmountToAccount(DepositDTO depositDTO) {
     if (isExistedAccount(depositDTO.getAccountNumber())) {
-      bankRepository.depositAmount(depositDTO);
+      bankRepository.depositAmountToAccount(depositDTO);
     }
   }
 
 
   @Override
-  public void withdraw(WithdrawDTO withdrawDTO) {
+  public void withdrawAmountToAccount(WithdrawDTO withdrawDTO) {
     BasicAccount withdrawAccount = bankRepository.findAccount(withdrawDTO.getAccountNumber());
     boolean validatedGoalAmount = validationService.validateAndCheckWithdraw(withdrawAccount);
 
     if (validatedGoalAmount || isExistedAccount(withdrawDTO.getAccountNumber())) {
-      bankRepository.withdrawAmount(withdrawDTO);
+      bankRepository.withdrawAmountToAccount(withdrawDTO);
     }
   }
 
 
   @Override
-  public void transfer(TransferDTO transferDTO) {
+  public void transferAmountToAccount(TransferDTO transferDTO) {
     isExistedAccount(transferDTO.getDepositAccountNumber());
     isExistedAccount(transferDTO.getWithdrawAccountNumber());
 
-    bankRepository.transferAmount(transferDTO);
+    bankRepository.transferAmountToAccount(transferDTO);
   }
 
 
