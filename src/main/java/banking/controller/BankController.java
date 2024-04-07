@@ -1,6 +1,8 @@
 package banking.controller;
 
 
+import static banking.constant.ErrorMessage.INCORRECT_INPUT;
+
 import banking.app.BankApp;
 import banking.constant.MenuNumber;
 import banking.domain.BasicAccount;
@@ -39,8 +41,7 @@ public class BankController {
 
       boolean executed = menuActionHandler.executeAction(menuNumber);
       if (!executed) {
-        System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
-        return;
+        throw new RuntimeException(INCORRECT_INPUT.getErrorMessage());
       }
 
     } while (isRunning);
