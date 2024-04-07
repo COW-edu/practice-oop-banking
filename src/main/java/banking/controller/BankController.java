@@ -8,7 +8,7 @@ import banking.dto.AccountDTO;
 import banking.dto.DepositDTO;
 import banking.dto.TransferDTO;
 import banking.dto.WithdrawDTO;
-import banking.hadler.MenuActionHandler;
+import banking.handler.MenuActionHandler;
 import banking.service.BankService;
 
 public class BankController {
@@ -51,24 +51,24 @@ public class BankController {
     bankService.createAccount(accountDTO);
   }
 
-  public void deposit() {
-    DepositDTO depositDTO = bankApp.deposit();
-    bankService.deposit(depositDTO);
+  public void depositAmountToAccount() {
+    DepositDTO depositDTO = bankApp.depositAmountToAccount();
+    bankService.depositAmountToAccount(depositDTO);
   }
 
-  public void withdraw() {
-    WithdrawDTO withdrawDTO = bankApp.withdraw();
-    bankService.withdraw(withdrawDTO);
+  public void withdrawAmountToAccount() {
+    WithdrawDTO withdrawDTO = bankApp.withdrawAmountToAccount();
+    bankService.withdrawAmountToAccount(withdrawDTO);
   }
 
-  public void transfer() {
-    TransferDTO transferDTO = bankApp.transfer();
-    bankService.transfer(transferDTO);
+  public void transferAmountToAccount() {
+    TransferDTO transferDTO = bankApp.transferAmountToAccount();
+    bankService.transferAmountToAccount(transferDTO);
   }
 
-  public void findAccount() {
+  public void findAccountByAccountNumber() {
     BasicAccount findAccount = bankService.retrieveAndComputeInterest(bankApp.findAccountInput());
-    bankApp.findAccount(findAccount);
+    bankApp.findAccountByAccountNumber(findAccount);
   }
 
   public void exitProgram() {
