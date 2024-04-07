@@ -14,31 +14,30 @@ public class MemoryBankRepository implements BankRepository {
 
   @Override
   public void createAccount(BasicAccount account) {
-    System.out.println(account.getAccountInfo());
     accountStorage.put(account.getAccountNumber(), account);
   }
 
 
   @Override
-  public void depositAmount(DepositDTO depositDTO) {
-    BasicAccount depositAccount = accountStorage.get(depositDTO.getAccountNumber());
-    depositAccount.setBalance(depositAccount.getBalance().add(depositDTO.getDepositAmount()));
+  public void depositAmountToAccount(DepositDTO depositDTO) {
+    BasicAccount depositToAccount = accountStorage.get(depositDTO.getAccountNumber());
+    depositToAccount.setBalance(depositToAccount.getBalance().add(depositDTO.getDepositAmount()));
   }
 
 
   @Override
-  public void withdrawAmount(WithdrawDTO withdrawDTO) {
-    BasicAccount withdrawAccount = accountStorage.get(withdrawDTO.getAccountNumber());
-    withdrawAccount.setBalance(
-        withdrawAccount.getBalance().subtract(withdrawDTO.getWithdrawAmount()));
+  public void withdrawAmountToAccount(WithdrawDTO withdrawDTO) {
+    BasicAccount withdrawToAccount = accountStorage.get(withdrawDTO.getAccountNumber());
+    withdrawToAccount.setBalance(
+        withdrawToAccount.getBalance().subtract(withdrawDTO.getWithdrawAmount()));
   }
 
 
   @Override
-  public void transferAmount(TransferDTO transferDTO) {
-    withdrawAmount(
+  public void transferAmountToAccount(TransferDTO transferDTO) {
+    withdrawAmountToAccount(
         new WithdrawDTO(transferDTO.getWithdrawAccountNumber(), transferDTO.getTransferAmount()));
-    depositAmount(
+    depositAmountToAccount(
         new DepositDTO(transferDTO.getDepositAccountNumber(), transferDTO.getTransferAmount()));
   }
 

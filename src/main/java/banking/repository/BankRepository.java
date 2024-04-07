@@ -10,11 +10,11 @@ public interface BankRepository {
 
   void createAccount(BasicAccount basicAccount);
 
-  void depositAmount(DepositDTO depositDTO);
+  void depositAmountToAccount(DepositDTO depositDTO);
 
-  void withdrawAmount(WithdrawDTO withdrawDTO);
+  void withdrawAmountToAccount(WithdrawDTO withdrawDTO);
 
-  void transferAmount(TransferDTO transferDTO);
+  void transferAmountToAccount(TransferDTO transferDTO);
 
   BasicAccount findAccount(String accountNumber);
 
