@@ -31,6 +31,7 @@ public class BankApp {
 
   private static final Scanner sc = new Scanner(System.in);
 
+
   public String appStart() {
     System.out.println(informationMessage(MENU));
     return BankApp.input();
@@ -62,7 +63,7 @@ public class BankApp {
   }
 
 
-  public DepositDTO deposit() {
+  public DepositDTO depositAmountToAccount() {
     System.out.println(informationMessage(DEPOSIT_ACCOUNT_NUMBER));
     String accountNumber = formatAccountNumber();
 
@@ -76,7 +77,7 @@ public class BankApp {
   }
 
 
-  public WithdrawDTO withdraw() {
+  public WithdrawDTO withdrawAmountToAccount() {
     System.out.println(informationMessage(WITHDRAW_ACCOUNT_NUMBER));
     String accountNumber = formatAccountNumber();
 
@@ -90,7 +91,7 @@ public class BankApp {
   }
 
 
-  public TransferDTO transfer() {
+  public TransferDTO transferAmountToAccount() {
     System.out.println(informationMessage(DEPOSIT_ACCOUNT_NUMBER));
     String depositAccountNumber = formatAccountNumber();
 
@@ -108,7 +109,7 @@ public class BankApp {
   }
 
 
-  public void findAccount(BasicAccount findAccount) {
+  public void findAccountByAccountNumber(BasicAccount findAccount) {
     System.out.println(informationMessage(ACCOUNT_INFO));
     System.out.println(findAccount.getAccountInfo());
   }
