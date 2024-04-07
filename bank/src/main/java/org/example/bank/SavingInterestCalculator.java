@@ -1,4 +1,4 @@
-package org.example.Bank;
+package org.example.bank;
 
 
 import java.math.BigDecimal;

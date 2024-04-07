@@ -1,6 +1,6 @@
-package org.example.Exception;
+package org.example.exception;
 
-import org.example.Constant.ErrorCode;
+import org.example.constant.ErrorCode;
 
 
 public class DepositException extends Exception{

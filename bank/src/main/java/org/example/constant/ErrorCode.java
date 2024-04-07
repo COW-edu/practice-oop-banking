@@ -1,8 +1,8 @@
-package org.example.Constant;
+package org.example.constant;
 
 
 //에러코드 - using enum class
-public enum ErrorCode {
+public enum  ErrorCode {
 
     // Unexpected Error
     E000("E000", "예상치 못한 오류 발생"),

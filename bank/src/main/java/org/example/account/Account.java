@@ -1,6 +1,6 @@
-package org.example.Account;
+package org.example.account;
 
-import org.example.Exception.WithdrawException;
+import org.example.exception.WithdrawException;
 
 import java.math.BigDecimal;
 

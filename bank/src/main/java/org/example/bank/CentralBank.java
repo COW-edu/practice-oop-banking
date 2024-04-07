@@ -1,7 +1,7 @@
-package org.example.Bank;
+package org.example.bank;
 
 
-import org.example.Account.Account;
+import org.example.account.Account;
 
 import java.util.ArrayList;
 

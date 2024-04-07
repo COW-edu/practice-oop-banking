@@ -1,4 +1,4 @@
-package org.example.Account;
+package org.example.account;
 
 
 import java.math.BigDecimal;
@@ -7,23 +7,23 @@ import java.math.BigDecimal;
 //적금 계좌 클래스는 일반 예금 계좌 클래스에서 상속을 받고 목표 금액 속성이 추가 됩니다.
 
 
-public class savingAccount extends Account {
+public class SavingAccount extends Account {
+
 
     //천만원으로 목표 금액 설정
     private BigDecimal goalPrice = new BigDecimal(10000000);
 
 
-    public savingAccount(){
+    public SavingAccount(){
         super();
         this.category = "Saving";
     }
-    // 적금 계좌의 카테고리를 "S"로 만들어 줍니다.
-    public savingAccount(String accNo, String owner, BigDecimal balance, BigDecimal goalAmount) {
+    // 적금 계좌의 카테고리를 "Saving"로 만들어 줍니다.
+    public SavingAccount(String accNo, String owner, BigDecimal balance, BigDecimal goalAmount) {
         super(accNo, owner, balance);
         this.goalPrice = goalAmount;
         this.category = "Saving";
     }
-
 
     public BigDecimal getGoalAmount() {
         return goalPrice;
