@@ -34,9 +34,7 @@ public class Bank {
         //1. 계좌번호를 입력 후 맞는지 확인
         String accountNum = askInput("\n출금하려는 계좌의 번호를 입력하세요 : ","");
 
-        try {
 
-        }
     }
 
 
