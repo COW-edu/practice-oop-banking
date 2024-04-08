@@ -1,8 +1,6 @@
 package BankRepository;
 
-import bankSevice.Account;
-
-import java.math.BigDecimal;
+import model.Account;
 
 public interface BankRepository {
     void save(Account generalAccount);

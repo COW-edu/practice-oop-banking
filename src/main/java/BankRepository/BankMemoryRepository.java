@@ -1,8 +1,7 @@
 package BankRepository;
 
-import bankSevice.Account;
+import model.Account;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 

@@ -1,4 +1,4 @@
-package bankSevice;
+package model;
 
 import java.math.BigDecimal;
 

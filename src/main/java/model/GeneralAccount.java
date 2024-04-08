@@ -1,7 +1,8 @@
-package bankSevice;
+package model;
 
 import lombok.Getter;
 import lombok.Setter;
+import model.Account;
 
 import java.math.BigDecimal;
 

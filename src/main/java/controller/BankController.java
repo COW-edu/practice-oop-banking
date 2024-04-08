@@ -1,16 +1,13 @@
 package controller;
 
-import bankSevice.Account;
+import model.Account;
 import bankSevice.BankService;
-import bankSevice.SavingsAccount;
-import interest.InterestPolicy;
 import interest.InterestService;
-import util.Appconfig;
+import util.AppConfig;
 import view.InputView;
 import view.OutputView;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +21,7 @@ public class BankController {
     private final OutputView outputView;
     private final BankService bankService;
     private final InterestService interestService;
-    Appconfig appConfig = new Appconfig();
+    AppConfig appConfig = new AppConfig();
 //    BankService bankService = appConfig.bankService();
 //    InterestService interestService = appConfig.interBankService();
 

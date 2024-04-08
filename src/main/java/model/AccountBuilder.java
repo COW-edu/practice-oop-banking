@@ -1,6 +1,4 @@
-package bankSevice;
-
-import lombok.Getter;
+package model;
 
 import java.math.BigDecimal;
 

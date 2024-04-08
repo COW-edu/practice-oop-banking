@@ -11,7 +11,7 @@ import BankRepository.BankMemoryRepository;
 import view.InputView;
 import view.OutputView;
 
-public class Appconfig {
+public class AppConfig {
     public BankService bankService(){
         return new BankServiceImpl(bankRepository());
     }

@@ -1,12 +1,10 @@
 import controller.BankController;
-import util.Appconfig;
-import view.InputView;
-import view.OutputView;
+import util.AppConfig;
 
 public class BankingApplication {
 
 	public static void main(String[] args)  {
-		Appconfig appConfig = new Appconfig();
+		AppConfig appConfig = new AppConfig();
 		BankController bankController = appConfig.bankController();
 		bankController.run();
 	}

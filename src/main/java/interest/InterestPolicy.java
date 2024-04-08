@@ -1,6 +1,6 @@
 package interest;
 
-import bankSevice.Account;
+import model.Account;
 
 import java.math.BigDecimal;
 

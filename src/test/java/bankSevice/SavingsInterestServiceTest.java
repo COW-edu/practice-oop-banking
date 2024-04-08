@@ -3,9 +3,8 @@ package bankSevice;
 import interest.InterestService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import util.Appconfig;
+import util.AppConfig;
 
-import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +16,7 @@ class SavingsInterestServiceTest {
     InterestService interestService;
     @BeforeEach()
     public void beforeEach(){
-        Appconfig appconfig = new Appconfig();
+        AppConfig appconfig = new AppConfig();
         bankService = appconfig.bankService();
         interestService = appconfig.interService();
     }
