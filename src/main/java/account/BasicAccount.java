@@ -1,7 +1,6 @@
 package account;
 import java.math.BigDecimal;
 
-import global.AccountType;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,54 +8,57 @@ import lombok.Getter;
 
 @Getter
 @Builder
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class BasicAccount implements Account{
-	private AccountType accountType;
-	private String accountNumber;
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
+public class BasicAccount extends Account {
+	private final AccountType accountType = AccountType.BASIC_ACCOUNT;
+	private final String accountNumber;
 	private String owner;
 	private BigDecimal balance;
-	private boolean isActivated;
-	public static BasicAccount getInstance(String accountNumber, String owner, BigDecimal balance, boolean isActivated) {
-		return new BasicAccount(AccountType.NORMAL_ACCOUNT, accountNumber, owner, balance, isActivated);
-	}
+	private boolean activation;
+
 	@Override
-	public synchronized boolean withdraw(BigDecimal value) {
-		if(this.balance.compareTo(value) < 0) // ÀÜ¾×º¸´Ù Ãâ±İ ±İ¾×ÀÌ ´õ Å« °æ¿ì
-			return false;
-		this.balance = this.balance.subtract(value);
-		return true;
+	public String getAccountNumber() {
+		return this.accountNumber;
 	}
+
+	@Override
+	public synchronized void deactivate() {
+		this.activation = false;
+	}
+
+	@Override
+	public boolean canWithdrawal(BigDecimal withdrawalAmount) {
+		return (balance.compareTo(withdrawalAmount) >= 0);
+	}
+
+	@Override
+	public synchronized void activate() {
+		this.activation = true;
+	}
+
+	@Override
+	public boolean isActive() {
+		return this.activation;
+	}
+
+	@Override
+	public synchronized void withdrawal(BigDecimal value) {
+		this.balance = this.balance.subtract(value);
+	}
+
 	@Override
 	public synchronized void deposit(BigDecimal value) {
 		this.balance = this.balance.add(value);
 	}
+
 	public synchronized String getAccountInfo() {
 		stringBuilder.setLength(0);
-		stringBuilder.append("[°èÁÂ Á¤º¸]").append("\n");
-		stringBuilder.append("°èÁÂÁ¾·ù: ").append(accountType.getAccountName()).append("\n");
-		stringBuilder.append("°èÁÂ¹øÈ£: ").append(getAccountNumber()).append("\n");
-		stringBuilder.append("¼ÒÀ¯ÀÚ: ").append(getOwner()).append("\n");
-		stringBuilder.append("ÀÜ¾×: £Ü ").append(decimalFormat.format(getBalance())).append("\n");
-		stringBuilder.append("È°¼º¿©ºÎ: ").append(isActivated());
+		stringBuilder.append("[ê³„ì¢Œ ì •ë³´]").append("\n");
+		stringBuilder.append("ê³„ì¢Œ ì¢…ë¥˜: ").append(accountType.getAccountName()).append("\n");
+		stringBuilder.append("ê³„ì¢Œë²ˆí˜¸: ").append(getAccountNumber()).append("\n");
+		stringBuilder.append("ê³„ì¢Œì£¼: ").append(getOwner()).append("\n");
+		stringBuilder.append("ì”ì•¡: ï¿¦").append(decimalFormat.format(getBalance())).append("\n");
+		stringBuilder.append("í™œì„±í™” ìƒíƒœ: ").append(isActivation());
 		return stringBuilder.toString();
-	}
-	public boolean checkNumber(String accountNumber) {
-		return this.accountNumber.equals(accountNumber);
-	}
-	@Override
-	public AccountType getAccountType() {
-		return this.accountType;
-	}
-	@Override
-	public synchronized void deactive() {
-		this.isActivated = false;
-	}
-	@Override
-	public synchronized void active() {
-		this.isActivated = true;
-	}
-	@Override
-	public boolean isActive() {
-		return this.isActivated;
 	}
 }

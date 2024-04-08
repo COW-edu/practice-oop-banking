@@ -1,4 +1,4 @@
-package global;
+package account;
 import interest.BasicAccountInterest;
 import interest.InterestCalculator;
 import interest.SavingAccountInterest;
@@ -8,8 +8,11 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum AccountType {
-	NORMAL_ACCOUNT("øπ±› ∞Ë¡¬", new BasicAccountInterest()),
-	SAVING_ACCOUNT("¿˚±› ∞Ë¡¬", new SavingAccountInterest());
+	SAVING_ACCOUNT("Ï†ÅÍ∏à Í≥ÑÏ¢å", new SavingAccountInterest()),
+	BASIC_ACCOUNT("ÏòàÍ∏à Í≥ÑÏ¢å", new BasicAccountInterest());
+
+	public static final int MIN_INDEX = 1;
+	public static final int MAX_INDEX = AccountType.values().length;
 
 	private final String accountName;
 	private final InterestCalculator interestCalculator;

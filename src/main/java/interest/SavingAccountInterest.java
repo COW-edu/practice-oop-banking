@@ -1,18 +1,15 @@
 package interest;
 import java.math.BigDecimal;
 
-public class SavingAccountInterest implements InterestCalculator{
+public class SavingAccountInterest implements InterestCalculator {
 	@Override
 	public BigDecimal getInterest(BigDecimal balance) {
-		BigDecimal interest = null;
-		if(balance.compareTo(getValueOf(1000000)) >= 0) {
-			interest = balance.multiply(getValueOf(5)).divide(getValueOf(100));
+		BigDecimal interest;
+		if (balance.compareTo(SavingAccountInterestRange.INTEREST_RANGE_1.getValue()) >= 0) {
+			interest = balance.multiply(SavingAccountInterestRange.INTEREST_PERCENT_1.getValue());
 		} else {
-			interest = balance.multiply(getValueOf(1)).divide(getValueOf(100));
+			interest = balance.multiply(SavingAccountInterestRange.INTEREST_PERCENT_2.getValue());
 		}
 		return interest;
-	}
-	private BigDecimal getValueOf(double i) {
-		return BigDecimal.valueOf(i);
 	}
 }

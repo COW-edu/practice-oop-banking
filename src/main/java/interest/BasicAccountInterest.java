@@ -1,24 +1,21 @@
 package interest;
 import java.math.BigDecimal;
 
-public class BasicAccountInterest implements InterestCalculator{
-	@Override
+public class BasicAccountInterest implements InterestCalculator {
+  @Override
 	public BigDecimal getInterest(BigDecimal balance) {
-		BigDecimal interest = null;
-		if(balance.compareTo(getValueOf(10000000)) >= 0) {
-			interest = balance.multiply(getValueOf(50)).divide(getValueOf(100));
-		} else if (balance.compareTo(getValueOf(5000000)) >= 0) {
-			interest = balance.multiply(getValueOf(7)).divide(getValueOf(100));
-		} else if (balance.compareTo(getValueOf(1000000)) >= 0) {
-			interest = balance.multiply(getValueOf(4)).divide(getValueOf(100));
-		} else if (balance.compareTo(getValueOf(10000)) >= 0) {
-			interest = balance.multiply(getValueOf(2)).divide(getValueOf(100));
+		BigDecimal interest;
+		if (balance.compareTo(BasicAccountInterestRange.INTEREST_RANGE_1.getValue()) >= 0) {
+			interest = balance.multiply(BasicAccountInterestRange.INTEREST_PERCENT_1.getValue());
+		} else if (balance.compareTo(BasicAccountInterestRange.INTEREST_RANGE_2.getValue()) >= 0) {
+			interest = balance.multiply(BasicAccountInterestRange.INTEREST_PERCENT_2.getValue());
+		} else if (balance.compareTo(BasicAccountInterestRange.INTEREST_RANGE_3.getValue()) >= 0) {
+			interest = balance.multiply(BasicAccountInterestRange.INTEREST_PERCENT_3.getValue());
+		} else if (balance.compareTo(BasicAccountInterestRange.INTEREST_RANGE_4.getValue()) >= 0) {
+			interest = balance.multiply(BasicAccountInterestRange.INTEREST_PERCENT_4.getValue());
 		} else {
-			interest = balance.multiply(getValueOf(1)).divide(getValueOf(100));
+			interest = balance.multiply(BasicAccountInterestRange.INTEREST_PERCENT_5.getValue());
 		}
 		return interest;
-	}
-	private BigDecimal getValueOf(double i) {
-		return BigDecimal.valueOf(i);
 	}
 }
