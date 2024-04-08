@@ -9,6 +9,7 @@ public class OutputView {
     private static final String DEPOSIT_MESSAGE = "%s 계좌에 %s원 입금이 완료되었습니다.%n";
     private static final String CREATE_ACCOUNT_MESSAGE = "%s 님 계좌생성이 완료되었습니다.%n" ;
     private static final String TRANSFER_MESSAGE = "%s 계좌에서 $계좌로 %s원 송금이 완료되었습니다.%n";
+    private static final String EXPECTED_AMOUNT="예상 금액:";
 
     public static void withdrawEndMessage(String accountNumber, String amount) {
         System.out.printf(WITHDRAW_MESSAGE, accountNumber, amount);
@@ -32,6 +33,6 @@ public class OutputView {
 //나중에 상수처리
     public void setAccountInfo(String accountInformation, BigInteger interestEstimated) {
         System.out.println(accountInformation);
-        System.out.println("예상 금액: " + interestEstimated);
+        System.out.println(EXPECTED_AMOUNT+ interestEstimated);
     }
 }

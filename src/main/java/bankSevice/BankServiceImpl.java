@@ -6,6 +6,8 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public class BankServiceImpl implements BankService {
+    private final static Integer GENERAL_ACCOUNT = 4;
+    private final static Integer SAVINGS_ACCOUNT = 5;
     private final BankRepository bankRepository;
 
     public BankServiceImpl(BankRepository bankRepository) {
@@ -14,10 +16,10 @@ public class BankServiceImpl implements BankService {
 
     @Override
     public void join(List<String> account) {
-        if (account.size() == 4) {
+        if (account.size() == GENERAL_ACCOUNT) {
             generalJoin(account);
         }
-        if (account.size() == 5) {
+        if (account.size() == SAVINGS_ACCOUNT) {
             savingsJoin(account);
         }
     }
