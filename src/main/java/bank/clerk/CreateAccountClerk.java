@@ -5,12 +5,12 @@ import account.AccountType;
 import account.SavingsAccount;
 import account.InstallmentSavingsAccount;
 import bank.BankSystem;
-import interest.SavingsInterest;
-import interest.InstallmentSavingsInterest;
+import interest.InterestCalculator;
 import lombok.RequiredArgsConstructor;
 import validate.ValidationUtils;
 
 import java.math.BigDecimal;
+import java.util.NoSuchElementException;
 
 @RequiredArgsConstructor
 public class CreateAccountClerk implements Clerk {
@@ -25,6 +25,8 @@ public class CreateAccountClerk implements Clerk {
     private static final String TEMP_VALUE = "";
 
     private final BankSystem bankSystem;
+    private final InterestCalculator savingsInterest;
+    private final InterestCalculator installmentSavingsInterest;
 
     public void action() {
         System.out.println(CLERK_REQUEST);
@@ -32,7 +34,8 @@ public class CreateAccountClerk implements Clerk {
     }
 
     private void validateAccountType() {
-        while (true) {
+        boolean completed = false;
+        while (!completed) {
             try {
                 String input = getUserInput();
                 AccountType accountType = AccountType.fromDescription(input);
@@ -43,8 +46,8 @@ public class CreateAccountClerk implements Clerk {
                         createAccount(AccountType.SAVING, target);
                     }
                 }
-                break;
-            } catch (IllegalStateException e) {
+                completed = true;
+            } catch (IllegalArgumentException | NoSuchElementException e) {
                 System.out.println(e.getMessage());
             }
         }
@@ -54,9 +57,9 @@ public class CreateAccountClerk implements Clerk {
         String name = getName();
         Account account;
         if (type == AccountType.SAVING) {
-            account = new InstallmentSavingsAccount(new InstallmentSavingsInterest(), SAVING_ACCOUNT_TYPE, TEMP_VALUE, name, BigDecimal.ZERO, targetAmount, true);
+            account = new InstallmentSavingsAccount(installmentSavingsInterest, SAVING_ACCOUNT_TYPE, TEMP_VALUE, name, BigDecimal.ZERO, targetAmount, true);
         } else {
-            account = new SavingsAccount(new SavingsInterest(), DEPOSIT_ACCOUNT_TYPE, TEMP_VALUE, name, BigDecimal.ZERO, null, true);
+            account = new SavingsAccount(savingsInterest, DEPOSIT_ACCOUNT_TYPE, TEMP_VALUE, name, BigDecimal.ZERO, null, true);
         }
         String accountNumber = bankSystem.createAccount(account);
         System.out.printf(type == AccountType.SAVING ? SAVING_ACCOUNT_CREATED : DEPOSIT_ACCOUNT_CREATED, accountNumber);

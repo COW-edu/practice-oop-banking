@@ -4,6 +4,8 @@ import bank.BankSystem;
 import lombok.RequiredArgsConstructor;
 import validate.ValidationUtils;
 
+import java.util.NoSuchElementException;
+
 
 @RequiredArgsConstructor
 public class GetAccountInfoClerk implements Clerk {
@@ -18,14 +20,15 @@ public class GetAccountInfoClerk implements Clerk {
     }
 
     private void getAccountInfo() {
-        while (true) {
+        boolean completed = false;
+        while (!completed) {
             try {
                 String accountNum = getUserInput();
                 ValidationUtils.isValidAccountNumber(accountNum);
                 String statusResult = bankSystem.getAccountInfo(accountNum);
                 resultMessage(statusResult);
-                break;
-            } catch (IllegalStateException e) {
+                completed = true;
+            } catch (IllegalArgumentException | NoSuchElementException e) {
                 System.out.println(e.getMessage());
             }
         }

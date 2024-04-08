@@ -20,16 +20,16 @@ public class ValidationUtils {
         }
     }
 
-    public static void isValidAccountNumber(String input) throws IllegalArgumentException {
+    public static void isValidAccountNumber(String input) throws IllegalStateException {
         if (!input.matches(ACCOUNT_NUMBER_PATTERN)) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_ACCOUNT_NUMBER_MESSAGE.getErrorMessage());
+            throw new IllegalStateException(ErrorMessage.INVALID_ACCOUNT_NUMBER_MESSAGE.getErrorMessage());
         }
     }
 
-    public static Account validateAndGetAccount(Map<String, Account> list, String accountNum) throws IllegalStateException {
+    public static Account validateAndGetAccount(Map<String, Account> list, String accountNum) throws UnsupportedOperationException {
         Account account = getAccount(list, accountNum);
         if (!ValidationUtils.validateStatus(account)) {
-            throw new IllegalStateException(String.format(ErrorMessage.INACTIVE_ACCOUNT_MESSAGE_FORMAT.getErrorMessage(), accountNum));
+            throw new UnsupportedOperationException(String.format(ErrorMessage.INACTIVE_ACCOUNT_MESSAGE_FORMAT.getErrorMessage(), accountNum));
         }
         return account;
     }

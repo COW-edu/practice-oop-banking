@@ -19,21 +19,21 @@ public class BankSystem {
         return bankStorage.save(account, accountNum);
     }
 
-    public String deposit(String accountNum, BigDecimal balance) throws IllegalStateException {
+    public String deposit(String accountNum, BigDecimal balance) throws UnsupportedOperationException {
         Account account = ValidationUtils.getAccount(getAllList(), accountNum);
         if (ValidationUtils.validateStatus(account)) {
             return account.deposit(balance);
         }
-        throw new IllegalStateException(String.format(ErrorMessage.INACTIVE_ACCOUNT_MESSAGE_FORMAT.getErrorMessage(), accountNum));
+        throw new UnsupportedOperationException(String.format(ErrorMessage.INACTIVE_ACCOUNT_MESSAGE_FORMAT.getErrorMessage(), accountNum));
     }
 
-    public String withdraw(String accountNum, BigDecimal balance) throws IllegalStateException {
+    public String withdraw(String accountNum, BigDecimal balance) throws UnsupportedOperationException {
 
         Account account = ValidationUtils.getAccount(getAllList(), accountNum);
         if (ValidationUtils.validateStatus(account)) {
             return account.withdraw(balance);
         }
-        throw new IllegalStateException(String.format(ErrorMessage.INACTIVE_ACCOUNT_MESSAGE_FORMAT.getErrorMessage(), accountNum));
+        throw new UnsupportedOperationException(String.format(ErrorMessage.INACTIVE_ACCOUNT_MESSAGE_FORMAT.getErrorMessage(), accountNum));
     }
 
     public String remittance(String fromAccountNum, String toAccountNum, BigDecimal balance) throws IllegalStateException {

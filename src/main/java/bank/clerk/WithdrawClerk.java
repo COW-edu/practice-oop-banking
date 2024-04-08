@@ -5,11 +5,12 @@ import lombok.RequiredArgsConstructor;
 import validate.ValidationUtils;
 
 import java.math.BigDecimal;
+import java.util.NoSuchElementException;
 
 @RequiredArgsConstructor
 public class WithdrawClerk implements Clerk {
-    private static final String CLERK_REQUEST = "[출금] 계좌, 금액을 작성해주세요";
 
+    private static final String CLERK_REQUEST = "[출금] 계좌, 금액을 작성해주세요";
     private final BankSystem bankSystem;
 
     public void action() {
@@ -18,7 +19,8 @@ public class WithdrawClerk implements Clerk {
     }
 
     private void withdraw() {
-        while (true) {
+        boolean completed = false;
+        while (!completed) {
             try {
                 String accountNum = getUserInput();
                 ValidationUtils.isValidAccountNumber(accountNum);
@@ -26,8 +28,11 @@ public class WithdrawClerk implements Clerk {
 
                 String balanceResult = bankSystem.withdraw(accountNum, balance);
                 resultMessage(balanceResult);
-                break;
-            } catch (IllegalStateException e) {
+                completed = true;
+            }catch (UnsupportedOperationException e){
+                System.out.println(e.getMessage());
+                completed = true;
+            }catch (IllegalArgumentException | NoSuchElementException e) {
                 System.out.println(e.getMessage());
             }
         }

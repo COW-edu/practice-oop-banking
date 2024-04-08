@@ -62,7 +62,7 @@ public abstract class Account {
     }
 
     public void setInitAccountNum(String accountNum) {
-        if (this.accountNum == null){
+        if (this.accountNum == null) {
             this.accountNum = accountNum;
         }
     }

@@ -1,5 +1,7 @@
 import bank.*;
 import bank.clerk.*;
+import interest.InstallmentSavingsInterest;
+import interest.SavingsInterest;
 import person.Person;
 
 public class AppConfig {
@@ -16,8 +18,16 @@ public class AppConfig {
         return new BankServiceMediator(bankClerk(), depositClerk(), withdrawClerk(), remittanceClerk(), changeStatusClerk(), getAccountInfoClerk());
     }
 
+    private SavingsInterest savingsInterest(){
+        return new SavingsInterest();
+    }
+
+    private InstallmentSavingsInterest installmentSavingsInterest(){
+        return new InstallmentSavingsInterest();
+    }
+
     private CreateAccountClerk bankClerk() {
-        return new CreateAccountClerk(bankSystem());
+        return new CreateAccountClerk(bankSystem(), savingsInterest(), installmentSavingsInterest());
     }
 
     private DepositClerk depositClerk() {

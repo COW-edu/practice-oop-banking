@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import validate.ValidationUtils;
 
 import java.math.BigDecimal;
+import java.util.NoSuchElementException;
 
 @RequiredArgsConstructor
 public class DepositClerk implements Clerk {
@@ -19,15 +20,19 @@ public class DepositClerk implements Clerk {
     }
 
     private void deposit() {
-        while (true) {
+        boolean completed = false;
+        while (!completed) {
             try {
                 String accountNum = getUserInput();
                 ValidationUtils.isValidAccountNumber(accountNum);
                 BigDecimal balance = ValidationUtils.createBalance(getUserInput());
                 String balanceResult = bankSystem.deposit(accountNum, balance);
                 resultMessage(balanceResult);
-                break;
-            } catch (IllegalStateException e) {
+                completed = true;
+            } catch (UnsupportedOperationException e){
+                System.out.println(e.getMessage());
+                completed = true;
+            } catch (IllegalArgumentException | NoSuchElementException e) {
                 System.out.println(e.getMessage());
             }
         }

@@ -9,6 +9,7 @@ import java.util.Arrays;
 @Getter
 @RequiredArgsConstructor
 public enum InstallmentSavingsInterestRateTier {
+
     TIER(new BigDecimal("1000000"), new BigDecimal("0.5"));
 
     private final BigDecimal balanceThreshold;

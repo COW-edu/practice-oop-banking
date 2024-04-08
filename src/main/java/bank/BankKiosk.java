@@ -19,10 +19,11 @@ public class BankKiosk {
 
 
     public void bankServiceMenu() {
-        while (true){
+        boolean completed = false;
+        while (!completed){
             int choice = promptMenuSelection();
             if(choice == EXIT_OPTION){
-                break;
+                completed = true;
             }
             clerkFacade.executeAction(choice);
         }
@@ -31,9 +32,8 @@ public class BankKiosk {
     private int promptMenuSelection() {
         boolean isValidChoice = false;
         int choice = INITIALIZE_VALUE;
-
+        menuList();
         while (!isValidChoice) {
-            menuList();
             while (!scanner.hasNextInt()) {
                 System.out.println(ERROR_MESSAGE);
                 scanner.next();
@@ -42,8 +42,9 @@ public class BankKiosk {
             scanner.nextLine();
             if (choice >= MIN_MENU_OPTION && choice <= MAX_MENU_OPTION) {
                 isValidChoice = true;
+            }else{
+                System.out.println(ERROR_MESSAGE);
             }
-            System.out.println(ERROR_MESSAGE);
         }
         return choice;
     }
