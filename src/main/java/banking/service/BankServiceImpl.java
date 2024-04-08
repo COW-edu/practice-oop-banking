@@ -29,6 +29,7 @@ public class BankServiceImpl implements BankService {
     this.validationService = validationService;
   }
 
+
   @Override
   public void createAccount(AccountDTO accountDTO) {
     if (validationService.isTargetAmountNull(accountDTO)) {
@@ -37,6 +38,7 @@ public class BankServiceImpl implements BankService {
     }
     bankRepository.createAccount(accountDTO.createSavingAccount());
   }
+
 
   @Override
   public void depositAmountToAccount(DepositDTO depositDTO) {
@@ -85,6 +87,4 @@ public class BankServiceImpl implements BankService {
     InterestCalculator interestCalculator = interestPolicy.get(findAccount.getAccountType());
     return interestCalculator.getInterest(findAccount.getBalance());
   }
-
-
 }

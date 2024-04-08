@@ -21,7 +21,7 @@ import java.util.Map;
 
 public class AppConfig {
 
-  
+
   public BankApp bankApp() {
     return new BankApp();
   }
@@ -58,6 +58,4 @@ public class AppConfig {
   public AccountValidationService accountValidationService() {
     return new AccountValidationService();
   }
-
-
 }

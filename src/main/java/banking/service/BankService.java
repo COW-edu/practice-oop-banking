@@ -17,6 +17,4 @@ public interface BankService {
   void transferAmountToAccount(TransferDTO transferDTO);
 
   BasicAccount retrieveAndComputeInterest(String accountInput);
-
-
 }

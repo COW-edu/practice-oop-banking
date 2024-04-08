@@ -53,6 +53,4 @@ public class MemoryBankRepository implements BankRepository {
     findAccount.setBalance(findAccount.getBalance().add(interest));
     return findAccount;
   }
-
-
 }

@@ -18,6 +18,4 @@ public class NormalInterestCalculator implements InterestCalculator {
 
     return balance.multiply(interestRate).setScale(0, RoundingMode.DOWN);
   }
-
-
 }

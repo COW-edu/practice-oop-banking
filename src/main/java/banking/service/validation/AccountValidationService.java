@@ -13,6 +13,7 @@ public class AccountValidationService {
     return accountDTO.getTargetAmount() == null;
   }
 
+
   public boolean validateAndCheckWithdraw(BasicAccount withdrawSavingAccount) {
     return Optional.ofNullable(withdrawSavingAccount)
         .filter(this::isSavingAccountEnableForWithdraw)
@@ -24,7 +25,7 @@ public class AccountValidationService {
           return false;
         });
   }
-  
+
 
   private boolean isSavingAccountEnableForWithdraw(BasicAccount withdrawSavingAccount) {
     return withdrawSavingAccount instanceof SavingAccount savingAccount &&

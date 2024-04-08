@@ -4,6 +4,7 @@ import lombok.Getter;
 
 @Getter
 public enum ErrorMessage {
+
   IS_EXISTED_NUMBER("존재하지 않는 계좌번호입니다.다시 확인해 주세요."),
   CHECK_GOAL_AMOUNT("목표 금액이 충족되지 않았습니다."),
   EXCLUDE_KOREAN("한글을 포함할 수 없습니다"),

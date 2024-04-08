@@ -30,12 +30,12 @@ import java.util.Scanner;
 public class BankApp {
 
   private static final Scanner sc = new Scanner(System.in);
-
-
+  
   public String appStart() {
     System.out.println(informationMessage(MENU));
     return BankApp.input();
   }
+
 
   public AccountDTO createAccount() {
     System.out.println(informationMessage(ACCOUNT_TYPE));
@@ -52,14 +52,8 @@ public class BankApp {
 
     BigDecimal targetAmount = (typeNumber == 2) ? inputTargetAmount() : null;
 
-    return AccountDTO.builder()
-        .typeNum(typeNumber)
-        .accountNumber(accountNumber)
-        .owner(owner)
-        .money(amount)
-        .isActivated(true)
-        .targetAmount(targetAmount)
-        .build();
+    return AccountDTO.builder().typeNum(typeNumber).accountNumber(accountNumber).owner(owner)
+        .money(amount).isActivated(true).targetAmount(targetAmount).build();
   }
 
 
@@ -70,10 +64,7 @@ public class BankApp {
     System.out.println(informationMessage(DEPOSIT_AMOUNT));
     BigDecimal depositAmount = inputDecimal(TYPE_FOR_DECIMAL.getErrorMessage());
 
-    return DepositDTO.builder()
-        .accountNumber(accountNumber)
-        .depositAmount(depositAmount)
-        .build();
+    return DepositDTO.builder().accountNumber(accountNumber).depositAmount(depositAmount).build();
   }
 
 
@@ -84,9 +75,7 @@ public class BankApp {
     System.out.println(informationMessage(WITHDRAW_AMOUNT));
     BigDecimal withdrawAmount = inputDecimal(TYPE_FOR_DECIMAL.getErrorMessage());
 
-    return WithdrawDTO.builder()
-        .accountNumber(accountNumber)
-        .withdrawAmount(withdrawAmount)
+    return WithdrawDTO.builder().accountNumber(accountNumber).withdrawAmount(withdrawAmount)
         .build();
   }
 
@@ -101,11 +90,8 @@ public class BankApp {
     System.out.println(informationMessage(TRANSFER_AMOUNT));
     BigDecimal transferAmount = inputDecimal(TYPE_FOR_DECIMAL.getErrorMessage());
 
-    return TransferDTO.builder()
-        .depositAccountNumber(depositAccountNumber)
-        .withdrawAccountNumber(withdrawAccountNumber)
-        .transferAmount(transferAmount)
-        .build();
+    return TransferDTO.builder().depositAccountNumber(depositAccountNumber)
+        .withdrawAccountNumber(withdrawAccountNumber).transferAmount(transferAmount).build();
   }
 
 
@@ -113,6 +99,7 @@ public class BankApp {
     System.out.println(informationMessage(ACCOUNT_INFO));
     System.out.println(findAccount.getAccountInfo());
   }
+
 
   public String findAccountInput() {
     System.out.println(informationMessage(ACCOUNT_NUMBER));
@@ -156,9 +143,11 @@ public class BankApp {
     return new BigDecimal(input());
   }
 
+
   private String informationMessage(InformationMessage message) {
     return message.getMessage();
   }
+
 
   private BigDecimal inputDecimal(String msg) {
     BigDecimal amount;
@@ -169,6 +158,4 @@ public class BankApp {
     }
     return amount;
   }
-
-
 }

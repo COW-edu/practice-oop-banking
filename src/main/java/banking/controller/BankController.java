@@ -47,30 +47,36 @@ public class BankController {
     } while (isRunning);
   }
 
+
   public void createAccount() {
     AccountDTO accountDTO = bankApp.createAccount();
     bankService.createAccount(accountDTO);
   }
+
 
   public void depositAmountToAccount() {
     DepositDTO depositDTO = bankApp.depositAmountToAccount();
     bankService.depositAmountToAccount(depositDTO);
   }
 
+
   public void withdrawAmountToAccount() {
     WithdrawDTO withdrawDTO = bankApp.withdrawAmountToAccount();
     bankService.withdrawAmountToAccount(withdrawDTO);
   }
+
 
   public void transferAmountToAccount() {
     TransferDTO transferDTO = bankApp.transferAmountToAccount();
     bankService.transferAmountToAccount(transferDTO);
   }
 
+
   public void findAccountByAccountNumber() {
     BasicAccount findAccount = bankService.retrieveAndComputeInterest(bankApp.findAccountInput());
     bankApp.findAccountByAccountNumber(findAccount);
   }
+
 
   public void exitProgram() {
     bankApp.exitProgram();

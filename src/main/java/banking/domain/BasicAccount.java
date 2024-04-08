@@ -38,6 +38,4 @@ public class BasicAccount {
         ", 활성화 여부=" + isActivated +
         " ]" + " \n";
   }
-
-
 }

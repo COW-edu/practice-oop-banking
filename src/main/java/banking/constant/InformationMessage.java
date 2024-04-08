@@ -25,6 +25,4 @@ public enum InformationMessage {
   InformationMessage(String message) {
     this.message = message;
   }
-
-
 }

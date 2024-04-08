@@ -5,6 +5,7 @@ import lombok.Getter;
 
 @Getter
 public enum SavingInterestRateTier {
+
   TIER(BigDecimal.valueOf(1_000_000), BigDecimal.valueOf(0.5)),
   DEFAULT(BigDecimal.ZERO, BigDecimal.valueOf(0.01));
 

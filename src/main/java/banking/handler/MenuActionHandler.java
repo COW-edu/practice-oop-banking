@@ -16,7 +16,6 @@ public class MenuActionHandler {
 
   private final Map<String, Runnable> actionMap = new HashMap<>();
 
-
   public void initialize(BankController bankController) {
     actionMap.put(CREATE_ACCOUNT.getMenuNumber(), bankController::createAccount);
     actionMap.put(DEPOSIT.getMenuNumber(), bankController::depositAmountToAccount);
@@ -35,6 +34,4 @@ public class MenuActionHandler {
     }
     return false;
   }
-
-
 }
