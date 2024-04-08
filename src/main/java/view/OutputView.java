@@ -1,6 +1,7 @@
 package view;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 
 public class OutputView {
@@ -29,7 +30,7 @@ public class OutputView {
         combinedInfo.forEach(System.out::println);
     }
 
-    public void setAccountInfo() {
+    public void setAccountInfo(String accountType, String bankAccountNumber, String name, BigDecimal amount, BigInteger interestEstimated) {
 
     }
 

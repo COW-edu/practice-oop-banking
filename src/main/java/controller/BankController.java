@@ -10,6 +10,7 @@ import view.InputView;
 import view.OutputView;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,7 +70,7 @@ public class BankController {
 
     private void getAccountInfo() {
         String accountNumber = inputView.getAccountInfo();
-        BigDecimal interestEstimated = interestService.getInterestEstimated(accountNumber);
+        BigInteger interestEstimated = interestService.getInterestEstimated(accountNumber);
         Account account = bankService.getAccountInfo(accountNumber);
         outputView.setAccountInfo(account.getAccountType(), account.getBankAccountNumber(), account.getName(), account.getAmount(), interestEstimated);
         if (account instanceof  SavingsAccount) {

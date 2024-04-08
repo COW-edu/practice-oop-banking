@@ -1,6 +1,8 @@
 package interest;
 
 import bankSevice.Account;
+import bankSevice.GeneralAccount;
+import bankSevice.SavingsAccount;
 
 import java.math.BigDecimal;
 
@@ -9,12 +11,12 @@ import static interest.InterestList.*;
 
 public class RateInterestPolicy implements InterestPolicy {
     @Override
-    public BigDecimal interest(Account member) {
-        if (member.getAccountType().equals("N")) {
-            return generalInterest(member.getAmount());
+    public BigDecimal interest(Account account) {
+        if (account instanceof SavingsAccount) {
+            return savingsInterest(account.getAmount());
         }
-        if (member.getAccountType().equals("S")) {
-            return savingsInterest(member.getAmount());
+        if (account instanceof GeneralAccount) {
+            return generalInterest(account.getAmount());
         }
         throw new IllegalArgumentException();//예외처리 해줄것
     }

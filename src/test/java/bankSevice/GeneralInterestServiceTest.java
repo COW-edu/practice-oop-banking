@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import util.Appconfig;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,7 +87,6 @@ class GeneralInterestServiceTest {
         bankService.join(generalAccount);
 
         //then
-        BigDecimal answerValue = new BigDecimal("10200.00");
-        assertEquals(answerValue, interestService.getInterestEstimated("12345"));
+        assertEquals( new BigInteger("10200"), interestService.getInterestEstimated("12345"));
     }
 }
