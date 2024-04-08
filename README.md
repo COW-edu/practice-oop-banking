@@ -1,7 +1,8 @@
 ## **COW L2 백엔드 과정 JAVA 객체지향프로그래밍 과제**
 
 코드 구조
-![image](https://github.com/tiemo0708/practice-oop-banking/assets/42500530/77a0994f-7ae7-4479-9590-bf7cc08f45a3)
+![image](https://github.com/tiemo0708/practice-oop-banking/assets/42500530/6f8d0454-d29e-4d32-861a-610c3cca18fe)
+
 
 
 
