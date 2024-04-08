@@ -53,21 +53,21 @@ public class AccountServiceImpl implements AccountService {
 
   @Override
   public void deposit(Account account, BigDecimal depositAmount) {
-    accountRepository.deposit(account, depositAmount);
+    account.deposit(depositAmount);
   }
 
   @Override
   public void withdrawal(Account account, BigDecimal withdrawalAmount) {
-    accountRepository.withDrawal(account, withdrawalAmount);
+    account.withdrawal(withdrawalAmount);
   }
 
   @Override
   public void deactivate(Account account) {
-    accountRepository.deactivate(account);
+    account.deactivate();
   }
 
   @Override
   public void activate(Account account) {
-    accountRepository.activate(account);
+    account.activate();
   }
 }

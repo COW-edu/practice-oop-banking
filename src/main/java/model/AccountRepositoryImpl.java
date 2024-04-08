@@ -1,7 +1,6 @@
 package model;
 
 import account.Account;
-import java.math.BigDecimal;
 import java.util.HashMap;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -32,25 +31,5 @@ public class AccountRepositoryImpl implements AccountRepository {
   @Override
   public int getAccountListCount() {
     return accounts.size();
-  }
-
-  @Override
-  public void deposit(Account account, BigDecimal depositAmount) {
-    account.deposit(depositAmount);
-  }
-
-  @Override
-  public void withDrawal(Account account, BigDecimal withdrawalAmount) {
-    account.withdrawal(withdrawalAmount);
-  }
-
-  @Override
-  public void deactivate(Account account) {
-    account.deactivate();
-  }
-
-  @Override
-  public void activate(Account account) {
-    account.activate();
   }
 }
