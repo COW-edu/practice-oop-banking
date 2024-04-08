@@ -3,7 +3,6 @@ package banking.controller;
 
 import static banking.constant.ErrorMessage.INCORRECT_INPUT;
 
-import banking.app.BankApp;
 import banking.constant.MenuNumber;
 import banking.domain.BasicAccount;
 import banking.dto.AccountDTO;
@@ -12,17 +11,18 @@ import banking.dto.TransferDTO;
 import banking.dto.WithdrawDTO;
 import banking.handler.MenuActionHandler;
 import banking.service.BankService;
+import banking.view.BankView;
 
 public class BankController {
 
   private final BankService bankService;
-  private final BankApp bankApp;
+  private final BankView bankView;
   private final MenuActionHandler menuActionHandler;
 
-  public BankController(BankService bankService, BankApp bankApp,
+  public BankController(BankService bankService, BankView bankView,
       MenuActionHandler menuActionHandler) {
     this.bankService = bankService;
-    this.bankApp = bankApp;
+    this.bankView = bankView;
     this.menuActionHandler = menuActionHandler;
     menuActionHandler.initialize(this);
   }
@@ -32,7 +32,7 @@ public class BankController {
     boolean isRunning = true;
 
     do {
-      String menuNumberStr = bankApp.appStart();
+      String menuNumberStr = bankView.appStart();
       MenuNumber menuNumber = MenuNumber.findByValue(menuNumberStr);
 
       if (menuNumber == MenuNumber.EXIT) {
@@ -49,36 +49,36 @@ public class BankController {
 
 
   public void createAccount() {
-    AccountDTO accountDTO = bankApp.createAccount();
+    AccountDTO accountDTO = bankView.createAccount();
     bankService.createAccount(accountDTO);
   }
 
 
   public void depositAmountToAccount() {
-    DepositDTO depositDTO = bankApp.depositAmountToAccount();
+    DepositDTO depositDTO = bankView.depositAmountToAccount();
     bankService.depositAmountToAccount(depositDTO);
   }
 
 
   public void withdrawAmountToAccount() {
-    WithdrawDTO withdrawDTO = bankApp.withdrawAmountToAccount();
+    WithdrawDTO withdrawDTO = bankView.withdrawAmountToAccount();
     bankService.withdrawAmountToAccount(withdrawDTO);
   }
 
 
   public void transferAmountToAccount() {
-    TransferDTO transferDTO = bankApp.transferAmountToAccount();
+    TransferDTO transferDTO = bankView.transferAmountToAccount();
     bankService.transferAmountToAccount(transferDTO);
   }
 
 
   public void findAccountByAccountNumber() {
-    BasicAccount findAccount = bankService.retrieveAndComputeInterest(bankApp.findAccountInput());
-    bankApp.findAccountByAccountNumber(findAccount);
+    BasicAccount findAccount = bankService.retrieveAndComputeInterest(bankView.findAccountInput());
+    bankView.findAccountByAccountNumber(findAccount);
   }
 
 
   public void exitProgram() {
-    bankApp.exitProgram();
+    bankView.exitProgram();
   }
 }

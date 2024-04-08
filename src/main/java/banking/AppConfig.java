@@ -4,7 +4,6 @@ package banking;
 import static banking.constant.AccountType.BASIC;
 import static banking.constant.AccountType.SAVING;
 
-import banking.app.BankApp;
 import banking.constant.AccountType;
 import banking.controller.BankController;
 import banking.handler.MenuActionHandler;
@@ -16,14 +15,15 @@ import banking.repository.MemoryBankRepository;
 import banking.service.BankService;
 import banking.service.BankServiceImpl;
 import banking.service.validation.AccountValidationService;
+import banking.view.BankView;
 import java.util.HashMap;
 import java.util.Map;
 
 public class AppConfig {
 
 
-  public BankApp bankApp() {
-    return new BankApp();
+  public BankView bankView() {
+    return new BankView();
   }
 
 
@@ -36,7 +36,7 @@ public class AppConfig {
 
 
   public BankController bankController() {
-    return new BankController(bankService(), bankApp(), menuActionHandler());
+    return new BankController(bankService(), bankView(), menuActionHandler());
   }
 
 

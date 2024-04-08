@@ -1,4 +1,4 @@
-package banking.app;
+package banking.view;
 
 
 import static banking.constant.ErrorMessage.TYPE_FOR_ACCOUNT;
@@ -27,13 +27,13 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.Scanner;
 
-public class BankApp {
+public class BankView {
 
   private static final Scanner sc = new Scanner(System.in);
-  
+
   public String appStart() {
     System.out.println(informationMessage(MENU));
-    return BankApp.input();
+    return BankView.input();
   }
 
 
