@@ -5,21 +5,21 @@ import exception.MaxAccountCountException;
 import java.math.BigDecimal;
 
 public interface AccountService {
-  public boolean addAccount(Account account) throws MaxAccountCountException;
+  boolean addAccount(Account account) throws MaxAccountCountException;
 
-  public void deleteAccount(Account account);
+  void deleteAccount(Account account);
 
-  public void activate(Account account);
+  void activate(Account account);
 
-  public void deactivate(Account account);
+  void deactivate(Account account);
 
-  public void deposit(Account account, BigDecimal depositAmount);
+  void deposit(Account account, BigDecimal depositAmount);
 
-  public void withdrawal(Account account, BigDecimal withdrawalAmount);
+  void withdrawal(Account account, BigDecimal withdrawalAmount);
 
-  public Account getAccount(String accountNumber);
+  Account getAccount(String accountNumber);
 
-  public boolean checkNumber(String accountNumber);
+  boolean checkNumber(String accountNumber);
 
-  public int getAccountListCount();
+  int getAccountListCount();
 }

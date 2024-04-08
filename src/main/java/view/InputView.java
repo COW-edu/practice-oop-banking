@@ -3,11 +3,11 @@ package view;
 import java.math.BigDecimal;
 
 public interface InputView {
-  public int getInt() throws NumberFormatException;
+  int getInt() throws NumberFormatException;
 
-  public String getString();
+  String getString();
 
-  public BigDecimal getBigDecimal() throws NumberFormatException;
+  BigDecimal getBigDecimal() throws NumberFormatException;
 
-  public boolean getBoolean() throws NumberFormatException;
+  boolean getBoolean() throws NumberFormatException;
 }

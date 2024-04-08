@@ -38,9 +38,8 @@ public class CreateAccountFunction extends BankingFunction {
       boolean activation = inputView.getBoolean();
       String accountInfo = null;
       switch (accountType) {
-        case BASIC_ACCOUNT -> {
+        case BASIC_ACCOUNT ->
           accountInfo = bankingController.createAccount(accountType, owner, activation);
-        }
         case SAVING_ACCOUNT -> {
           outputView.print(Message.Target.getPrintMessage() + " " +
               RequireMessage.RequireAmount.getPrintMessage());

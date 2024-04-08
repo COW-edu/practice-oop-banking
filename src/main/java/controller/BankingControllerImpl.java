@@ -64,7 +64,7 @@ public class BankingControllerImpl implements BankingController {
     Optional.ofNullable(account)
         .orElseThrow(
             () -> new NotExistAccountException(ErrorMessage.NotExistAccount, accountNumber));
-    if (!account.isActive()){
+    if (account.isDeactivate()){
       throw new DeactivatedAccountException(ErrorMessage.DeactivatedAccount, accountNumber);
     }
     accountInformationService.deactivate(account);
@@ -126,7 +126,7 @@ public class BankingControllerImpl implements BankingController {
   public void deposit(String accountNumber, BigDecimal depositAmount)
       throws NotExistAccountException, DeactivatedAccountException, NegativeNumberException {
     Account account = getAccount(accountNumber);
-    if (!account.isActive()){
+    if (account.isDeactivate()){
       throw new DeactivatedAccountException(ErrorMessage.DeactivatedAccount, accountNumber);
     }
     if (depositAmount.compareTo(BigDecimal.ZERO) < 0){
@@ -139,7 +139,7 @@ public class BankingControllerImpl implements BankingController {
   public void withdrawal(String accountNumber, BigDecimal withdrawalAmount)
       throws NotExistAccountException, NotEnoughBalanceException, DeactivatedAccountException, NegativeNumberException {
     Account account = getAccount(accountNumber);
-    if (!account.isActive()){
+    if (account.isDeactivate()){
       throw new DeactivatedAccountException(ErrorMessage.DeactivatedAccount, accountNumber);
     }
     if (withdrawalAmount.compareTo(BigDecimal.ZERO) < 0){
@@ -159,10 +159,10 @@ public class BankingControllerImpl implements BankingController {
       throws NotExistAccountException, NotEnoughBalanceException, DeactivatedAccountException, NegativeNumberException {
     Account depositAccount = getAccount(depositAccountNumber);
     Account withdrawalAccount = getAccount(withdrawalAccountNumber);
-    if (!withdrawalAccount.isActive()){
+    if (withdrawalAccount.isDeactivate()){
       throw new DeactivatedAccountException(ErrorMessage.DeactivatedAccount, withdrawalAccountNumber);
     }
-    if (!depositAccount.isActive()){
+    if (depositAccount.isDeactivate()){
       throw new DeactivatedAccountException(ErrorMessage.DeactivatedAccount, depositAccountNumber);
     }
     if (remittanceAmount.compareTo(BigDecimal.ZERO) < 0){
@@ -184,7 +184,7 @@ public class BankingControllerImpl implements BankingController {
   public BigDecimal getInterest(String accountNumber)
       throws NotExistAccountException, DeactivatedAccountException {
     Account account = getAccount(accountNumber);
-    if (!account.isActive()){
+    if (account.isDeactivate()){
       throw new DeactivatedAccountException(ErrorMessage.DeactivatedAccount, accountNumber);
     }
     return interestService.getInterest(account.getAccountType(), account.getBalance());

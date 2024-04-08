@@ -37,8 +37,8 @@ public class BasicAccount extends Account {
 	}
 
 	@Override
-	public boolean isActive() {
-		return this.activation;
+	public boolean isDeactivate() {
+		return !this.activation;
 	}
 
 	@Override

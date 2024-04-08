@@ -1,7 +1,6 @@
 package exception;
 
 import common.ErrorMessage;
-import java.math.BigDecimal;
 import lombok.Getter;
 
 @Getter

@@ -1,8 +1,6 @@
 package exception;
 
-import account.Account;
 import common.ErrorMessage;
-import java.io.Serial;
 import lombok.Getter;
 
 @Getter

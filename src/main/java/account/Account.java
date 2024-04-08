@@ -12,7 +12,7 @@ public abstract class Account {
 	public abstract AccountType getAccountType();
 	public abstract BigDecimal getBalance();
 	public abstract String getAccountNumber();
-	public abstract boolean isActive();
+	public abstract boolean isDeactivate();
 	public abstract boolean canWithdrawal(BigDecimal withdrawalAmount);
 	public abstract void activate();
 	public abstract void deactivate();
