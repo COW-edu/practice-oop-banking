@@ -14,7 +14,7 @@ public abstract class Account {
 
     protected InterestCalculator interestCalculator;
     protected String type;
-    protected String accountNum;
+    protected String accountNumber;
     protected String name;
     protected BigDecimal balance;
     protected BigDecimal target;
@@ -58,12 +58,16 @@ public abstract class Account {
 
     public String getAccountInfo() {
         return String.format(SuccessMessage.DISPLAY_ACCOUNT_INFO.getSuccessMessage(),
-                this.type, this.accountNum, this.name, this.balance, this.status ? SuccessMessage.ACCOUNT_ACTIVE.getSuccessMessage() : SuccessMessage.ACCOUNT_INACTIVE.getSuccessMessage());
+                this.type, this.accountNumber, this.name, this.balance, this.status ? SuccessMessage.ACCOUNT_ACTIVE.getSuccessMessage() : SuccessMessage.ACCOUNT_INACTIVE.getSuccessMessage());
+    }
+
+    public String getAccountNumber() {
+        return this.accountNumber;
     }
 
     public void setInitAccountNum(String accountNum) {
-        if (this.accountNum == null) {
-            this.accountNum = accountNum;
+        if (this.accountNumber == null) {
+            this.accountNumber = accountNum;
         }
     }
 

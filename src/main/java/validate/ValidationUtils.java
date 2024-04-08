@@ -27,14 +27,14 @@ public class ValidationUtils {
     }
 
     public static Account validateAndGetAccount(Map<String, Account> list, String accountNum) throws UnsupportedOperationException {
-        Account account = getAccount(list, accountNum);
+        Account account = getMatchAccount(list, accountNum);
         if (!ValidationUtils.validateStatus(account)) {
             throw new UnsupportedOperationException(String.format(ErrorMessage.INACTIVE_ACCOUNT_MESSAGE_FORMAT.getErrorMessage(), accountNum));
         }
         return account;
     }
 
-    public static Account getAccount(Map<String, Account> accounts, String accountNum) throws NoSuchElementException {
+    public static Account getMatchAccount(Map<String, Account> accounts, String accountNum) throws NoSuchElementException {
         Account account = accounts.get(accountNum);
         if (account == null) {
             throw new NoSuchElementException(ErrorMessage.ACCOUNT_NOT_FOUND_ERROR.getErrorMessage());

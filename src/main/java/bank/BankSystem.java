@@ -16,11 +16,12 @@ public class BankSystem {
 
     public String createAccount(Account account) {
         String accountNum = createAccountNum();
-        return bankStorage.save(account, accountNum);
+        account.setInitAccountNum(accountNum);
+        return bankStorage.save(account);
     }
 
     public String deposit(String accountNum, BigDecimal balance) throws UnsupportedOperationException {
-        Account account = ValidationUtils.getAccount(getAllList(), accountNum);
+        Account account = ValidationUtils.getMatchAccount(getAllList(), accountNum);
         if (ValidationUtils.validateStatus(account)) {
             return account.deposit(balance);
         }
@@ -28,8 +29,7 @@ public class BankSystem {
     }
 
     public String withdraw(String accountNum, BigDecimal balance) throws UnsupportedOperationException {
-
-        Account account = ValidationUtils.getAccount(getAllList(), accountNum);
+        Account account = ValidationUtils.getMatchAccount(getAllList(), accountNum);
         if (ValidationUtils.validateStatus(account)) {
             return account.withdraw(balance);
         }
@@ -37,7 +37,6 @@ public class BankSystem {
     }
 
     public String remittance(String fromAccountNum, String toAccountNum, BigDecimal balance) throws IllegalStateException {
-
         Account toAccount = ValidationUtils.validateAndGetAccount(getAllList(), fromAccountNum);
         Account fromAccount = ValidationUtils.validateAndGetAccount(getAllList(), toAccountNum);
 
@@ -47,12 +46,12 @@ public class BankSystem {
     }
 
     public String changeStatus(String accountNum) throws IllegalStateException {
-        Account account = ValidationUtils.getAccount(getAllList(), accountNum);
+        Account account = ValidationUtils.getMatchAccount(getAllList(), accountNum);
         return account.changeStatus();
     }
 
     public String getAccountInfo(String accountNum) throws IllegalStateException {
-        Account account = ValidationUtils.getAccount(getAllList(), accountNum);
+        Account account = ValidationUtils.getMatchAccount(getAllList(), accountNum);
         return account.getAccountInfo();
     }
 

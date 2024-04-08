@@ -15,6 +15,5 @@ public enum ErrorMessage {
     BELOW_TARGET("목표금액 이하! [잔고] = %s"),
     INACTIVE_ACCOUNT_MESSAGE_FORMAT("[%s] 계좌가 비활성화 상태입니다.");
 
-
     private final String errorMessage;
 }

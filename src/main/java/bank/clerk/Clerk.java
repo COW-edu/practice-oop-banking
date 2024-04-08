@@ -9,7 +9,7 @@ public interface Clerk {
     void action();
 
     default String getUserInput() {
-        Scanner scanner = GlobalScanner.getScanner();
+        Scanner scanner = GlobalScanner.scanner;
         return scanner.nextLine().trim();
     }
 

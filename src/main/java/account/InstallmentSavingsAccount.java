@@ -44,7 +44,7 @@ public class InstallmentSavingsAccount extends Account {
     @Override
     public String getAccountInfo() {
         return String.format(DISPLAY_ACCOUNT_INFO,
-                this.type, this.accountNum, this.name, this.balance, this.target, this.status ? ACCOUNT_ACTIVE : ACCOUNT_INACTIVE);
+                this.type, this.accountNumber, this.name, this.balance, this.target, this.status ? ACCOUNT_ACTIVE : ACCOUNT_INACTIVE);
     }
 
     private boolean checkBalanceForWithdrawal(BigDecimal balance) {

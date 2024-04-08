@@ -14,7 +14,6 @@ public enum SuccessMessage {
     ACCOUNT_ACTIVE("[계좌상태] = 활성화"),
     DISPLAY_ACCOUNT_INFO("[계좌유형] = %s [계좌번호] = %s [소유자] = %s [잔액] = %s [활성화 여부] = %s");
 
-
     private final String successMessage;
 
 }

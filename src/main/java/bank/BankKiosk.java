@@ -15,7 +15,7 @@ public class BankKiosk {
     private static final int MAX_MENU_OPTION = 6;
     private static final int EXIT_OPTION = 7;
     private final BankServiceMediator clerkFacade;
-    private final Scanner scanner = GlobalScanner.getScanner();
+    private final Scanner scanner = GlobalScanner.scanner;
 
 
     public void bankServiceMenu() {

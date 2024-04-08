@@ -24,20 +24,18 @@ public class BankServiceMediator {
     private final ChangeStatusClerk changeStatusClerk;
     private final GetAccountInfoClerk getAccountInfoClerk;
 
+    public void executeAction(int action) {
+        InitAction();
+        Clerk clerk = clerks.get(action);
+        clerk.action();
+    }
 
     private void InitAction() {
-
         clerks.put(CREATE_ACCOUNT, createAccountClerk);
         clerks.put(DEPOSIT, depositClerk);
         clerks.put(WITHDRAW, withdrawClerk);
         clerks.put(REMITTANCE, remittanceClerk);
         clerks.put(CHANGE_STATUS, changeStatusClerk);
         clerks.put(GET_ACCOUNT_INFO, getAccountInfoClerk);
-    }
-
-    public void executeAction(int action) {
-        InitAction();
-        Clerk clerk = clerks.get(action);
-        clerk.action();
     }
 }

@@ -1,12 +1,13 @@
 package global;
 
-
-import lombok.Getter;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 import java.util.Scanner;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class GlobalScanner {
 
-    @Getter
     public static final Scanner scanner = new Scanner(System.in);
+
 }
