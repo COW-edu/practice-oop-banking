@@ -2,17 +2,19 @@ package model;
 
 import lombok.Getter;
 import lombok.Setter;
-import model.Account;
 
 import java.math.BigDecimal;
 
+import static util.ErrorMessage.NOT_ENOUGH_MONEY;
 
-@Getter
+
+
 public class GeneralAccount implements Account {
     protected final String accountType;
     protected final String name;
+    @Getter
     protected final String bankAccountNumber;
-    @Setter
+    @Getter
     protected BigDecimal amount;
     protected boolean activation;
 
@@ -23,6 +25,19 @@ public class GeneralAccount implements Account {
         this.amount = amount;
         this.activation = activation;
     }
+
+    @Override
+    public void deposit(BigDecimal amount) {
+        this.amount = this.amount.add(amount);
+    }
+    @Override
+    public void withdraw(BigDecimal amount) {
+        if (this.amount.compareTo(amount) < 0) {
+            throw new IllegalArgumentException(NOT_ENOUGH_MONEY.getMessage()); // 잔액 부족
+        }
+        this.amount = this.amount.subtract(amount);
+    }
+
     @Override
     public String toString() {
         return "계좌종류:'" + accountType + '\'' +

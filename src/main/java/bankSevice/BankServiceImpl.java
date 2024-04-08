@@ -53,13 +53,14 @@ public class BankServiceImpl implements BankService {
     @Override
     public void deposit(String accountNumber, BigDecimal depositAmount) {
         Account account =bankRepository.getAccount(accountNumber);
-        account.setAmount(account.getAmount().add(depositAmount));
+        account.deposit(depositAmount);
     }
 
     @Override
     public void withdraw(String accountNumber, BigDecimal withdrawAmount) {
         Account account = bankRepository.getAccount(accountNumber);
-        account.setAmount(account.getAmount().subtract(withdrawAmount));
+        account.withdraw(withdrawAmount);
+
     }
 
     @Override

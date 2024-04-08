@@ -22,10 +22,6 @@ public class BankController {
     private final BankService bankService;
     private final InterestService interestService;
     AppConfig appConfig = new AppConfig();
-//    BankService bankService = appConfig.bankService();
-//    InterestService interestService = appConfig.interBankService();
-
-
     public BankController(InputView inputView, OutputView outputView, BankService bankService, InterestService interestService) {
         this.inputView = inputView;
         this.outputView = outputView;
@@ -44,7 +40,6 @@ public class BankController {
         menuOptions.put(6, this::terminateAccount);
         menuOptions.put(0, this::exitProgram);
     }
-
 
     public void run() {
         menuOptionChoice(InputView.askCategory());
@@ -96,12 +91,16 @@ public class BankController {
     }
 
     private void withdraw() {
-        List<String> withdrawInformation = InputView.withdraw();
-        bankService.withdraw(withdrawInformation.get(0), new BigDecimal(withdrawInformation.get(1)));
-        OutputView.withdrawEndMessage(withdrawInformation.get(0), withdrawInformation.get(1));
-        run();
+        try {
+            List<String> withdrawInformation = InputView.withdraw();
+            bankService.withdraw(withdrawInformation.get(0), new BigDecimal(withdrawInformation.get(1)));
+            OutputView.withdrawEndMessage(withdrawInformation.get(0), withdrawInformation.get(1));
+            run();
+        }catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+            run();
+        }
     }
-
 
     private void menuOptionChoice(int input) {
         Runnable action = menuOptions.getOrDefault(input, this::throwException);
