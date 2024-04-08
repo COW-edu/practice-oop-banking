@@ -19,7 +19,7 @@ public class Appconfig {
         return new BankMemoryRepository();
     }
     public InterestService interService(){
-        return new InterestServiceImpl(bankRepository(), interestPolicy());
+        return new InterestServiceImpl(bankService(), interestPolicy());
     }
     public static InterestPolicy interestPolicy() {
         return new RateInterestPolicy();
