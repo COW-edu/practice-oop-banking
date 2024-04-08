@@ -14,21 +14,15 @@ import banking.service.validation.AccountValidationService;
 import java.math.BigDecimal;
 import java.util.Map;
 import java.util.Optional;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 public class BankServiceImpl implements BankService {
 
   private final BankRepository bankRepository;
   private final Map<AccountType, InterestCalculator> interestPolicy;
   private final AccountValidationService validationService;
-
-  public BankServiceImpl(BankRepository bankRepository,
-      Map<AccountType, InterestCalculator> interestPolicy,
-      AccountValidationService validationService) {
-    this.bankRepository = bankRepository;
-    this.interestPolicy = interestPolicy;
-    this.validationService = validationService;
-  }
-
+  
 
   @Override
   public void createAccount(AccountDTO accountDTO) {
