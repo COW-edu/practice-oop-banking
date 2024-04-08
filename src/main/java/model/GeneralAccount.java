@@ -34,6 +34,11 @@ public class GeneralAccount implements Account {
     }
 
     @Override
+    public void disableAccount() {
+        this.activation = false;
+    }
+
+    @Override
     public String toString() {
         return "계좌종류:'" + accountType + '\'' +
                 ", 소유자:'" + name + '\'' +

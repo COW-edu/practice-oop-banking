@@ -12,5 +12,6 @@ public interface BankService {
     AccountBuilder setUpAccountBuilder(List<String> account);
     void deposit(String accountNumber, BigDecimal depositAmount);
     void withdraw(String accountNumber, BigDecimal withdrawAmount);
+    void disableAccount(String accountNumber);
     Account getAccountInfo(String accountNumber);
 }

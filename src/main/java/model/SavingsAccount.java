@@ -15,10 +15,6 @@ public class SavingsAccount extends GeneralAccount {
         super(accountType, bankAccountNumber, name, amount, activation);
         this.goalAmount = goalAmount;
     }
-    @Override
-    public void deposit(BigDecimal amount) {
-        super.deposit(amount);
-    }
 
     @Override
     public void withdraw(BigDecimal amount) {
@@ -31,6 +27,7 @@ public class SavingsAccount extends GeneralAccount {
         }
         this.amount = this.amount.subtract(amount);
     }
+
     @Override
     public String toString() {
         return "계좌종류:'" + accountType + '\'' +

@@ -55,6 +55,13 @@ public class BankServiceImpl implements BankService {
         Account account = bankRepository.getAccount(accountNumber);
         account.withdraw(withdrawAmount);
     }
+
+    @Override
+    public void disableAccount(String accountNumber) {
+        Account account = bankRepository.getAccount(accountNumber);
+        account.disableAccount();
+    }
+
     @Override
     public Account getAccountInfo(String accountNumber) {
         return bankRepository.getAccount(accountNumber);

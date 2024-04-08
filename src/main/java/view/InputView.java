@@ -18,43 +18,10 @@ public class InputView {
     private static final String CATEGORY_NUMBER_REGEX = "^[0-6]{1}+$";
     private static final String ACCOUNT_NUMBER_REGEX = "^[0-9]{5}+$";
     private static final String ASK_NUMBER_AND_AMOUNT = "계좌번호와 금액을 입력하세요";
+    private static final String ASK_DISABLE_ACCOUNT = "비활성화할 계좌번호를 입력해주세요";
     private static final String EXIT_PROGRAM = "프로그램을 종료합니다.";
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-    public static void terminateAccount() {
-    }
-    public static List<String> transfer() {
-        System.out.println(ASK_TRANSFER_INFORMATION);
-        return makeList(input());
-    }
-    public static List<String> deposit() {
-        System.out.println(ASK_NUMBER_AND_AMOUNT);
-        return makeList(input());
-    }
-    public static List<String> withdraw() {
-        System.out.println(ASK_NUMBER_AND_AMOUNT);
-        return makeList(input());
-    }
-    public static List<String> createAccount() {
-        System.out.printf(ASK_ACCOUNT_INFORMATION + ACCOUNT_INFORMATION_CATEGORY + ACCOUNT_INFORMATION_EXAMPLE);//추후에 입력값 예외처리 필요
-        List<String> accountDetails = makeList(input());
-        try {
-            validateAccountNumber(accountDetails);
-            return checkAccountType(accountDetails);
-        }catch (IllegalArgumentException e){
-            System.out.println(e.getMessage());
-            return createAccount();
-        }
-    }
-    private static List<String> checkAccountType(List<String> accountDetails) {
-        List<String> updatedAccountDetails = new ArrayList<>(accountDetails);
-        if (accountDetails.get(0).equals("S")) { //상수, 매직넘버 처리 해주기
-            System.out.println(ASK_TARGET_AMOUNT);
-            updatedAccountDetails.add(input());
-            return updatedAccountDetails;
-        }
-        return updatedAccountDetails;
-    }
     public static int askCategory() {
         String choiceCategory;
         System.out.printf(ASK_CATEGORY + CATEGORY_CHOICE);
@@ -67,6 +34,49 @@ public class InputView {
             return askCategory();
         }
     }
+
+    public static List<String> createAccount() {
+        System.out.printf(ASK_ACCOUNT_INFORMATION + ACCOUNT_INFORMATION_CATEGORY + ACCOUNT_INFORMATION_EXAMPLE);//추후에 입력값 예외처리 필요
+        List<String> accountDetails = makeList(input());
+        try {
+            validateAccountNumber(accountDetails.get(2));
+            return checkAccountType(accountDetails);
+        }catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+            return createAccount();
+        }
+    }
+
+    public static List<String> transfer() {
+        System.out.println(ASK_TRANSFER_INFORMATION);
+        return makeList(input());
+    }
+
+    public static List<String> deposit() {
+        System.out.println(ASK_NUMBER_AND_AMOUNT);
+        return makeList(input());
+    }
+
+    public static List<String> withdraw() {
+        System.out.println(ASK_NUMBER_AND_AMOUNT);
+        return makeList(input());
+    }
+
+    private static List<String> checkAccountType(List<String> accountDetails) {
+        List<String> updatedAccountDetails = new ArrayList<>(accountDetails);
+        if (accountDetails.get(0).equals("S")) { //상수, 매직넘버 처리 해주기
+            System.out.println(ASK_TARGET_AMOUNT);
+            updatedAccountDetails.add(input());
+            return updatedAccountDetails;
+        }
+        return updatedAccountDetails;
+    }
+
+    public static String disableAccount() {
+        System.out.println(ASK_DISABLE_ACCOUNT);
+        return validateAccountNumber(input());
+    }
+
     private static String input() {
         try {
             return br.readLine();
@@ -79,10 +89,11 @@ public class InputView {
             throw new IllegalArgumentException(CATEGORY_OUT_OF_LANGE.getMessage());
         }
     }
-    private static void validateAccountNumber(List<String> input) {
-        if (!input.get(2).matches(ACCOUNT_NUMBER_REGEX)) {
+    private static String validateAccountNumber(String input) {
+        if (!input.matches(ACCOUNT_NUMBER_REGEX)) {
             throw new IllegalArgumentException(WRONG_ACCOUNT_NUMBER.getMessage());
         }
+        return input;
     }
     private static List<String> makeList(String input) {
         return Arrays.stream(input.split(","))

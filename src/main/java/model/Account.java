@@ -7,5 +7,6 @@ public interface Account {
     BigDecimal getAmount();
     void deposit(BigDecimal amount);
     void withdraw(BigDecimal amount);
+    void disableAccount();
     String toString();
 }

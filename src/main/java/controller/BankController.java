@@ -33,7 +33,7 @@ public class BankController {
         menuOptions.put(3, this::deposit);
         menuOptions.put(4, this::withdraw);
         menuOptions.put(5, this::transfer);
-        menuOptions.put(6, this::terminateAccount);
+        menuOptions.put(6, this::disableAccount);
         menuOptions.put(0, this::exitProgram);
     }
 
@@ -67,7 +67,10 @@ public class BankController {
         InputView.exitProgram();
     }
 
-    private void terminateAccount() {
+    private void disableAccount() {
+        bankService.disableAccount(InputView.disableAccount());
+        OutputView.disableAccountEnd();
+        run();
     }
 
     private void transfer() {
