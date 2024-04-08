@@ -2,7 +2,6 @@ package model;
 
 import java.math.BigDecimal;
 
-
 public class AccountBuilder {
     private String accountType;
     private String name;

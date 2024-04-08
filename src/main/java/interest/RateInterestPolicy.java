@@ -3,11 +3,8 @@ package interest;
 import model.Account;
 import model.GeneralAccount;
 import model.SavingsAccount;
-
 import java.math.BigDecimal;
-
 import static interest.InterestList.*;
-
 
 public class RateInterestPolicy implements InterestPolicy {
     @Override

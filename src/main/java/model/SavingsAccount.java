@@ -7,8 +7,6 @@ import java.math.BigDecimal;
 
 import static util.ErrorMessage.FAIL_TO_GOAL;
 import static util.ErrorMessage.NOT_ENOUGH_MONEY;
-
-
 @Getter
 public class SavingsAccount extends GeneralAccount {
    private final BigDecimal goalAmount;
@@ -32,7 +30,6 @@ public class SavingsAccount extends GeneralAccount {
             throw new IllegalArgumentException(NOT_ENOUGH_MONEY.getMessage());
         }
         this.amount = this.amount.subtract(amount);
-
     }
     @Override
     public String toString() {

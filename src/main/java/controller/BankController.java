@@ -6,7 +6,6 @@ import interest.InterestService;
 import util.AppConfig;
 import view.InputView;
 import view.OutputView;
-
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
@@ -14,9 +13,7 @@ import java.util.Map;
 
 import static util.ErrorMessage.WRONG_FORM;
 
-
 public class BankController {
-
     private final InputView inputView;
     private final OutputView outputView;
     private final BankService bankService;
@@ -30,7 +27,6 @@ public class BankController {
     }
 
     private static final Map<Integer, Runnable> menuOptions = new HashMap<>();
-
     {
         menuOptions.put(1, this::createAccount);
         menuOptions.put(2, this::getAccountInfo);
@@ -87,7 +83,6 @@ public class BankController {
         bankService.deposit(depositInformation.get(0), new BigDecimal(depositInformation.get(1)));
         OutputView.depositMessage(depositInformation.get(0), depositInformation.get(1));
         run();
-
     }
 
     private void withdraw() {

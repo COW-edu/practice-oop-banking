@@ -1,13 +1,8 @@
 package model;
 
 import lombok.Getter;
-import lombok.Setter;
-
 import java.math.BigDecimal;
-
 import static util.ErrorMessage.NOT_ENOUGH_MONEY;
-
-
 
 public class GeneralAccount implements Account {
     protected final String accountType;

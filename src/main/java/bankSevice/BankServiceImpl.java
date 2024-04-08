@@ -34,25 +34,19 @@ public class BankServiceImpl implements BankService {
 
     @Override
     public void savingsJoin(List<String> account) {
-        AccountBuilder builder = setUpAccountBuilder(account)
-                .goalAmount(new BigDecimal(account.get(4)));
+        AccountBuilder builder = setUpAccountBuilder(account).goalAmount(new BigDecimal(account.get(4)));
         bankRepository.save(builder.buildSavingsAccount());
     }
 
     @Override
     public AccountBuilder setUpAccountBuilder(List<String> account) {
-        return new AccountBuilder()
-                .accountType(account.get(0))
-                .name(account.get(1))
-                .bankAccountNumber(account.get(2))
-                .amount(new BigDecimal(account.get(3)))
-                .activation(true);
+        return new AccountBuilder().accountType(account.get(0)).name(account.get(1)).bankAccountNumber(account.get(2)).amount(new BigDecimal(account.get(3))).activation(true);
     }
 
 
     @Override
     public void deposit(String accountNumber, BigDecimal depositAmount) {
-        Account account =bankRepository.getAccount(accountNumber);
+        Account account = bankRepository.getAccount(accountNumber);
         account.deposit(depositAmount);
     }
 
@@ -60,12 +54,9 @@ public class BankServiceImpl implements BankService {
     public void withdraw(String accountNumber, BigDecimal withdrawAmount) {
         Account account = bankRepository.getAccount(accountNumber);
         account.withdraw(withdrawAmount);
-
     }
-
     @Override
     public Account getAccountInfo(String accountNumber) {
         return bankRepository.getAccount(accountNumber);
-
     }
 }

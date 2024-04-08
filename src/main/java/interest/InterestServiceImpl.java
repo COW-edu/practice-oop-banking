@@ -1,8 +1,6 @@
 package interest;
 
-import BankRepository.BankRepository;
 import bankSevice.BankService;
-
 import java.math.BigInteger;
 
 public class InterestServiceImpl implements InterestService {

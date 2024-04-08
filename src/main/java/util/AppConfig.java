@@ -12,18 +12,22 @@ import view.InputView;
 import view.OutputView;
 
 public class AppConfig {
-    public BankService bankService(){
+    public BankService bankService() {
         return new BankServiceImpl(bankRepository());
     }
-    public static BankRepository bankRepository(){
+
+    public static BankRepository bankRepository() {
         return new BankMemoryRepository();
     }
-    public InterestService interService(){
+
+    public InterestService interService() {
         return new InterestServiceImpl(bankService(), interestPolicy());
     }
+
     public static InterestPolicy interestPolicy() {
         return new RateInterestPolicy();
     }
+
     public InputView inputView() {
         return new InputView();
     }
