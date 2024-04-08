@@ -12,4 +12,6 @@ public interface Account {
     String getName();
 
     void setAmount(BigDecimal add);
+
+    String toString();
 }

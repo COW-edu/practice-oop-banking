@@ -13,5 +13,13 @@ public class SavingsAccount extends GeneralAccount {
         super(accountType, bankAccountNumber, name, amount, activation);
         this.goalAmount = goalAmount;
     }
-
+    @Override
+    public String toString() {
+        return "계좌종류:'" + accountType + '\'' +
+                ", 소유자:'" + name + '\'' +
+                ", 계좌번호:'" + bankAccountNumber + '\'' +
+                ", 잔액:" + amount +
+                ", 활성상태:" + activation +
+                ", 목표금액:" + goalAmount ;
+    }
 }

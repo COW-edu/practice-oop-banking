@@ -70,14 +70,9 @@ public class BankController {
 
     private void getAccountInfo() {
         String accountNumber = inputView.getAccountInfo();
-        BigInteger interestEstimated = interestService.getInterestEstimated(accountNumber);
         Account account = bankService.getAccountInfo(accountNumber);
-        outputView.setAccountInfo(account.getAccountType(), account.getBankAccountNumber(), account.getName(), account.getAmount(), interestEstimated);
-        if (account instanceof  SavingsAccount) {
-            outputView.setAccountInfo(((SavingsAccount) bankService.getAccountInfo(accountNumber)).getGoalAmount());
-        }
+        outputView.setAccountInfo(account.toString(),interestService.getInterestEstimated(accountNumber));
         run();
-
     }
 
     private void exitProgram() {
