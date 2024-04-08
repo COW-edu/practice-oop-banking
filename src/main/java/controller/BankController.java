@@ -1,9 +1,9 @@
 package controller;
 
 import bankSevice.Account;
-import bankSevice.GeneralAccount;
 import bankSevice.BankService;
 import bankSevice.SavingsAccount;
+import interest.InterestPolicy;
 import interest.InterestService;
 import util.Appconfig;
 import view.InputView;
@@ -21,16 +21,18 @@ public class BankController {
 
     private final InputView inputView;
     private final OutputView outputView;
-
-
+    private final BankService bankService;
+    private final InterestService interestService;
     Appconfig appConfig = new Appconfig();
-    BankService bankService = appConfig.bankService();
-    InterestService interestService = appConfig.interBankService();
+//    BankService bankService = appConfig.bankService();
+//    InterestService interestService = appConfig.interBankService();
 
 
-    public BankController(InputView inputView, OutputView outputView) {
+    public BankController(InputView inputView, OutputView outputView, BankService bankService, InterestService interestService) {
         this.inputView = inputView;
         this.outputView = outputView;
+        this.bankService = bankService;
+        this.interestService = interestService;
     }
 
     private static final Map<Integer, Runnable> menuOptions = new HashMap<>();

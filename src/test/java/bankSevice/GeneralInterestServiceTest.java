@@ -19,7 +19,7 @@ class GeneralInterestServiceTest {
     public void beforeEach() {
         Appconfig appconfig = new Appconfig();
         bankService = appconfig.bankService();
-        interestService = appconfig.interBankService();
+        interestService = appconfig.interService();
     }
 
     @Test
