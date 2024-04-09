@@ -1,44 +1,142 @@
 package org.example.account;
 
+import org.example.exception.DepositException;
 import org.example.exception.WithdrawException;
 
 import java.math.BigDecimal;
 
+
 public class Account {
-    //필요한 정보 : 일반 계좌 클래스의 속성은 종류 2가지 ( 1. N 예금계좌 , 2. S 적금계좌)
-    //계좌번호, 소유자, 잔액, 활성화 여부
+    public static int howmanyaccout= 0;
+    public String id;
+    public String pw;
+    protected String category;
+    protected String accountnum;
+    protected BigDecimal balance;
+    protected String owner;
+    protected boolean isVaild;
 
-    protected String category; //계좌 종류
-    protected String accountNum; //계좌번호
-    protected String owner; // 소유자
-    protected BigDecimal balance; //잔액
-    protected boolean isVaild; // 활성화 여부
 
-    //적금 계좌 클래스는 일반 예금 계좌 클래스에서 상속을 받고 목표 금액 속성이 추가 .
-    // 이 클래스는 일반 계좌 즉 n을 뜻한다.
-    public Account() {
-        //활성화 여부와 계좌 종류를 명시한다
-        isVaild = true;
-        category = "Normal";
+    public Account(){
+        howmanyaccout++;
     }
-
-    //두번째 생성자에는 계좌번호와 소유자, 잔액을 표기한다.
-    public Account(String accountNum, String owner, BigDecimal balance) {
-        //생성자 체이닝을 활용하여, 위의 account()의 내용도 같이 선언해준다.
+    public Account(String id, String pw){
         this();
-        this.accountNum = accountNum;
+        this.id = id;
+        this.pw =pw;
+    }
+    public Account(String accNo, String owner, BigDecimal balance) {
+        this();
+        this.accountnum = accNo;
         this.owner = owner;
         this.balance = balance;
+    }
+
+
+    public boolean SuccessLogin(String id, String pw) {
+        boolean ok = false; //2번
+        if (this.id.equals(id) && this.pw.equals(pw)) {
+            ok = true;
+        }
+        return ok;
+    }
+
+    public void display_info() {
+        System.out.println("--------------------");
+        System.out.println("전체 계정의 숫자 : " + Account.howmanyaccout);
+        System.out.println("계좌 소유주 명  : " + owner);
+        System.out.println("계좌 번호 : " + accountnum);
+        System.out.println("계좌의 종류 : " + category);
+        System.out.println("현재 사용하시는 Id는 : " + id);
+        System.out.println("잔액 : " + balance);
+        System.out.println("--------------------");
+    }
+
+    public void add(BigDecimal amount){
+        this.balance = this.balance.add(amount);
+    }
+
+    public void minus(BigDecimal amount){
+        this.balance = this.balance.subtract(amount);
 
     }
 
-    //getter & setter part - 접근 지정자가 protected 이기 때문에
-    public String getaccountNum() {
-        return accountNum;
+    public void showmenu(){
+        java.util.Scanner sc = new java.util.Scanner(System.in);
+        String input = null;
+        boolean keepgoing = true;
+
+        while(keepgoing){
+            System.out.println("---------------");
+            System.out.println(this.owner+"("+this.id+") 고객님 환영합니다." );
+            System.out.println("필요하신 서비스에 해당되는 번호를 기입해주세요. ");
+            System.out.println("1.입금 2.출금 ,3.종료");
+            input = sc.nextLine();
+
+
+
+            switch (input){
+                case "1":
+                    System.out.println("----입금메뉴-----");
+                    display_info();
+                    while(true){
+                        try{
+                            System.out.println("입금액을 입력하세요");
+                            String amount = sc.nextLine();
+                            BigDecimal howmuch = new BigDecimal(amount);
+                            add(howmuch);
+                            break;
+
+                        } catch (NumberFormatException error){
+                            System.out.println("유효한 숫자를 입력하셔야합니다.");
+                        }
+                    }
+                    System.out.println("확인되었습니다.");
+                    display_info();
+                    break;
+
+                case "2":
+                    System.out.println("----출금메뉴-----");
+                    display_info();
+                    while(true){
+                        try{
+                            System.out.println("출금액을 입력하세요");
+                            System.out.println("현재 잔액 : "+balance);
+                            String amount = sc.nextLine();
+                            BigDecimal howmuch = new BigDecimal(amount);
+                            minus(howmuch);
+                            break;
+
+                        } catch (NumberFormatException error){
+                            System.out.println("유효한 숫자를 입력하셔야합니다.");
+                        }
+                    }
+                    System.out.println("확인되었습니다.");
+                    display_info();
+                    break;
+                case "3" :
+                    System.out.println("종료합니다. 이용해주셔서 감사합니다.");
+                    keepgoing =false;
+                    break;
+                default:
+                    System.out.println("다시 한번 입력해주세요.");
+
+
+            }
+        }
+
+
     }
 
-    public void setAccNo(String acccountNum) {
-        this.accountNum = acccountNum;
+
+
+
+    public String getAccountnum() {
+        return accountnum;
+    }
+
+    public void setAccNo(String accNo) {
+        this.accountnum = accNo;
     }
 
     public String getOwner() {
@@ -57,8 +155,7 @@ public class Account {
         this.balance = balance;
     }
 
-
-    public boolean isVaild() {
+    public boolean isVaild(){
         return isVaild;
     }
 
@@ -70,54 +167,8 @@ public class Account {
         this.category = category;
     }
 
-    //필요한 계좌정보를 불러내는 메서드
-    public void getAccountInfo() {
-        System.out.println("-------------------------");
-        System.out.println("계좌의 종류 : "+category);
-        System.out.println("계좌번호 : "+accountNum );
-        System.out.println("계좌주 : "+owner);
-        System.out.println("잔액 : "+balance);
+
+    public int size() {
+        return howmanyaccout;
     }
-
-
-    // 뱅크 클래스에서 호출할 출금, 입금 기본 메서드를 생성합니다.
-
-    //출금 관련 메서드 withdraw
-    public BigDecimal withdraw(BigDecimal amount) throws WithdrawException {
-        //계좌의 잔액이 출금하고자 하는 금액보다 낮다면 ( 에러 던지기)
-        if(this.balance.compareTo(amount) < 0){
-            throw new WithdrawException("잔액이 모자랍니다.");
-        }else{
-
-            //subtract 함수는 빼는 함수이다.
-            //This.balance -amount .
-            this.balance = this.balance.subtract(amount);
-        }
-        return amount;
-    }
-
-
-
-    //입금 관련 메서드 deposit
-
-
-
-    //equals overriding
-
-
-
-    // hashcode overriding
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
