@@ -17,35 +17,26 @@ public class SavingAccount extends Account {
     }
 
     @Override
-    public boolean withdraw(BigDecimal withdrawAmount) { // 출금
-        if(isValid(withdrawAmount)) {
-            if(isBiggerThanGoal()) {
-                amount = amount.subtract(withdrawAmount);
-                System.out.println("WithDraw Finish! your Amount : ₩" + amount); // withdraw 성공
-                return true;
-            } else {
-                System.out.println("WithDraw Failed your Amount : ₩" + amount
-                        + " and your GoalAmount : ₩" + goalAmount); // 예산 < 목표금액
-                return false;
-            }
-        } else {
-            System.out.println("WithDraw Failed your Amount : ₩" + amount); // 예산 < 출금 금액
-            return false;
-        }
-    }
-
-    private boolean isValid(BigDecimal withdrawAmount) { // 예산 > 출금 금액인 경우
-        return amount.compareTo(withdrawAmount) >= 0;
-    }
-
-    private boolean isBiggerThanGoal() { // 예산 > 목표금액인 경우
-        return amount.compareTo(goalAmount) >= 0;
+    public void minusAmount(BigDecimal withdrawAmount) { // 출금
+        amount = amount.subtract(withdrawAmount);
+        System.out.println("Withdraw Finish! Your Amount : ₩" + amount);
     }
 
     @Override
-    public boolean deposit(BigDecimal depositAmount) { // 입금
+    public void plusAmount(BigDecimal depositAmount) { // 입금
         amount = amount.add(depositAmount);
-        System.out.println("Deposite Finish! Your Amount : ₩" + amount);
-        return true;
+        System.out.println("Deposit Finish! Your Amount : ₩" + amount);
+    }
+
+    @Override
+    public boolean amountIsBiggerThanWithdrawAmount(BigDecimal withdrawAmount) { // 예산 > 출금 금액인 경우
+        if (amountIsBiggerThanGoalAmount()) {
+            return amount.compareTo(withdrawAmount) >= 0;
+        }
+        return false;
+    }
+
+    private boolean amountIsBiggerThanGoalAmount() { // 예산 > 목표 금액인 경우
+        return amount.compareTo(goalAmount) >= 0;
     }
 }

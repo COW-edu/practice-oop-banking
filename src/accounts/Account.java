@@ -3,16 +3,16 @@ package accounts;
 import java.math.BigDecimal;
 
 public abstract class Account {
-    protected String accountType;
-    protected String accountNum;
     protected String owner;
+    protected String accountNum;
+    protected String accountType;
     protected BigDecimal amount;
     protected boolean activated;
 
     public Account(String owner, String accountNum, String accountType, BigDecimal amount) {
-        this.accountType = accountType;
-        this.accountNum = accountNum;
         this.owner = owner;
+        this.accountNum = accountNum;
+        this.accountType = accountType;
         this.amount = amount;
         this.activated = true;
     }
@@ -27,9 +27,15 @@ public abstract class Account {
 
     }
 
+    public boolean amountIsBiggerThanWithdrawAmount(BigDecimal withdrawAmount) { // 예산 > 출금 금액인 경우
+        return amount.compareTo(withdrawAmount) >= 0;
+    }
+
     public boolean isExist(String accountNum) {
         return accountNum.equals(accountNum);
     }
-    public abstract boolean withdraw(BigDecimal withdrawAmount);
-    public abstract boolean deposit(BigDecimal depositAmount);
+
+    public abstract void minusAmount(BigDecimal withdrawAmount);
+
+    public abstract void plusAmount(BigDecimal depositAmount);
 }

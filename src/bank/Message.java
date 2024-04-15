@@ -1,4 +1,4 @@
-package bankService;
+package bank;
 
 import java.math.BigDecimal;
 import java.util.Scanner;
@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class Message {
     private static Scanner scanner = new Scanner(System.in);
     private CentralBank centralBank = new CentralBank();
+
     public boolean askAction(){
         System.out.println("***********************");
         System.out.println("어떻게 도와드릴까요?");

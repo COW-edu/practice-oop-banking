@@ -5,7 +5,6 @@ import accounts.Account;
 import java.math.BigDecimal;
 
 public abstract class InterestCalculator {
-
     protected static final BigDecimal TEN_MILLION = new BigDecimal("10000000"); // 천만
     protected static final BigDecimal FIVE_MILLION = new BigDecimal("5000000"); // 오백만
     protected static final BigDecimal ONE_MILLION = new BigDecimal("1000000"); // 백만
