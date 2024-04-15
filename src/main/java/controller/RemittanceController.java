@@ -2,7 +2,6 @@ package controller;
 
 import account.Account;
 import common.EParamType;
-import common.ErrorMessage;
 import common.Message;
 import common.Request;
 import common.Response;
@@ -43,10 +42,10 @@ public class RemittanceController implements BankingController {
     Account withdrawalAccount = checkAccount(withdrawalAccountNumber);
     Account depositAccount = checkAccount(depositAccountNumber);
     if (amount.compareTo(BigDecimal.ZERO) < 0){
-      return new Response(ErrorMessage.NegativeNumber);
+      return new Response(Message.NegativeNumber);
     }
     if (!withdrawalAccount.canWithdrawal(amount)){
-      return new Response(ErrorMessage.NotEnoughBalanceException);
+      return new Response(Message.NotEnoughBalanceException);
     }
     accountService.withdrawal(withdrawalAccount, amount);
     accountService.deposit(depositAccount, amount);
