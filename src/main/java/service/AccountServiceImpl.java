@@ -39,11 +39,6 @@ public class AccountServiceImpl implements AccountService {
   }
 
   @Override
-  public int getAccountListCount() {
-    return accountRepository.getAccountListCount();
-  }
-
-  @Override
   public void deposit(Account account, BigDecimal depositAmount) {
     account.deposit(depositAmount);
   }

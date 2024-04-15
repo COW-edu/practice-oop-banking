@@ -9,6 +9,4 @@ public interface AccountRepository {
   void deleteAccount(Account account);
 
   Account getAccount(String accountNumber);
-
-  int getAccountListCount();
 }
