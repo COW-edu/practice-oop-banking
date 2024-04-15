@@ -1,6 +1,6 @@
 package exception;
 
-import common.ErrorMessage;
+import common.Message;
 import lombok.Getter;
 
 @Getter
@@ -9,7 +9,7 @@ public class IndexOutOfRangeException extends Exception{
   private final int maxIndex;
   private final int inputIndex;
 
-  public IndexOutOfRangeException(ErrorMessage errorMessage, int minIndex, int maxIndex, int inputIndex) {
+  public IndexOutOfRangeException(Message errorMessage, int minIndex, int maxIndex, int inputIndex) {
     super(errorMessage.getPrintMessage());
     this.minIndex = minIndex;
     this.maxIndex = maxIndex;

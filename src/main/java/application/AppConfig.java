@@ -1,8 +1,6 @@
 package application;
 
-import controller.BankingController;
-import controller.BankingControllerImpl;
-import view.BankingManager;
+import view.BankingView;
 import view.InputView;
 import view.InputViewImpl;
 import view.OutputView;
@@ -10,13 +8,15 @@ import view.OutputViewImpl;
 
 public class AppConfig {
 
-  public BankingManager banking() {
+  public BankingView banking() {
+    return new BankingView(bankingManager(), inputView(), outputView());
+  }
+  private BankingManager bankingManager() {
     return new BankingManager(frontController());
   }
 
   private FrontController frontController() {
-    return new FrontController(
-        bankingController(), inputView(), outputView());
+    return new FrontController();
   }
 
   private InputView inputView() {
@@ -25,9 +25,5 @@ public class AppConfig {
 
   private OutputView outputView() {
     return OutputViewImpl.getInstance();
-  }
-
-  private BankingController bankingController() {
-    return new BankingControllerImpl();
   }
 }

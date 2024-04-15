@@ -1,8 +1,6 @@
 package service;
 
 import account.Account;
-import common.ErrorMessage;
-import exception.MaxAccountCountException;
 import java.math.BigDecimal;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -18,15 +16,9 @@ public class AccountServiceImpl implements AccountService {
   private static final AccountService instance = new AccountServiceImpl();
 
   @Override
-  public boolean addAccount(Account account) throws MaxAccountCountException {
-    if(accountRepository.getAccountListCount() == AccountRepository.MAX_ACCOUNT_COUNT){
-      throw new MaxAccountCountException(ErrorMessage.MaxAccountCount);
-    }
+  public void addAccount(Account account) {
     if(accountRepository.getAccount(account.getAccountNumber()) == null) {
       accountRepository.addAccount(account);
-      return true;
-    } else {
-      return false;
     }
   }
 

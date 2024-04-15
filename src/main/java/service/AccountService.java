@@ -1,11 +1,10 @@
 package service;
 
 import account.Account;
-import exception.MaxAccountCountException;
 import java.math.BigDecimal;
 
 public interface AccountService {
-  boolean addAccount(Account account) throws MaxAccountCountException;
+  void addAccount(Account account);
 
   void deleteAccount(Account account);
 
@@ -20,6 +19,4 @@ public interface AccountService {
   Account getAccount(String accountNumber);
 
   boolean checkNumber(String accountNumber);
-
-  int getAccountListCount();
 }

@@ -1,44 +1,39 @@
 package application;
 
-import banking.ActivateAccountFunction;
-import banking.BankingFunction;
-import banking.DeactivateAccountFunction;
-import banking.DeleteAccountFunction;
-import banking.DepositFunction;
-import banking.GetAccountInfoFunction;
-import banking.GetInterestFunction;
-import banking.CreateAccountFunction;
-import banking.QuitFunction;
-import banking.RemittanceFunction;
-import banking.SelectMenuFunction;
-import banking.WithdrawalFunction;
+import controller.ActivateAccountController;
 import controller.BankingController;
+import controller.DeactivateAccountController;
+import controller.DeleteAccountController;
+import controller.DepositController;
+import controller.GetAccountInfoController;
+import controller.GetInterestController;
+import controller.CreateAccountController;
+import controller.RemittanceController;
+import controller.WithdrawalController;
+import common.Request;
+import common.Response;
+import exception.DeactivatedAccountException;
+import exception.NotExistAccountException;
 import java.util.HashMap;
 import view.EMenu;
-import view.InputView;
-import view.OutputView;
 
 public class FrontController {
-  private final HashMap<EMenu, BankingFunction> functions = new HashMap<>();
+  private final HashMap<EMenu, BankingController> controllerMap = new HashMap<>();
 
-  public FrontController(
-      BankingController bankingController,
-      InputView inputView,
-      OutputView outputView) {
-    functions.put(EMenu.eMakeAccount, new CreateAccountFunction(bankingController, inputView, outputView));
-    functions.put(EMenu.eDeleteAccount, new DeleteAccountFunction(bankingController, inputView, outputView));
-    functions.put(EMenu.eAccountInfo, new GetAccountInfoFunction(bankingController, inputView, outputView));
-    functions.put(EMenu.eActivateAccount, new ActivateAccountFunction(bankingController, inputView, outputView));
-    functions.put(EMenu.eDeactivateAccount, new DeactivateAccountFunction(bankingController, inputView, outputView));
-    functions.put(EMenu.eWithdrawal, new WithdrawalFunction(bankingController, inputView, outputView));
-    functions.put(EMenu.eDeposit, new DepositFunction(bankingController, inputView, outputView));
-    functions.put(EMenu.eRemittance, new RemittanceFunction(bankingController, inputView, outputView));
-    functions.put(EMenu.eInterest, new GetInterestFunction(bankingController, inputView, outputView));
-    functions.put(EMenu.eQuit, new QuitFunction(bankingController, inputView, outputView));
-    functions.put(null, new SelectMenuFunction(functions, bankingController, inputView, outputView));
+  public FrontController() {
+    controllerMap.put(EMenu.eMakeAccount, new CreateAccountController());
+    controllerMap.put(EMenu.eDeleteAccount, new DeleteAccountController());
+    controllerMap.put(EMenu.eAccountInfo, new GetAccountInfoController());
+    controllerMap.put(EMenu.eActivateAccount, new ActivateAccountController());
+    controllerMap.put(EMenu.eDeactivateAccount, new DeactivateAccountController());
+    controllerMap.put(EMenu.eWithdrawal, new WithdrawalController());
+    controllerMap.put(EMenu.eDeposit, new DepositController());
+    controllerMap.put(EMenu.eRemittance, new RemittanceController());
+    controllerMap.put(EMenu.eInterest, new GetInterestController());
   }
 
-  public boolean process() {
-    return functions.get(null).execute();
+  public Response process(Request request)
+      throws NotExistAccountException, DeactivatedAccountException {
+    return controllerMap.get(request.getRequest()).process(request);
   }
 }

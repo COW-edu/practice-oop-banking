@@ -5,9 +5,6 @@ import common.Message;
 import common.RequireMessage;
 import exception.DeactivatedAccountException;
 import exception.IndexOutOfRangeException;
-import exception.MaxAccountCountException;
-import exception.NegativeNumberException;
-import exception.NotEnoughBalanceException;
 import exception.NotExistAccountException;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -48,25 +45,8 @@ public class OutputViewImpl implements OutputView {
   }
 
   @Override
-  public void printError(MaxAccountCountException exception) {
-    printError(ErrorMessage.MaxAccountCount);
-  }
-
-  @Override
   public void printError(DeactivatedAccountException exception) {
     printError(exception.getAccountNumber() + " " + ErrorMessage.DeactivatedAccount.getPrintMessage());
-  }
-
-  @Override
-  public void printError(NotEnoughBalanceException exception) {
-    printError(ErrorMessage.NotEnoughBalanceException.getPrintMessage() + " "
-        + Message.Balance + " "
-        + exception.getBalance());
-  }
-
-  @Override
-  public void printError(NegativeNumberException exception) {
-    printError(ErrorMessage.NegativeNumber);
   }
 
   @Override

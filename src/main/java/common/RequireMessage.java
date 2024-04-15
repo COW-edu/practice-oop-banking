@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 public enum RequireMessage {
   RequireAccountType(accountTypeMessage()),
   RequireOwner("계좌주의 이름을 입력해주세요."),
-  RequireActivation("계좌 활성화 상태를 입력해주세요. ( 0(음수) : 비활성화 / 1(양수) : 활성화)"),
+  RequireActivation("계좌 활성화 상태를 입력해주세요. ( 0 : 비활성화 / 1 : 활성화)"),
   RequireAmount("0 보다 큰 금액을 입력해주세요."),
   RequireAccountNumber("계좌번호를 입력해주세요.");
 

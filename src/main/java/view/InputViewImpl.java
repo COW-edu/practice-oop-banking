@@ -30,6 +30,13 @@ public class InputViewImpl implements InputView {
 
   @Override
   public boolean getBoolean() throws NumberFormatException{
-    return scanner.nextInt() > 0;
+    int input = scanner.nextInt();
+    if (input == 0) {
+      return false;
+    } else if (input == 1) {
+      return true;
+    } else {
+      throw new NumberFormatException("0 또는 1만 입력해주세요.");
+    }
   }
 }

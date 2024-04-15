@@ -1,6 +1,6 @@
 package exception;
 
-import common.ErrorMessage;
+import common.Message;
 import lombok.Getter;
 
 @Getter
@@ -11,7 +11,7 @@ public class NotExistAccountException extends Exception {
     this.accountNumber = accountNumber;
   }
 
-  public NotExistAccountException(ErrorMessage errorMessage, String accountNumber) {
+  public NotExistAccountException(Message errorMessage, String accountNumber) {
     super(errorMessage.getPrintMessage());
     this.accountNumber = accountNumber;
   }

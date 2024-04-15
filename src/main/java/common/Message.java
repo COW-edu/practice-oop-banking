@@ -21,7 +21,12 @@ public enum Message {
   Target("목표"),
   Complete("성공하였습니다."),
   Balance("잔액"),
-  Interest("이자");
+  Interest("이자"),
+  NotExistAccount("계좌가 존재하지 않습니다."),
+  DeactivatedAccount("계좌가 비활성화 상태입니다,"),
+  NegativeNumber("0보다 큰 숫자를 입력해주세요."),
+  NotEnoughBalanceException("잔액이 충분하지 않습니다."),
+  IndexOutOfRange("범위를 벗어난 숫자입니다.");
 
   private final String printMessage;
 

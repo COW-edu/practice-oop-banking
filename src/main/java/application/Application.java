@@ -1,11 +1,14 @@
 package application;
 
-import view.BankingManager;
+import view.BankingView;
 
 public class Application {
 	public static void main(String[] args) {
 		AppConfig config = new AppConfig();
-		BankingManager banking = config.banking();
-		banking.run();
+		BankingView banking = config.banking();
+		boolean isRunning;
+		do {
+			isRunning = banking.run();
+		} while (isRunning);
 	}
 }
