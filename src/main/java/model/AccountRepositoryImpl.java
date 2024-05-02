@@ -27,9 +27,4 @@ public class AccountRepositoryImpl implements AccountRepository {
   public Account getAccount(String accountNumber) {
     return accounts.get(accountNumber);
   }
-
-  @Override
-  public int getAccountListCount() {
-    return accounts.size();
-  }
 }
